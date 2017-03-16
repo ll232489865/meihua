@@ -1,0 +1,14 @@
+{
+  "name": "powerSwitch",
+  "homepage": "https://github.com/zhangxinxu/powerSwitch",
+  "_release": "626ca726b5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "626ca726b55be77666819435aafdd899ee642085"
+  },
+  "_source": "https://github.com/zhangxinxu/powerSwitch.git",
+  "_target": "*",
+  "_originalSource": "zhangxinxu/powerSwitch",
+  "_direct": true
+}

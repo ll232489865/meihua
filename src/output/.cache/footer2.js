@@ -1,0 +1,2 @@
+/*TMODJS:{"version":1,"md5":"9b5c06d4e0143491734517af7ba3d54e"}*/
+template('footer2','<div class="tc mt20"> <div> <a href="javascript:" class="mt5"> 关于我们 </a> | <a href="javascript:" class="mt5"> 媒体报道 </a> | <a href="javascript:" class="mt5"> 联系我们 </a> | <a href="javascript:" class="mt5"> 协议与条款 </a> | <a href="javascript:" class="mt5"> 加入我们 </a> | <a href="javascript:" class="mt5"> 积分规则 </a> | <a href="javascript:" class="mt5"> 客户服务 </a> </div> <div class="mt10"> Copyright © 2016 营天下 All Rights Reserved 京ICP备15030160号 </div> </div> ');

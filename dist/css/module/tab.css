@@ -1,0 +1,86 @@
+/*选项卡--T(tab,简写成Tab)*/
+.Tab_hor_area{
+    background:#f3f3f3;
+    border:1px solid #bbbbbb;
+    line-height:40px;
+    position:relative;
+}
+.Tab_hor{
+    float: left;
+    border-left:1px solid #bbb;
+    margin-left:-1px;
+    text-align: center;
+    cursor: pointer;
+    background: #f3f3f3;
+}
+.Tab_hor_inner{
+    /*float: left;*/
+    font-size: 14px;
+    color: #999;
+    display: inline-block;
+    padding: 0 30px;
+}
+
+.Tab_hor_on{
+    color:#555;
+    font-weight:bold;
+    /*position:relative;*/
+    background: #fff;
+    border-top: 2px solid #7DC03A;
+    line-height: 39px;
+    margin-bottom:-1px;
+    border-bottom: 1px solid #fff;
+
+}
+.Tab_pd{ padding:30px; background:#fff; border: 1px solid #bbb;}
+.Tab_ver_tt{
+    background: #7DC03A;
+    line-height: 50px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 18px; 
+    color:#fff;
+}
+
+.Tab_ver_area{
+    background:#fcfcfc;
+    line-height:50px;
+    position:relative;
+
+}
+.Tab_ver{
+    border:1px solid #bbb;
+    margin-top:-1px;
+    position:relative;
+    cursor: pointer;
+    background: #f3f3f3;
+}
+
+.Tab_ver_on{
+    color:#555;
+    font-weight:bold;
+    background:#fcfcfc;
+    
+}
+.Tab_ver_inner{
+    padding:0 20px;
+    font-size: 16px;
+    display:block;
+    color: #999;
+    cursor: pointer;
+    
+}
+.Tab_ver_on .Tab_ver_inner, .Tab_ver_inner:hover, .Tab_ver_second:hover,.Tab_ver_second_on{ color: #7DC03A;text-decoration: none;}
+.Tab_ver_second{
+     background: #fff;
+     border-top:1px dashed #ddd;
+     border-bottom:1px dashed #ddd;
+     margin-bottom: -1px;
+     font-size: 16px;
+     padding-left: 58px;
+     display: block;
+}
+.Tab_hor_area .select .Tab_hor_inner{
+    font-size: 16px;
+    color: #7DC03A;
+}

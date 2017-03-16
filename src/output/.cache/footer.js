@@ -1,0 +1,2 @@
+/*TMODJS:{"version":8,"md5":"f3c56834c83cdbb056700ea64932f243"}*/
+template('footer','<div class="Foot"> <div class="Link_solie"></div> <div class=" bgf5 tc"> Copyright(C)2010-2017 华美少儿英语 </div> </div> </div>');
