@@ -12,5 +12,6 @@ require.config({
 })
 define(['jquery','moduleHtml'],function($,template){
     
+    $('#unit').text('Unit'+template.catchParameter(window.location.href,'#'));
 })
     

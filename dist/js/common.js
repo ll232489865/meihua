@@ -48,41 +48,95 @@ define(['tpl'],function(template){
     }
     function htmlModule(data,html){
         setModule(['footer','header'],data);
+        setHeight();
     }
+    //对象化本地存储
     function localStorageObj(name,obj){
         var stringObj = JSON.stringify(obj); 
         localStorage.setItem(name, stringObj);
     }
+    //获取地址
     function routPath(p){
         return  {
             path : document.getElementsByTagName("html")[0].className.indexOf('Account') != '-1' ? path = '../' : path = './'
         }
     }
+    //请求封装
     function ajaxObj(url,parms,callback){
-        $.ajax(apiPath(url),{
+        var defaultCfg = {
             dataType:'json',//服务器返回json格式数据
             type:'get',//HTTP请求类型
             timeout:60000,//超时时间
+            data:{},
             headers:{},
             success:function(data){
                 callback(data);
             },
             error:function(xhr,type,errorThrown){
-                alert('错误')
+                console.log('错误');
             }
-        });
+        }
+        var cfg = $.extend(defaultCfg,parms);
+        $.ajax(apiPath(url),cfg);
     }
-    var obj = {first: 0,second: null},path= routPath();
-    htmlModule(path);
+    //直接调用加载头低部模板
+    htmlModule(routPath());
 
+    //获取hash取值
     function catchParameter(str,character){
         return str.substring(str.lastIndexOf(character)+1);
     }
+    //设置高度
+    function setHeight(){
+        var h = $('#header').outerHeight() +  $('.Foot').outerHeight();
+        $('#setHeight').height($(window).height() - h);
+    }
+    //得到url文件名
+    function GetPageurl() 
+    { 
+        var url=window.location.href;//获取完整URL地址 
+        var tmp= new Array();//临时变量，用于保存分割字符串 
+        tmp=url.split("/");//按照"/"分割 
+        var cc = tmp[tmp.length-1];//获取最后一部分，即文件名和参数 
+        tmp=cc.split("?");//把参数和文件名分割开 
+        return tmp[0];//返回值 
+    }
+     //得到参数
+    function getQueryStringArgs() {
+        var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+            args = {},
+            items = qs.length ? qs.split("&") : [],
+            item = null,
+            name = null,
+            value = null,
+            parmStr = '?',
+            i = 0,
+            len = items.length;
+   
+        for (i = 0; i < len; i++) {
+            item = items[i].split("=");
+            
+            // decodeURIComponent解码
+            name = decodeURIComponent(item[0]);
+            value = decodeURIComponent(item[1]);
+            parmStr+=decodeURIComponent(item[0]) + '=' + decodeURIComponent(item[1]) + (i==len-1?"":'&')
+            if (name.length) {
+                args[name] = value;
+            }
+        }
+        return {
+            parmObj:args,
+            parmStr:parmStr
+        }
+    } 
     return {
         htmlModule : htmlModule,
         routPath : routPath,
         localStorageObj : localStorageObj,
         ajaxObj:ajaxObj,
-        catchParameter:catchParameter
+        catchParameter:catchParameter,
+        setHeight:setHeight,
+        GetPageurl:GetPageurl,
+        getQueryStringArgs:getQueryStringArgs
     }
 });

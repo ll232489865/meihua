@@ -1,6 +1,6 @@
 .home_bg{
-    background: url('../../images/home_bg.png');
-    background-size:cover, cover; 
+    background: url('../../images/home_bg.jpg');
+    background-size: 100% 100%
 }
 .home_round{
     display: inline-block;
@@ -17,8 +17,8 @@
 }
 
 .lesson_bg{
-    background: url('../../images/bg_3.jpeg') no-repeat;
-    background-size:cover, cover;
+    background: url('../../images/lessons_bg.jpg') no-repeat;
+     background-size: 100% 100%
 }
 .unit_round{
     width: 200px;
@@ -39,7 +39,7 @@
     background-size:cover, cover;
 }
 .login_area{
-    background:rgba(0,0,0,.5);
+    background:rgba(33,33,33,.5);
     width: 340px; height: 340px;
     border-radius:170px;
     display: inline-block;

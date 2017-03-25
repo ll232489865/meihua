@@ -45,13 +45,31 @@ gulp.task('minhtml',function(){
 })
 
 gulp.task('copy',function(){
-    gulp.src(["bower_components/jquery/dist/jquery.min.js","bower_components/bootstrap/dist/js/bootstrap.min.js","bower_components/requirejs/require.js",'bower_components/artTemplate//dist/template.js','bower_components/powerSwitch/jquery-powerSwitch.js'])
+    gulp.src([
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "bower_components/requirejs/require.js",
+        'bower_components/artTemplate//dist/template.js',
+        'bower_components/powerSwitch/jquery-powerSwitch.js',
+        'bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js',
+        'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js'
+    ])
     .pipe(gulp.dest('src/js/libs'))
     .pipe(gulp.dest('dist/js/libs'));
 
-    gulp.src(["bower_components/bootstrap/dist/css/bootstrap.min.css"])
+    gulp.src([
+        "bower_components/bootstrap/dist/css/bootstrap.min.css",
+        "bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css",
+        "bower_components/bootstrap-select/dist/css/bootstrap-select.min.css"
+    ])
     .pipe(gulp.dest('src/css/'))
     .pipe(gulp.dest('dist/css/'));
+
+    gulp.src([
+        "bower_components/bootstrap/fonts/*",
+    ])
+    .pipe(gulp.dest('src/fonts/'))
+    .pipe(gulp.dest('dist/fonts/'));
 
     gulp.src(["src/css/**/*.css"])
     .pipe(gulp.dest('dist/css/'));

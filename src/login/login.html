@@ -2,44 +2,75 @@
 <html lang="en"  class="Header1">
 <head>
     <meta charset="UTF-8">
-    <title>index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+
+    <style type="text/css">
+        html
+        {
+            margin:0;
+            overflow:hidden;
+            _padding:65px 0px 0px 0;/*IE6下通过设置上下的填充来给上下固定部分腾出空间*/
+            _border:0;
+        }
+         body
+        {
+            margin:0;
+            height:100%;
+            border:0;
+        }
+        #center {
+            margin:0; /*公共*/
+            width:100%;
+            position:fixed;/*FF IE7 SF*/
+            top:0px;
+            bottom:0px;
+            overflow: auto !important;
+            _position: relative;/**IE6***/
+            _top:0px;
+            _OVERFLOW-Y: auto;
+            _OVERFLOW-X: auto;
+            SCROLLBAR-FACE-COLOR: #EEEEEE;/*设置IE下滚动条颜色*/
+            SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+            SCROLLBAR-SHADOW-COLOR: #919192;
+            SCROLLBAR-3DLIGHT-COLOR:#ffffff;
+            SCROLLBAR-ARROW-COLOR: #919192;
+            SCROLLBAR-TRACK-COLOR: #ffffff;
+            SCROLLBAR-DARKSHADOW-COLOR: #ffffff;
+            _height:100%;
+        }
+    </style>
 </head>
+
 <link rel="stylesheet" href="../css/include/base.css">
 <link rel="stylesheet" href="../css/include/public.css">
 <link rel="stylesheet" href="../css/include/style.css">
+
 <body>
-<div id="header"></div>
-<div class="home_bg tr" id="setHeight">
+
+<div class="home_bg tr" id="center">
     <span class="Dib_vm"></span>
     <span class="login_area">
-        <div class="p20 tc">
-            <div style="color: #fff; font-weight: bold; font-size: 20px; margin-top: 20px;">会员登录</div>
+        <div class="p20 tc fw">
+            <div style="color: #fff; font-weight: bold; font-size: 24px; margin-top: 20px;">会员登录</div>
         </div>
-        <div class="mt20 mb10 tc">
-            <img src="../css/img/login-inp1.png" alt="" class="vm">
-            <input type="text" class="Ist_30 w200" >
+        <div class="mt1 mb1 tc">
+            <img src="../images/login_username.png" alt="" class="vm">
+            <input type="text" class="Ist_35 w220" id="id_username" name="username" value="输入学员ID" maxlength="100" required>
         </div>
-        <div class="mt15 mb10 tc">
-            <img src="../css/img/login-inp2.png" alt="" class="vm">
-            <input type="password" class="Ist_30 w200" >
+        <div class="mt5 mb5 tc">
+            <img src="../images/login_password.png" alt="" class="vm">
+            <input type="password" class="Ist_35 w220" id="id_password" name="password" value="输入密码" required>
         </div>
-        <div class="mt5 tl mb10">
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            <a href="javascript:" class="gf">
-                忘记密码？
-            </a>
+        <div class="mt20 tf mr25">
+            <input type="submit" value = "登 录" class="Btn_red Btn_40 w280" style="font-weight: bold;"/>
         </div>
-        <div class="mt10 tl">
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            <span class="Btn_blue Btn_34 ">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;登 录&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span>    
+        <div class="mt30 tc mb10">
+            <a href="javascript:" class="gf f14">忘记密码？</a>
         </div>
     </span>
 </div>
-
-
-
-
-
 <!--footer-->
 <div id="footer"></div>
 <!--footer end-->
