@@ -10,7 +10,7 @@ require.config({
             exports: 'template'
          },
          'powerSwitch':{
-             deps: ['jquery'],
+            deps: ['jquery'],
             exports: 'powerSwitch'
          }
 　　　　}
