@@ -32,7 +32,7 @@ require.config({
 
 　　　　}
 })
-define(['jquery','moduleHtml','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect'],function($,template){
+define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect'],function($){
         $('.selectpicker').selectpicker({
                 style: 'btn-default',
                 size: 4,

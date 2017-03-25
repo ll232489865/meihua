@@ -32,10 +32,35 @@ require.config({
 
 　　　　}
 })
-define(['jquery','moduleHtml','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect'],function($,template){
+define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect'],function($){
         $('.selectpicker').selectpicker({
                 style: 'btn-default',
                 size: 4,
                 liveSearch:true
+        });
+         $('#table').bootstrapTable({
+           queryParams: function (params) {
+                return {
+                        rows: this.pageSize,
+                        page: this.pageNumber,
+                        sort: this.sortName,
+                        order: this.sortOrder
+                        };
+                },                 //是否显示父子表
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'Name',
+                title: '部门名称'
+            }, {
+                field: 'ParentName',
+                title: '上级部门'
+            }, {
+                field: 'Level',
+                title: '部门级别'
+            }, {
+                field: 'Desc',
+                title: '描述'
+            }, ]
         });
 });
