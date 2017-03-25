@@ -1,4 +1,3 @@
-/* 代码整理：大头网 www.datouwang.com */
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.

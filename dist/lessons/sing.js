@@ -11,18 +11,13 @@ require.config({
             exports: 'template'
          }
          ,
-         'jpalayer':{
-            deps: ['jquery'],
-            exports: 'jpalayer'
-         }
-         ,
          'lrc':{
             deps: ['jquery'],
             exports: 'lrc'
          }
 　　　　}
 })
-define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
+define(['jquery','moduleHtml','jpalayer','lrc'],function($,template){
     $("#jquery_jplayer_1").jPlayer({
 		ready: function (event) {
 			$(this).jPlayer("setMedia", {

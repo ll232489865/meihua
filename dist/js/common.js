@@ -36,6 +36,7 @@ define(['tpl'],function(template){
         {
             //初始化加载模板
             nanmeArray.forEach(function(value,index,array){
+                console.log(value)
                 var htmlModule = template(value, data);
                 document.getElementById(value).innerHTML = htmlModule;
             })

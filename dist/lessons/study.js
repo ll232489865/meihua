@@ -15,7 +15,8 @@ require.config({
          }
 　　　　}
 })
-define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
+define(['jquery','moduleHtml','powerSwitch'],function($,template){
+    // console.log(powerSwitch);
     $("#ce_position").find("a").powerSwitch({
         eventType: "hover",
         classAdd: "active",

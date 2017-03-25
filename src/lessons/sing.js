@@ -11,11 +11,6 @@ require.config({
             exports: 'template'
          }
          ,
-         'jpalayer':{
-            deps: ['jquery'],
-            exports: 'jpalayer'
-         }
-         ,
          'lrc':{
             deps: ['jquery'],
             exports: 'lrc'
