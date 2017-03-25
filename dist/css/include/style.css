@@ -23,10 +23,12 @@
 .unit_round{
     width: 200px;
     height:200px;
-    border-radius:100px;
+    -webkit-border-radius:100px;
+            border-radius:100px;
     background:#7BD0FD;
     display:inline-block;
-    box-shadow: 0 0 5px #333;
+    -webkit-box-shadow: 0 0 5px #333;
+            box-shadow: 0 0 5px #333;
     position: relative
 }
 .unit_bg{
@@ -41,7 +43,8 @@
 .login_area{
     background:rgba(33,33,33,.5);
     width: 340px; height: 340px;
-    border-radius:170px;
+    -webkit-border-radius:170px;
+            border-radius:170px;
     display: inline-block;
     vertical-align: middle;
     margin-right: 5%;
@@ -57,15 +60,6 @@
 .star_in {
     width: 65px;
     display: inline-block
-}
-
-.star_out {
-    width: 50%;
-    overflow: hidden;
-    background-position: 0 -12px;
-    float: left
-}
-ay: inline-block
 }
 
 .star_out {

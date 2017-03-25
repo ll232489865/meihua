@@ -17,7 +17,7 @@ require.config({
          }
 　　　　}
 })
-define(['jquery','moduleHtml','jpalayer','lrc'],function($,template){
+define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
     $("#jquery_jplayer_1").jPlayer({
 		ready: function (event) {
 			$(this).jPlayer("setMedia", {

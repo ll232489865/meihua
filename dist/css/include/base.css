@@ -248,10 +248,7 @@ body{line-height:1.4;color:#666666}body,input,textarea,select{font-size:12px;fon
 .ell{text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
 /* css3过渡动画效果 */
 .trans{
-	-webkit-transition:all 0.5s;
-	   -moz-transition:all 0.5s;
-	    -ms-transition:all 0.5s;
-	     -o-transition:all 0.5s;	
+	-webkit-transition:all 0.5s;	
 	       transition:all 0.5s; 
 			
 }
@@ -270,6 +267,10 @@ body{line-height:1.4;color:#666666}body,input,textarea,select{font-size:12px;fon
 .dib_fix{display:inline-block; height:0; overflow:hidden;}
 /*布局*/
 /*等高布局*/
+.Contour{margin-bottom: -3000px;padding-bottom: 3000px; _zoom:1; overflow:hidden;}
+
+
+�*/
 .Contour{margin-bottom: -3000px;padding-bottom: 3000px; _zoom:1; overflow:hidden;}
 
 
