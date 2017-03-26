@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>登录</title>
 
-    <style type="text/css">
+    <!--<style type="text/css">
         html
         {
             margin:0;
@@ -40,7 +40,7 @@
             SCROLLBAR-DARKSHADOW-COLOR: #ffffff;
             _height:100%;
         }
-    </style>
+    </style>-->
 </head>
 
 <link rel="stylesheet" href="../css/include/base.css">
@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="../css/include/style.css">
 
 <body>
-
+<div id="header"></div>
 <div class="home_bg tr" id="center">
     <span class="Dib_vm"></span>
     <span class="login_area">
@@ -57,14 +57,14 @@
         </div>
         <div class="mt1 mb1 tc">
             <img src="../images/login_username.png" alt="" class="vm">
-            <input type="text" class="Ist_35 w220" id="id_username" name="username" value="输入学员ID" maxlength="100" required>
+            <input type="text" class="Ist_35 w220" id="id_username" value="492399154@qq.com" name="username" value="输入学员ID" maxlength="100" required>
         </div>
         <div class="mt5 mb5 tc">
             <img src="../images/login_password.png" alt="" class="vm">
-            <input type="password" class="Ist_35 w220" id="id_password" name="password" value="输入密码" required>
+            <input type="password" class="Ist_35 w220" value="sa123" id="id_password" name="password" value="输入密码" required>
         </div>
         <div class="mt20 tf mr25">
-            <input type="submit" value = "登 录" class="Btn_red Btn_40 w280" style="font-weight: bold;"/>
+            <span id="login_btn" class="Btn_red Btn_40 w280" style="font-weight: bold;">登录</span>
         </div>
         <div class="mt30 tc mb10">
             <a href="javascript:" class="gf f14">忘记密码？</a>

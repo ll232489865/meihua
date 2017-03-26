@@ -68,26 +68,24 @@ gulp.task('copy',function(){
     gulp.src([
         "bower_components/bootstrap/fonts/*",
     ])
-    .pipe(gulp.dest('src/fonts/'))
-    .pipe(gulp.dest('dist/fonts/'));
+    gulp.src(["src/*"])
+    .pipe(gulp.dest('dist/'));
 
-    gulp.src(["src/css/**/*.css"])
+    gulp.src(['src/*.js'])
+    .pipe(gulp.dest('dist/'));
+
+    gulp.src(['src/images/*'])
+    .pipe(gulp.dest('dist/images/'));
+
+    gulp.src(['src/css/*'])
     .pipe(gulp.dest('dist/css/'));
-
-    gulp.src(['src/js/*.js'])
-    .pipe(gulp.dest('dist/js'));
 
     gulp.src(['src/**/*.js'])
     .pipe(gulp.dest('dist/'));
 
-    gulp.src(['src/js/**/*.js'])
-    .pipe(gulp.dest('dist/js/'));
-
     gulp.src(['src/output/**/*.js'])
     .pipe(gulp.dest('dist/output'));
 
-    gulp.src(['src/*.js'])
-    .pipe(gulp.dest('dist/'));
 
 })
 

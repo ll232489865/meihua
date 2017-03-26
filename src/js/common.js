@@ -15,29 +15,28 @@ Date.prototype.Format = function(fmt) { //author: meizz
 	return fmt;
 }
 var apiPath = function(path){
-    return "http://192.168.1.10:8288/pc/" + path
+    return "http://120.27.224.143:10010/v1/" + path
 }
 
 require.config({
     paths : {
-        "tpl":path+'../output/template',
-        "footer":path+'../output/footer'
+        "tpl":path+'../output/main/template',
+        "tpl2":path+'../output/admin/template'
     }
-    ,
-    shim: {
-        'tpl':{
-            exports: 'tpl'
-        }
-　　}
 })
-define(['tpl'],function(template){
+define(['tpl','tpl2'],function(template,tpl2){
+    console.log(tpl2);
     function setModule(nanmeArray,data){
         if(nanmeArray instanceof Array)
         {
             //初始化加载模板
             nanmeArray.forEach(function(value,index,array){
-                console.log(value)
-                var htmlModule = template(value, data);
+                if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
+                    var htmlModule = template(value, data);
+                }else{
+                    var htmlModule = tpl2(value, data);
+                }
+                
                 document.getElementById(value).innerHTML = htmlModule;
             })
         }else{
@@ -48,8 +47,26 @@ define(['tpl'],function(template){
         
     }
     function htmlModule(data,html){
-        setModule(['footer','header'],data);
-        setHeight();
+        if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
+            setModule(['footer','header'],data);
+        }else{
+            setModule(['header2'],data);
+            $('#logout').click(function(){
+                console.log(JSON.parse(localStorage.getItem("session")))
+                debugger;
+                $.ajax({
+                    url:'http://120.27.224.143:10010/v1/logout',
+                    type:"get",
+                    dataType:'json',
+                    timeout:60000,
+                  
+                    success:function(data){
+                        console.log(data);
+                    }
+                })
+            })
+        }
+        
     }
     //对象化本地存储
     function localStorageObj(name,obj){
@@ -63,7 +80,7 @@ define(['tpl'],function(template){
         }
     }
     //请求封装
-    function ajaxObj(url,parms,callback){
+    function ajaxObj(url,parms,flag,callback){
         var defaultCfg = {
             dataType:'json',//服务器返回json格式数据
             type:'get',//HTTP请求类型

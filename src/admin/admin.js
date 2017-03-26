@@ -2,7 +2,7 @@ require.config({
     paths : {
         "jquery" : "../js/libs/jquery.min",
         "bootstrap" : "../js/libs/bootstrap.min",
-        "moduleHtml":'../js/common',
+        "moduleHtml":'adminComm',
         "bootstrapValidator":'../js/libs/bootstrapValidator.min',
         "bootstraptable":'../js/libs/bootstrap-table.min',
         "bootstrapzhcn":'../js/libs/bootstrap-table-zh-CN',
@@ -32,7 +32,8 @@ require.config({
 
 　　　　}
 })
-define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect'],function($){
+define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapselect','adminComm'],function($){
+        console.log(123);
         $('.selectpicker').selectpicker({
                 style: 'btn-default',
                 size: 4,
@@ -45,6 +46,9 @@ define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapsel
                         page: this.pageNumber,
                         sort: this.sortName,
                         order: this.sortOrder
+
+
+
                         };
                 },                 //是否显示父子表
             columns: [{
