@@ -39,6 +39,7 @@ define(['tpl','tpl2'],function(template,tpl2){
                 
                 document.getElementById(value).innerHTML = htmlModule;
             })
+            setHeight();
         }else{
             //一个个动态加载模板
             var htmlModule = template(nanmeArray.getAttribute('data-module'), data);

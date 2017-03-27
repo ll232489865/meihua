@@ -9,24 +9,160 @@
 <link rel="stylesheet" href="../css/include/style.css">
 <body>
 <div id="header"></div>
-<div id="setHeight" class="unit_bg">
-    <div style="height: 100px;"></div>
-   <div id="ce_slide" class="ce_slide">
-        <a class="bn_img" href="javascript:"  id="ce_adImage0">
-            <img src="../images/lun1.png" width="100%" height="100%" alt="">
-        </a>
-        <a class="bn_img" href="javascript:" id="ce_adImage1">
-            <img src="../images/lun2.png" width="100%" height="100%" alt="">
-        </a>
-        <a class="bn_img" href="javascript:" id="ce_adImage2">
-            <img src="../images/lun3.png" width="100%" height="100%" alt="">
-        </a>
-        <div id="ce_position" class="ce_position">
-            <a href="javascript:" class="bn_control" data-rel="ce_adImage0"></a>
-            <a href="javascript:" class="bn_control active" data-rel="ce_adImage1"></a>
-            <a href="javascript:" class="bn_control" data-rel="ce_adImage2"></a>
+<style>
+     .ce_abs{position: absolute; width: 100%; height: 100%; top: 0; display: none; font-size: 50px;}
+     .ce_item:hover img{ opacity: .8}
+     .ce_slide_control{
+         position: absolute; height: 100%; width: 54px; right: -54px;font-size: 0;
+     }
+     .ce_slide_control img{ cursor: pointer}
+     .ce_slide_control input{width:25px;height:25px;border:1px solid #fff;border-radius:4px;background:#ddd;} 
+    .ce_slide_control .i1{background:#000000;} 
+    .ce_slide_control .i2{background:#FF0000;} 
+    .ce_slide_control .i3{background:#80FF00;} 
+    .ce_slide_control .i4{background:#00FFFF;} 
+    .ce_slide_control .i5{background:#808080;} 
+    .ce_slide_control .i6{background:#FF8000;} 
+    .ce_slide_control .i7{background:#408080;} 
+    .ce_slide_control .i8{background:#8000FF;} 
+    .ce_slide_control .i9{background:#CCCC00;} 
+     /*.ce_item:hover .ce_abs{ display: block}*/
+</style>
+<div id="setHeight" class="unit_bg" style="background: #EA6074">
+    <div style="background: url(../images/sdudy.jpg) no-repeat; height:100%; background-size: cover cover; width:1063px; margin: 0 auto;">
+       <div style="padding: 50px;" class="fix rel" id="studyContain">
+        <div id="ce_slide" class="ce_slide" style="height: 100%;">
+            <canvas id="canvas" width="740" height="420" style="position: absolute; z-index: 100; left: 0; top: 0;">您的浏览器不支持 canvas 标签</canvas> 
+            <div class="bn_img"  id="ce_adImage0">
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_03.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_05.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_07.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_13.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_15.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+            </div>
+            <div class="bn_img" id="ce_adImage1">
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_03.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_05.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_07.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_13.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_15.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+            </div>
+            <div class="bn_img" id="ce_adImage2">
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_03.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_05.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_07.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_13.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_15.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+            </div>
+            <div id="ce_position" class="ce_position">
+                <a href="javascript:" class="bn_control" data-rel="ce_adImage0"></a>
+                <a href="javascript:" class="bn_control active" data-rel="ce_adImage1"></a>
+                <a href="javascript:" class="bn_control" data-rel="ce_adImage2"></a>
+            </div>
         </div>
+        <div class="ce_slide_control">
+            <!--<span class="Dib_vm"></span>-->
+            <span class="dib vm">
+                <img src="../css/img/canvasControl_03.png" id="eraser" alt="">
+                <img src="../css/img/canvasControl_04.png" id="clear" alt="">
+                <span style="display: inline-block; height: 54px; width: 59px; position: relative">
+                    <img src="../css/img/canvasControl_05.png" alt="">    
+                </span>
+                <img src="../css/img/canvasControl_06.png" alt="">
+                <div id="color">
+                    <input class="i1" type="button" value="" /> <br>
+                    <input class="i2" type="button" value="" /> <br>
+                    <input class="i3" type="button" value="" /> <br>
+                    <input class="i4" type="button" value="" /> <br>
+                    <input class="i5" type="button" value="" /> <br>
+                    <input class="i6" type="button" value="" /> <br>
+                    <input class="i7" type="button" value="" /> <br>
+                    <input class="i8" type="button" value="" /> <br>
+                    <input class="i9" type="button" value="" /> <br>
+                </div>
+                
+            </span>
+            
+        </div>
+       </div>
+        
     </div>
+   
 </div>
 
 
