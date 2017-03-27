@@ -769,8 +769,9 @@ input.search {
 }
 .bn_position .active,
 .ce_position .active {
-  background-color: #FFF;
+  background-color: #3AD271;
   vertical-align: baseline;
+  border: 1px solid #3AD271;
 }
 .bn_position,
 .ce_position {
@@ -778,17 +779,17 @@ input.search {
   right: 3px;
   bottom: 15px;
   width: 100%;
-  text-align: center;
+  text-align: right;
 }
 .bn_control,
 .ce_control {
   display: inline-block;
-  width: 9px;
-  height: 9px;
-  border: 1px solid #fff;
-  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #999;
+  border-radius: 15px;
   margin-right: 15px;
-  background-color: none;
+  background-color: #999;
   overflow: hidden;
   box-shadow: 0 0 3px #999;
 }
@@ -864,6 +865,9 @@ input.search {
   line-height: 40px;
   background: #447CFF;
   color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 .Part_area {
   line-height: 180%;
