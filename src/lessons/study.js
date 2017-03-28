@@ -21,7 +21,6 @@ require.config({
 　　　　}
 })
 define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerSwitch,canvas){
-    console.log(canvas);
     // console.log(powerSwitch);
     $("#ce_position").find("a").powerSwitch({
         eventType: "hover",
@@ -34,8 +33,22 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
         }
     }).eq(0).trigger("mouseover");
     $("#studyContain").css('height',$("#studyContain").parent().height()-100)
-    $('canvas').attr('height',$('#ce_slide').height()).attr('width',$('#ce_slide').width())
-    canvas.paint.init(true);
+    $('#canvas').attr('height',$('#ce_slide').height()).attr('width',$('#ce_slide').width())
     
+    $('#pens').click(function(){
+        $('#canvas').css('visibility','visible');
+        canvas.paint.init(true);
+        $('#color').show()
+    })
+    $('#default').click(function(){
+        $('#color').hide()
+        canvas.paint.init(false);
+        $('#canvas').css('visibility','hidden');
+    })
+    $('.ce_item img').click(function(){
+        var index = $(this).parent().index();
+        $(this).parent().addClass('selected').siblings().removeClass('selected');
+        $("#audio"+index).get(0).play()
+    })
 })
     

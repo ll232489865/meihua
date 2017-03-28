@@ -26,40 +26,50 @@
     .ce_slide_control .i7{background:#408080;} 
     .ce_slide_control .i8{background:#8000FF;} 
     .ce_slide_control .i9{background:#CCCC00;} 
-     /*.ce_item:hover .ce_abs{ display: block}*/
+    .ce_slide .selected .ce_abs{display: block}
 </style>
 <div id="setHeight" class="unit_bg" style="background: #EA6074">
     <div style="background: url(../images/sdudy.jpg) no-repeat; height:100%; background-size: cover cover; width:1063px; margin: 0 auto;">
        <div style="padding: 50px;" class="fix rel" id="studyContain">
         <div id="ce_slide" class="ce_slide" style="height: 100%;">
-            <canvas id="canvas" width="740" height="420" style="position: absolute; z-index: 100; left: 0; top: 0;">您的浏览器不支持 canvas 标签</canvas> 
+            <canvas id="canvas" width="740" height="420" style="position: absolute; visibility: hidden; z-index: 100; left: 0; top: 0;">您的浏览器不支持 canvas 标签</canvas> 
             <div class="bn_img"  id="ce_adImage0">
                 <div class="ce_item" style="float: left; margin: 30px; position: relative">
                     <img src="../images/unit1/study_unit1_03.png">
+                    <audio src="../images/unit1/1.mp3" id="audio0">
+                    </audio>
                     <div class="ce_abs">
                         糖
                     </div>
                 </div>
                 <div class="ce_item" style="float: left; margin: 30px; position: relative">
                     <img src="../images/unit1/study_unit1_05.png">
+                    <audio src="../images/unit1/1704.mp3" id="audio1">
+                    </audio>
                     <div class="ce_abs">
                         糖
                     </div>
                 </div>
                 <div class="ce_item" style="float: left; margin: 30px; position: relative">
                     <img src="../images/unit1/study_unit1_07.png">
+                    <audio src="../images/unit1/3.mp3" id="audio2">
+                    </audio>
                     <div class="ce_abs">
                         糖
                     </div>
                 </div>
                 <div class="ce_item" style="float: left; margin: 30px; position: relative">
                     <img src="../images/unit1/study_unit1_13.png">
+                    <audio src="../images/unit1/5.mp3" id="audio3">
+                    </audio>
                     <div class="ce_abs">
                         糖
                     </div>
                 </div>
                 <div class="ce_item" style="float: left; margin: 30px; position: relative">
                     <img src="../images/unit1/study_unit1_15.png">
+                    <audio src="../images/unit1/6.mp3" id="audio4">
+                    </audio>
                     <div class="ce_abs">
                         糖
                     </div>
@@ -141,10 +151,10 @@
                 <img src="../css/img/canvasControl_03.png" id="eraser" alt="">
                 <img src="../css/img/canvasControl_04.png" id="clear" alt="">
                 <span style="display: inline-block; height: 54px; width: 59px; position: relative">
-                    <img src="../css/img/canvasControl_05.png" alt="">    
+                    <img src="../css/img/canvasControl_05.png" id="pens" alt="">    
                 </span>
-                <img src="../css/img/canvasControl_06.png" alt="">
-                <div id="color">
+                <img src="../css/img/canvasControl_06.png" alt="" id="default">
+                <div id="color" class="dn">
                     <input class="i1" type="button" value="" /> <br>
                     <input class="i2" type="button" value="" /> <br>
                     <input class="i3" type="button" value="" /> <br>
@@ -155,9 +165,7 @@
                     <input class="i8" type="button" value="" /> <br>
                     <input class="i9" type="button" value="" /> <br>
                 </div>
-                
             </span>
-            
         </div>
        </div>
         
