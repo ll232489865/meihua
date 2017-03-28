@@ -8,7 +8,6 @@ define(['jquery','moduleHtml'],function($,template){
     $(function(){
         console.log(456);
         var h = $('#header').outerHeight() +  $('.Foot').outerHeight();
-        debugger;
         $('.home_bg').height($(window).height() - h);
 
         $('#login_btn').click(function(){

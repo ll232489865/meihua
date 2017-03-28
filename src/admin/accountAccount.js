@@ -2,7 +2,7 @@ require.config({
     paths : {
         "jquery" : "../js/libs/jquery.min",
         "bootstrap" : "../js/libs/bootstrap.min",
-        "moduleHtml":'../js/common',
+        "moduleHtml":'adminComm',
         "bootstrapValidator":'../js/libs/bootstrapValidator.min',
         "bootstraptable":'../js/libs/bootstrap-table.min',
         "bootstrapzhcn":'../js/libs/bootstrap-table-zh-CN',

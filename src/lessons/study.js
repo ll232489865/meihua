@@ -45,10 +45,17 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
         canvas.paint.init(false);
         $('#canvas').css('visibility','hidden');
     })
-    $('.ce_item img').click(function(){
+    $(".ce_slide").delegate("img","click",function(){
         var index = $(this).parent().index();
-        $(this).parent().addClass('selected').siblings().removeClass('selected');
-        $("#audio"+index).get(0).play()
+        var aa = createAudio($("#audio"+index).get(0).currentSrc)
+        aa.play();
+        aa=null;
+        
     })
+    function createAudio(src){
+        var audio = new Audio();
+        audio.src = src;
+        return audio
+    }
 })
     
