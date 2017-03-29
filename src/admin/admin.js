@@ -39,43 +39,42 @@ define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapsel
                 size: 4,
                 liveSearch:true
         });
-        //  $('#table').bootstrapTable({
-        //    queryParams: function (params) {
-        //         return {
-        //                 rows: this.pageSize,
-        //                 page: this.pageNumber,
-        //                 sort: this.sortName,
-        //                 order: this.sortOrder
-
-
-
-        //                 };
-        //         },                 //是否显示父子表
-        //     columns: [{
-        //         checkbox: true
-        //     }, {
-        //         field: 'Name',
-        //         title: '部门名称'
-        //     }, {
-        //         field: 'ParentName',
-        //         title: '上级部门'
-        //     }, {
-        //         field: 'Level',
-        //         title: '部门级别'
-        //     }, {
-        //         field: 'Desc',
-        //         title: '描述'
-        //     }, ]
-        // });
-
-                var ButtonInit = function () {
-                var oInit = new Object();
-                var postdata = {};
-
-                oInit.Init = function () {
-                        //初始化页面上面的按钮事件
-                };
-
-                return oInit;
-                };
+        // $.ajax({
+        //         url:'http://120.27.224.143:10010/v1/admin/zone/query',
+        //         type:"get",
+        //         dataType:'json',
+        //         timeout:60000,
+        //         headers:{
+        //                 'apiKey':localStorage.getItem("session"),
+        //                 'contentType' : 'application/json'
+        //         },
+        //         success:function(data){
+        //             console.log(data);
+        //         }
+        //         ,
+        //         error:function(XMLHttpRequest, textStatus, errorThrown){
+        //                 console.log(XMLHttpRequest);
+        //                 console.log(textStatus);
+        //                 console.log(errorThrown);
+        //         }
+        //     })
+        $.ajax({
+                url:'http://120.27.224.143:10010/v1/admin/zone/query',
+                type:"get",
+                dataType:'json',
+                timeout:60000,
+                headers:{
+                        'SUPERADMIN-API-KEY':JSON.parse(localStorage.getItem("session")),
+                        'contentType' : 'application/json'
+                },
+                success:function(data){
+                    console.log(data);
+                }
+                ,
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log(XMLHttpRequest);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                }
+            })
 });

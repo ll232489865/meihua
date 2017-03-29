@@ -1,12 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="en"  class="Header1">
     <head>
         <title>打地鼠</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/include/base.css">
+<link rel="stylesheet" href="../css/include/public.css">
+<link rel="stylesheet" href="../css/include/style.css">
 	<script src="../js/libs/jquery.min.js"></script>
         <style>
             body{
                 margin: 0;
-                background-image: url(../images/mouse_game/bg.jpg);
+                /*background-image: url(../images/mouse_game/bg.jpg);*/
                 /*cursor属性可以自定义鼠标指针的样式：第一个参数是自定义鼠标图标路径，
                 第2个参数auto是css标准的cursor样式，可换成其它属性(如pointer/default等)*/
                 cursor: url(../images/mouse_game/cursor.png), auto;
@@ -15,7 +19,9 @@
             table{
                 width: 600px;
                 height: 600px;
-                margin: auto;
+                left:50%;
+                margin-left:-300px;
+                position: absolute;
             }
             td{
                 height: 150px;
@@ -26,7 +32,7 @@
                 text-align: center;
                 vertical-align: bottom;
             }
-            img{
+            #table img{
                 width: 80px;
                 height: 0;
                 position: relative;
@@ -57,8 +63,8 @@
             #score{
                 font-size: 30px;
                 position: absolute;
-                top: 50px;
-                background-color: rgba(100, 100, 100, 0.6);
+                top: 100px;
+                background-color: rgba(255, 255, 255, 1);
                 line-height: 50px;
                 padding-left: 50px;
                 padding-right: 15px;
@@ -67,11 +73,14 @@
             }
         </style>
     </head>
-    <body>
+
+<body class="game_bg">
+<div id="header"></div>    
+    <div id="setHeight">
         <audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
         <audio id="hit"></audio>
         <p id="score">得分：0</p>
-        <table>
+        <table id="table">
             <tr>
                 <td><img src="../images/mouse_game/mouse.png"></td>
                 <td><img src="../images/mouse_game/mouse.png"></td>
@@ -88,55 +97,10 @@
                 <td><img src="../images/mouse_game/mouse.png"></td>
             </tr>
         </table>
-        <script>
-            var score = 0;
-            var mouses = $('img');
-            var time1
-            // 跳出一个地鼠，过一会儿隐藏
-            function show(){
-                var a = Math.floor(Math.random() * 9);
-                var mouse = mouses.get(a);
+    </div>
+<div id="footer"></div>
 
-                $(mouse).addClass('mouseUp').removeClass('mouseDown');
 
-                function hide(){
-                    $(mouse).addClass('mouseDown').removeClass('mouseUp');
-                }
-                // setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式
-                time = setTimeout(hide, 2500);
-                return time
-            }
-            // 跳出一批地鼠
-            function play(){
-                var time1 = show();
-                var time2 = show();
-                var time3 = show();
-            }
-            // 每隔一段时间跳出一批地鼠
-            time1 = setInterval(play, 2000);
-
-            // 打中地鼠
-            $('img').click(function(){
-                $(this).addClass('mouseDown').removeClass('mouseUp');
-                score = score + 10;
-                if(score>=100){
-                    clearInterval(time1);
-                    alert('游戏结束');
-                    return
-                }
-                // 设置id=score的标签的文本内容(在这里指的是p标签)
-                $('#score').text('得分：' + score);
-                // 设置id=hit标签的src属性值为hit.wav并播放它
-                $('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
-            });
-
-            // 鼠标被按下时，指针图片改为image/cursor-down.png
-            // 鼠标没有被按下时，指针图片改为image/cursor.png
-            $('body').mousedown(function(){
-                $('body').css('cursor', 'url(../images/mouse_game/cursor-down.png), auto');
-            }).mouseup(function(){
-                $('body').css('cursor', 'url(../images/mouse_game/cursor.png), auto');
-            });
-        </script>
-    </body>
+<script data-main="mouse_game" src="../js/libs/require.js"></script>
+</body>
 </html>

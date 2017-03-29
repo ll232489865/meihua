@@ -58,11 +58,20 @@ define(['tpl','tpl2'],function(template,tpl2){
                 $.ajax({
                     url:'http://120.27.224.143:10010/v1/logout',
                     type:"get",
+                    header:{
+                        apikey : JSON.parse(localStorage.getItem("session"))
+                    }
+                    ,
                     dataType:'json',
                     timeout:60000,
-                  
                     success:function(data){
                         console.log(data);
+                    }
+                    ,
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                            console.log(XMLHttpRequest);
+                            console.log(textStatus);
+                            console.log(errorThrown);
                     }
                 })
             })
@@ -87,7 +96,9 @@ define(['tpl','tpl2'],function(template,tpl2){
             type:'get',//HTTP请求类型
             timeout:60000,//超时时间
             data:{},
-            headers:{},
+            headers:{
+                'Content-Type': 'application/json'
+            },
             success:function(data){
                 callback(data);
             },

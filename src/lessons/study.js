@@ -50,7 +50,6 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
         var aa = createAudio($("#audio"+index).get(0).currentSrc)
         aa.play();
         aa=null;
-        
     })
     function createAudio(src){
         var audio = new Audio();

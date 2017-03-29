@@ -6,18 +6,19 @@
     display: inline-block;
     height: 170px;
     width: 170px;
-    background: url('../../images/unit_1.png');
+    background: url('../../images/unit2.png');
     background-size:cover, cover; 
     font-size: 25px;
     margin: 20px 0;
     color: #fff;
+    color: #7BD0FD;
     font-weight:bold;
-    line-height: 170px;
+    line-height: 100px;
     text-shadow: 1px 1px 1px #000;
 }
 
 .lesson_bg{
-    background: url('../../images/lessons_bg.jpg') no-repeat;
+    background: url('../../images/timg.jpeg') no-repeat;
      background-size: 100% 100%
 }
 .unit_round{
@@ -33,9 +34,12 @@
     background: url('../../images/bg_1.jpeg') no-repeat;
     background-size:cover, cover;
 }
-
+.sing_bg{
+    background: url('../../images/timg (2).jpeg') no-repeat;
+    background-size:cover, cover;
+}
 .game_bg{
-    background: url('../../images/bg_4.png') no-repeat;
+    background: url('../../images/mouse_game/bg.jpg') no-repeat;
     background-size:cover, cover;
 }
 .login_area{
