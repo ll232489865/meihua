@@ -6,14 +6,8 @@ require.config({
 })
 define(['jquery','moduleHtml'],function($,template){
     $(function(){
-        console.log(456);
-        var h = $('#header').outerHeight() +  $('.Foot').outerHeight();
-        $('.home_bg').height($(window).height() - h);
-
-
-        
-
-
+        var h = $('#header').outerHeight();
+        $('.mainCon').height($(window).height() - h);
         $('#login_btn').click(function(){
              $.ajax({
                 url:'http://120.27.224.143:10010/v1/login?username='+$('#id_username').val(),
@@ -23,15 +17,28 @@ define(['jquery','moduleHtml'],function($,template){
                 headers:{"Content-Type": 'application/json'},
                 data: JSON.stringify({"data":$('#id_password').val()}),
                 success:function(data){
-                    localStorage.setItem("session",JSON.stringify(data.data.apiKey));
-                    var code = data.ret.code
+                    var code = data.ret.code;
+                    var user = data.data.userGroup;
+                    template.localStorageObj("session",{apiKey : data.data.apiKey,user:user});
                     if(code==0){
-                        window.location.href="../admin/admin.html"
+                        switch(user)
+                        {
+                            case 'student':
+                            window.location.href="../lessons/lessons.html"
+                            break;
+                            case 'superAdmin':
+                            window.location.href="../admin/admin.html"
+                            break;
+                            case 'teacher':
+                            window.location.href="../admin/admin.html"
+                            break;
+                            case 'admin':
+                            window.location.href="../admin/admin.html"
+                            break;
+                        }
                     }
                 }
             })
         })
-           
-        
     })
 });

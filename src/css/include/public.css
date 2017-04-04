@@ -572,8 +572,9 @@ input.search {
 }
 /*头部*/
 .Head {
-  line-height: 70px;
+  line-height: 60px;
   padding: 10px 0;
+  background: #0168B7;
 }
 /*导航*/
 .Nav {
@@ -583,17 +584,37 @@ input.search {
 }
 .Nav_item {
   float: left;
-  line-height: 40px;
+  line-height: 20px;
+}
+@font-face {
+  font-family: huamei;
+  src: url('../../fonts/comicbd.ttf'), url('../../fonts/comicbd.ttf');
+  /* IE9 */
+}
+@font-face {
+  font-family: huamei2;
+  src: url('../../fonts/FZY4JW.TTF'), url('../../fonts/FZY4JW.ttf');
+  /* IE9 */
+}
+.Nav_area {
+  margin-top: 8px;
+  background: #fff;
+  border: 2px solid #1488E0;
+  height: 20px;
+  padding: 10px;
+  border-radius: 20px;
 }
 .Nav_a {
-  float: left;
   padding: 0px 20px;
+  font-size: 16px;
+  font-family: 'huamei';
   color: #fff;
-  font-size: 14px;
+  text-shadow: #444 2px 0 2px, #444 0 2px 2px, #444 -2px 0 2px, #444 0 -2px 2px;
 }
 .Nav_a:hover {
   text-decoration: none;
-  color: #447CFF;
+  color: #fff;
+  text-shadow: #003D6C 2px 0 2px, #003D6C 0 2px 2px, #003D6C -2px 0 2px, #003D6C 0 -2px 2px;
 }
 .Nav_space {
   position: relative;
@@ -605,6 +626,9 @@ input.search {
   border-left: 1px solid #eee;
   vertical-align: middle;
   line-height: 30px;
+}
+.C_1 {
+  color: #0168B7;
 }
 /* Sidebar */
 #sidebar-nav {
@@ -860,8 +884,9 @@ input.search {
 }
 .Foot {
   line-height: 40px;
-  background: #447CFF;
-  color: #fff;
+  color: #3A9749;
+  font-family: 'microsoft yahei';
+  font-weight: bold;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -952,8 +977,8 @@ input.search {
 }
 .Btn_green,
 .Label_green {
-  background: #7DC03A;
-  border-color: #7DC03A;
+  background: #0168B7;
+  border-color: #0168B7;
 }
 .Btn_green:hover,
 .Label_green:hover {
@@ -967,8 +992,8 @@ input.search {
 }
 .Btn_blue,
 .Label_blue {
-  background: #4fbaf1;
-  border-color: #4fbaf1;
+  background: #0168B7;
+  border-color: #0168B7;
 }
 .Btn_blue:hover,
 .Label_blue:hover {

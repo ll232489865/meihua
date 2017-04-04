@@ -49,25 +49,33 @@
 
 <body>
 <div id="header"></div>
-<div class="home_bg tr" id="center">
+<div class="home_bg tr mainCon" id="center">
     <span class="Dib_vm"></span>
     <span class="login_area">
-        <div class="p20 tc fw">
-            <div style="color: #fff; font-weight: bold; font-size: 24px; margin-top: 20px;">会员登录</div>
+        <div class="mt1 mb1 tc" style="margin-top:85px">
+            &emsp;
+            <span style="background: #fff; padding: 12px 15px; box-shadow: 0 0 5px #eee inset; display:inline-block">
+                <img src="../images/账号@2x.png" alt="" class="vm">
+                <input type="text" class="w180" style="border:none; color: #A6CAE5;margin-left: 10px; vertical-align: middle" id="id_username" value="492399154@qq.com" name="username"  maxlength="100" required>
+            </span>
+            
         </div>
-        <div class="mt1 mb1 tc">
-            <img src="../images/login_username.png" alt="" class="vm">
-            <input type="text" class="Ist_35 w220" id="id_username" value="492399154@qq.com" name="username" value="输入学员ID" maxlength="100" required>
+
+        <div class="mt1 mb1 tc" style="margin-top: 10px;">
+            &emsp;
+            <span style="background: #fff; padding: 12px 15px; box-shadow: 0 0 5px #eee inset; display:inline-block">
+                <img src="../images/密码@2x.png" alt="" class="vm">
+                <input type="password" class="w180" style="border:none; color: #A6CAE5; margin-left: 10px; vertical-align: middle" id="id_password" value="sa123" name="username"  maxlength="100" required>
+            </span>
+            
         </div>
-        <div class="mt5 mb5 tc">
-            <img src="../images/login_password.png" alt="" class="vm">
-            <input type="password" class="Ist_35 w220" value="sa123" id="id_password" name="password" value="输入密码" required>
+       
+        <div class="mt20 tl mr25">
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <span id="login_btn" class="Btn_blue Btn_40 w200" style="font-weight: bold;">登录</span>
         </div>
-        <div class="mt20 tf mr25">
-            <span id="login_btn" class="Btn_red Btn_40 w280" style="font-weight: bold;">登录</span>
-        </div>
-        <div class="mt30 tc mb10">
-            <a href="javascript:" class="gf f14">忘记密码？</a>
+        <div class="mt20 tc mb10 ">
+            &emsp;&emsp;<a href="javascript:" class="gf f14 C_1 b">忘记密码？</a>
         </div>
     </span>
 </div>

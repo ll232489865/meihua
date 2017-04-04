@@ -21,11 +21,19 @@ var apiPath = function(path){
 require.config({
     paths : {
         "tpl":path+'../output/main/template',
-        "tpl2":path+'../output/admin/template'
+        "tpl2":path+'../output/admin/template',
+        'jquery':path+'../js/libs/jquery.min'
+        
     }
 })
-define(['tpl','tpl2'],function(template,tpl2){
-    console.log(tpl2);
+
+var userset ={
+      'superAdmin':'SUPERADMIN-API-KEY',
+      'teacher':'TEACHER-API-KEY',
+      'student':'STUDENT-API-KEY'
+}
+define(['tpl','tpl2','jquery'],function(template,tpl2,$){
+    
     function setModule(nanmeArray,data){
         if(nanmeArray instanceof Array)
         {
@@ -36,7 +44,6 @@ define(['tpl','tpl2'],function(template,tpl2){
                 }else{
                     var htmlModule = tpl2(value, data);
                 }
-                
                 document.getElementById(value).innerHTML = htmlModule;
             })
             setHeight();
@@ -47,35 +54,67 @@ define(['tpl','tpl2'],function(template,tpl2){
         }
         
     }
-    function htmlModule(data,html){
-        if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
-            setModule(['footer','header'],data);
-        }else{
-            setModule(['header2'],data);
-            $('#logout').click(function(){
-                console.log(JSON.parse(localStorage.getItem("session")))
-                debugger;
-                $.ajax({
-                    url:'http://120.27.224.143:10010/v1/logout',
-                    type:"get",
-                    header:{
-                        apikey : JSON.parse(localStorage.getItem("session"))
-                    }
-                    ,
-                    dataType:'json',
-                    timeout:60000,
-                    success:function(data){
-                        console.log(data);
-                    }
-                    ,
-                    error:function(XMLHttpRequest, textStatus, errorThrown){
-                            console.log(XMLHttpRequest);
-                            console.log(textStatus);
-                            console.log(errorThrown);
-                    }
+    function htmlModule(data,html,templateObj){
+        if(!html)
+        {
+            if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
+                setModule(['footer','header'],{list:data});
+                $('#logout').click(function(){
+                    var user = userset[JSON.parse(localStorage.getItem("session")).user]
+                    $.ajax({
+                        url:'http://120.27.224.143:10010/v1/logout',
+                        type:"get",
+                        headers:{
+                            "Content-Type": 'application/json',
+                            'STUDENT-API-KEY'  : JSON.parse(localStorage.getItem("session")).apiKey
+                        }
+                        ,
+                        dataType:'json',
+                        timeout:60000,
+                        success:function(data){
+                            localStorage.removeItem('session');
+                            window.location.href = '../login/login.html';
+                        }
+                        ,
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                                console.log(XMLHttpRequest);
+                                console.log(textStatus);
+                                console.log(errorThrown);
+                        }
+                    })
+                    
                 })
-            })
+            }else{
+                setModule(['header2'],data);
+                $('#logout').click(function(){
+                    var user = userset[JSON.parse(localStorage.getItem("session")).user];
+                    $.ajax({
+                        url:'http://120.27.224.143:10010/v1/logout',
+                        type:"get",
+                        headers:{
+                            "Content-Type": 'application/json',
+                            'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
+                        }
+                        ,
+                        dataType:'json',
+                        timeout:60000,
+                        success:function(data){
+                            localStorage.removeItem('session');
+                            window.location.href = '../login/login.html';
+                        }
+                        ,
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                                console.log(XMLHttpRequest);
+                                console.log(textStatus);
+                                console.log(errorThrown);
+                        }
+                    })
+                })
+            }
+        }else{
+            setModule(html,data,templateObj);
         }
+        
         
     }
     //对象化本地存储
@@ -110,7 +149,7 @@ define(['tpl','tpl2'],function(template,tpl2){
         $.ajax(apiPath(url),cfg);
     }
     //直接调用加载头低部模板
-    htmlModule(routPath());
+    htmlModule($.extend(routPath(),{session:localStorage.getItem('session')}));
 
     //获取hash取值
     function catchParameter(str,character){
@@ -118,7 +157,7 @@ define(['tpl','tpl2'],function(template,tpl2){
     }
     //设置高度
     function setHeight(){
-        var h = $('#header').outerHeight() +  $('.Foot').outerHeight();
+        var h = $('#header').outerHeight();
         $('#setHeight').height($(window).height() - h);
     }
     //得到url文件名

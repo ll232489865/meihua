@@ -1,33 +1,43 @@
 <!--Header-->
 <div class="Head">
-    <div class="Constr fix">
+    <div class="fix">
         <div class="l mr20">
             <a href="../lessons/lessons.html#0" class="g3 tdn">
-                <img src="{{path}}../images/logo.png" alt="logo" class="vm ml30">
+                <img src="{{list.path}}../images/logo.png" alt="logo"  class="vm ml30">
             </a>
         </div>
-        <ul class="r mt5 mr20">
+        {{if list.session==null}}
+         <div class="r">
+            <img src="{{list.path}}../images/icon_phone@2x.png" class="vm mr10" alt="study">
+            <b class="gf f20 fw ml2$ vm dib"> 
+                400 800 8802    
+            </b>
+        </div>
+        
+        {{else}}
+       <ul class="r mr20 Nav_area">
             <li class="Nav_item">
                 <a href="../lessons/lessons.html" title="课程" class="Nav_a">
-                    <img src="{{path}}../images/classes.png"alt="study" width="50px">
+                    lessons
                 </a>
             </li>
             <li class="Nav_item">
                 <a href="../setting/setting.html#0" title="设置" class="Nav_a">
-                    <img src="{{path}}../images/setting.png" alt="Setting" width="42">
+                    setting
                 </a>
             </li>
-            <!--<li class="Nav_item">
-                <a class="Nav_a" href="../admin/admin.html#1" title="Admin">
-                    <img src="{{path}}../images/administrator.png" alt="Admin" >
-                </a>
-            </li>-->
             <li class="Nav_item">
                 <a class="Nav_a" href="../help/help.html" title="帮助">
-                    <img src="{{path}}../images/help.png" alt="Help" width="42">
+                    help
+                </a>
+            </li>
+            <li class="Nav_item">
+                <a class="Nav_a" href="javascript:" title="登出" id="logout">
+                    logout
                 </a>
             </li>
         </ul>
+        {{/if}}
     </div>
 </div>
 <!--Header end-->

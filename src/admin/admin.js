@@ -58,23 +58,23 @@ define(['jquery','bootstrap','bootstrapValidator','bootstraptable','bootstrapsel
         //                 console.log(errorThrown);
         //         }
         //     })
-        $.ajax({
-                url:'http://120.27.224.143:10010/v1/admin/zone/query',
-                type:"get",
-                dataType:'json',
-                timeout:60000,
-                headers:{
-                        'SUPERADMIN-API-KEY':JSON.parse(localStorage.getItem("session")),
-                        'contentType' : 'application/json'
-                },
-                success:function(data){
-                    console.log(data);
-                }
-                ,
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                        console.log(XMLHttpRequest);
-                        console.log(textStatus);
-                        console.log(errorThrown);
-                }
-            })
+        // $.ajax({
+        //         url:'http://120.27.224.143:10010/v1/admin/zone/query',
+        //         type:"get",
+        //         dataType:'json',
+        //         timeout:60000,
+        //         headers:{
+        //                 'SUPERADMIN-API-KEY':JSON.parse(localStorage.getItem("session")),
+        //                 'contentType' : 'application/json'
+        //         },
+        //         success:function(data){
+        //             console.log(data);
+        //         }
+        //         ,
+        //         error:function(XMLHttpRequest, textStatus, errorThrown){
+        //                 console.log(XMLHttpRequest);
+        //                 console.log(textStatus);
+        //                 console.log(errorThrown);
+        //         }
+        //     })
 });

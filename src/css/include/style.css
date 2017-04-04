@@ -1,6 +1,6 @@
 .home_bg{
-    background: url('../../images/home_bg.jpg');
-    background-size: 100% 100%
+    background: url('../../images/loginBg.png') no-repeat left top;
+    background-size: 110% 150%;
 }
 .home_round{
     display: inline-block;
@@ -18,9 +18,29 @@
 }
 
 .lesson_bg{
-    background: url('../../images/timg.jpeg') no-repeat;
-     background-size: 100% 100%
+    background: url('../../images/lesson_main_03.png') no-repeat;
+     background-size: cover cover
 }
+.lesson_item{
+    
+    font-size: 20px;
+    width: 50%;
+    position: absolute;
+    width: 150px; height: 150px;
+    text-align: center;
+    line-height: 145px;
+}
+.lesson_item img{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.lesson_w{
+    font-size: 30px;
+    font-family: 'FZY4JW';  
+    color: #fff;
+    text-shadow: #00712C 2px 0 4px,#00712C 0 2px 4px,#00712C -2px 0 4px,#00712C 0 -2px 4px;
+} 
 .unit_round{
     width: 200px;
     height:200px;
@@ -43,9 +63,12 @@
     background-size:cover, cover;
 }
 .login_area{
-    background:rgba(33,33,33,.5);
-    width: 340px; height: 340px;
-    border-radius:170px;
+    width: 500px;
+    height: 310px;
+    background: url('../../images/login_area_03.png') no-repeat left top;
+    /*background:rgba(33,33,33,.5);*/
+    background-size: 100% 100%;
+    
     display: inline-block;
     vertical-align: middle;
     margin-right: 5%;

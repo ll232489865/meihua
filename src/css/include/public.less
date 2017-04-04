@@ -577,8 +577,9 @@ input.search{
 
 /*头部*/
 .Head {
-    line-height: 70px;
+    line-height: 60px;
     padding: 10px 0;
+	background: @bg1;
 }
 
 /*导航*/
@@ -589,19 +590,41 @@ input.search{
 }
 .Nav_item {
     float: left;
-    line-height: 40px;
-}
+    line-height: 20px;
 
+}
+@font-face
+	{
+		font-family: huamei;
+		src: url('../../fonts/comicbd.ttf'),
+			url('../../fonts/comicbd.ttf'); /* IE9 */
+	}
+@font-face
+	{
+		font-family: huamei2;
+		src: url('../../fonts/FZY4JW.TTF'),
+			url('../../fonts/FZY4JW.ttf'); /* IE9 */
+	}
+.Nav_area{
+	margin-top:8px;
+  background:#fff; border: 2px solid #1488E0;
+  height: 20px; padding: 10px;
+  border-radius: 20px;
+}
 .Nav_a {
-    float: left;
     padding: 0px 20px;
-    color: #fff;
-    font-size: 14px;
+    font-size: 16px;
+	font-family: 'huamei';
+	color: #fff;
+	text-shadow: #444 2px 0 2px,#444 0 2px 2px,#444 -2px 0 2px,#444 0 -2px 2px;
+	
 }
 
 .Nav_a:hover {
     text-decoration: none;
-    color: #447CFF
+    color: #fff;
+	text-shadow: #003D6C 2px 0 2px,#003D6C 0 2px 2px,#003D6C -2px 0 2px,#003D6C 0 -2px 2px;
+	// text-shadow: 2px 2px 4px #003D6C,2px 2px 4px #003D6C,2px 2px 4px #003D6C;
 }
 
 .Nav_space {
@@ -615,7 +638,7 @@ input.search{
     vertical-align: middle;
     line-height: 30px;
 }
-@bg1:#7DC03A;
+@bg1:#0168B7;
 @bg2:#51A613;
 @bg3:#f3f3f3;
 @color1:#7DC03A;
@@ -626,6 +649,7 @@ input.search{
 @fcolor2:#333;
 @fcolor3:#FF7200;
 
+.C_1{ color: @bg1}
 
 
 /* Sidebar */
@@ -882,7 +906,15 @@ input.search{
   background-position: -50px 0;
   z-index: 5;
 }
-.Foot{ line-height: 40px; background: #447CFF; color: #fff; position: fixed; bottom: 0; width:100%;}
+.Foot{
+	line-height: 40px;
+  color: #3A9749;
+  font-family: 'microsoft yahei';
+  font-weight: bold;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 .Part_area{ line-height: 180%;}
 
 /*按钮button--Btn*/
@@ -941,8 +973,8 @@ input.search{
 }
 
 .Btn_blue,.Label_blue{
-    background:#4fbaf1;
-    border-color:#4fbaf1;
+    background:@bg1;
+    border-color:@bg1;
 }
 .Btn_blue:hover,.Label_blue:hover{
     background:#40a8de;
