@@ -603,6 +603,7 @@ input.search {
   height: 20px;
   padding: 10px;
   border-radius: 20px;
+  box-sizing: content-box;
 }
 .Nav_a {
   padding: 0px 20px;

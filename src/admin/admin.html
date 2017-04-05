@@ -23,7 +23,6 @@
                 <ul class="submenu" style="display: block;">
                     <li><a href="admin.html">首 页</a></li>
                     <li><a href="administratorinfo.html">校区管理</a></li>
-                    <li><a href="createaccount.html">创建帐号</a></li>
                 </ul>
             </li>
         </ul>
@@ -47,7 +46,7 @@
                     </div>
                     <div class="row-fluid">
                         <div id="toolbar" class="btn-group">
-                            <button id="btn_add" type="button" class="btn btn-default">
+                            <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#userInfoControl">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                             </button>
                             <button id="btn_edit" type="button" class="btn btn-default">
@@ -57,7 +56,11 @@
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                             </button>
                         </div>
-                        <table id="table" data-toggle="table"
+                        <table id="table"
+                        data-click-to-select="true"
+                        data-single-select="true">
+                        </table>
+                        <!--<table id="table" data-toggle="table"
                                 data-url="../testData/testJson.json?type=owner&sort=full_name&direction=asc&per_page=100&page=1"
                                 data-pagination=true
                                 data-height="650"
@@ -96,13 +99,16 @@
                                     </th>
                                 </tr>
                                 </thead>
-                            </table>
+                            </table>-->
                     </div>
                 </div>
                
             </div>
         </div>
     </div>
+<!-- Modal -->
+<div class="modal fade" id="userInfoControl" data-module="userInfoControl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+</div>
 </body>
 <script data-main="admin" src="../js/libs/require.js"></script>
 </html>

@@ -34,13 +34,14 @@ var userset ={
 }
 define(['tpl','tpl2','jquery'],function(template,tpl2,$){
     
-    function setModule(nanmeArray,data){
+    function setModule(nanmeArray,data,templateObj){
+        var newtemplate = templateObj || template;
         if(nanmeArray instanceof Array)
         {
             //初始化加载模板
             nanmeArray.forEach(function(value,index,array){
                 if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
-                    var htmlModule = template(value, data);
+                    var htmlModule = newtemplate(value, data);
                 }else{
                     var htmlModule = tpl2(value, data);
                 }
@@ -49,7 +50,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
             setHeight();
         }else{
             //一个个动态加载模板
-            var htmlModule = template(nanmeArray.getAttribute('data-module'), data);
+            var htmlModule = newtemplate(nanmeArray.getAttribute('data-module'), data);
             nanmeArray.innerHTML = htmlModule;
         }
         
