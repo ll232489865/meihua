@@ -20,10 +20,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" >名称</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="名称">  
+                    <input type="text" class="form-control" id="username" name="username" value="{{list.username}}" placeholder="名称">  
                     </div>
                     <label class="control-label">*</label>
                 </div>
+                {{if !list.username}}
                 <div class="form-group">
                     <label class="col-sm-2 control-label" >密码</label>
                     <div class="col-sm-9">
@@ -38,20 +39,22 @@
                     </div>
                     <label class="control-label">*</label>
                 </div>
+                {{/if}}
                 <div class="form-group">
                     <label class="col-sm-2 control-label">邮箱</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="邮箱">
+                    <input type="text" class="form-control" id="email" value="{{list.email}}" name="email" placeholder="邮箱">
                     </div>
                     <label class="control-label">*</label>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">手机</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="手机">
+                        <input type="text" class="form-control" id="phone" name="phone"  value="{{list.mobile}}" placeholder="手机">
                     </div>
                     <label class="control-label">*</label>
                 </div>
+                {{if !list.username}}
                 <div class="form-group">
                     <label  class="col-sm-2 control-label">身份权限</label>
                     <div class="col-sm-9">
@@ -75,6 +78,31 @@
                         <label class="control-label">*</label>
                     </div>
                 </div>
+                {{else}}
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">身份权限</label>
+                    <div class="col-sm-9">
+                        <select class="selectpicker" id="selectpicker1" data-style="" readonly="readonly">
+                            <option data-id="student">学生</option> 
+                            <option data-id="teacher">老师</option>
+                            <option data-id="superAdmin">超级管理员</option>
+                            <option data-id="zoneAdmin">校区管理员</option>
+                        </select>
+                        <label class="control-label">*</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">校区选择</label>
+                    <div class="col-sm-10">
+                        <select class="selectpicker" id="selectpicker2" data-style="" readonly="readonly">
+                            {{each list as value i}}
+                            <option data-id="{{value._id}}">{{value.address}}</option>
+                            {{/each}}
+                        </select>
+                        <label class="control-label">*</label>
+                    </div>
+                </div>
+                {{/if}}
                 <div class="form-group">
                     <label class="col-sm-2 control-label">性别</label>
                     <div class="col-sm-10"> 
