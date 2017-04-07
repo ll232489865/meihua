@@ -130,7 +130,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         }
     }
     //请求封装
-    function ajaxObj(url,parms,flag,callback){
+    function ajaxObj(url,parms,callback){
         var defaultCfg = {
             dataType:'json',//服务器返回json格式数据
             type:'get',//HTTP请求类型
@@ -146,7 +146,8 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
                 console.log('错误');
             }
         }
-        var cfg = $.extend(defaultCfg,parms);
+        $.extend(defaultCfg.headers,parms.headers);
+        var cfg = $.extend({},defaultCfg,{data:JSON.stringify(parms.data)},{type:parms.type});
         $.ajax(apiPath(url),cfg);
     }
     //直接调用加载头低部模板

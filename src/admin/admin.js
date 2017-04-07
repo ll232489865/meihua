@@ -404,7 +404,7 @@ define(['jquery','adminTemplate','common','bootstrap','bootstrapValidator','boot
     //模态框加载事件，包括了新增以及修改以及查看
     $('#btn_add').click(function(){
          common.htmlModule({list:zoneData},$('#userInfoControl')[0],adminTemplate);
-         
+         console.log(zoneData);
             ValidatorInit();
             $('#selectpicker1').selectpicker({
                     style: 'btn-default',
@@ -423,26 +423,5 @@ define(['jquery','adminTemplate','common','bootstrap','bootstrapValidator','boot
             })
             $('#userInfoControl').modal('show');
     })
-    // $('#userInfoControl').on('show.bs.modal', function (e) {
-    //     var triggerBtn = $(e.relatedTarget);
-        
-    //     common.htmlModule({list:zoneData},$('#userInfoControl')[0],adminTemplate);
-    //     ValidatorInit();
-    //     $('#selectpicker1').selectpicker({
-    //             style: 'btn-default',
-    //             size: 4,
-    //             liveSearch:true
-    //     });
-    //     $('#selectpicker2').selectpicker({
-    //             style: 'btn-default',
-    //             size: 4,
-    //             liveSearch:true
-    //     });
-    //     //点击保存按钮的回调
-    //     $("#save_btn").click(function(){ 
-    //         $('.form-horizontal').bootstrapValidator('validate');
-    //         modiAdd();
-    //     })
-        
-    // })
+  
 });

@@ -79,6 +79,7 @@
                     </div>
                 </div>
                 {{else}}
+                {{if !list.userGroup}}
                 <div class="form-group">
                     <label  class="col-sm-2 control-label">身份权限</label>
                     <div class="col-sm-9">
@@ -102,6 +103,8 @@
                         <label class="control-label">*</label>
                     </div>
                 </div>
+                {{/if}}
+                
                 {{/if}}
                 <div class="form-group">
                     <label class="col-sm-2 control-label">性别</label>
