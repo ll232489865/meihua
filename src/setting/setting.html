@@ -63,40 +63,47 @@
 <div class="modal fade" id="userInfoControl" data-module="userInfoControl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div> 
 <div class="modal fade" id="userInfoContro2" data-module="userInfoContro2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    
+
     <div class="modal-dialog rel" role="document">
-        <div class="alert alert-success dn" id="alert-success"  role="alert" style="position: absolute; width: 100%; top:50%; z-index: 100;">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        操作成功
-    </div>
-    <div class="alert alert-danger dn"  id="alert-danger" role="alert" style="position: absolute; width: 100%; top:50%; z-index: 100;">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        操作失败
-    </div>
+        <div class="alert alert-success dn" id="alert-successI"  role="alert" style="position: absolute; width: 100%; top:50%; z-index: 100;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            操作成功
+        </div>
+        <div class="alert alert-danger dn"  id="alert-dangerI" role="alert" style="position: absolute; width: 100%; top:50%; z-index: 100;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            操作失败
+        </div>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">重置密码</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="form-horizontal2">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">注册邮箱</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="邮箱地址">
+                    <input type="text" class="form-control" id="reemail" name="email" placeholder="邮箱地址">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">新密码</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control" id="repassword" name="noempty" placeholder="Password">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" id="recode" name="noempty"  placeholder="输入验证码">
+                    </div>
+                    <button type="button" class="btn btn-success col-sm-3 " id="vcode">点击获取验证码</button>
                 </div>
                 <span id="_id" class="dn"></span>
             </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-successI">保存</button>
+        <button type="button" class="btn btn-success" id="btn-successI">保存</button>
       </div>
     </div>
   </div>
