@@ -12,8 +12,60 @@
 <link rel="stylesheet" href="../css/include/style.css">
 
 <body>
-<div id="header"></div>
-<div class="home_bg tr mainCon" id="center">
+<div style="position: relative; z-index: 10; padding: 20px;">
+    <img src="../images/login.png" width="150" alt="">
+</div>
+<div style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
+    <div id="bn_slide" class="bn_slide">
+        <div class="bn_img" id="bn_adImage0"  style="display: none; background: red; background: url(../images/login_bg1.jpg) no-repeat center top; background-size: cover ,cover">
+            
+        </div>
+        <div class="bn_img" id="bn_adImage1" style="display: none; background: blue;background: url(../images/login_bg2.jpg) no-repeat center top; background-size: cover ,cover">
+            乐
+        </div>
+        <div id="bn_position" class="bn_position dn">
+            <a href="javascript:" class="bn_control" data-rel="bn_adImage0">
+                
+            </a>
+            <a href="javascript:" class="bn_control" data-rel="bn_adImage1">
+                
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--<div id="header"></div>-->
+<div style="position: absolute; right:0; top: 50%; margin:-175px 105px 0 0; z-index: 12;">
+    <span class="login_area">
+        <div style="padding-top:30px; font-size: 24px; color: #fff; font-weight: bold; text-align: center">
+            会员登录
+        </div>
+        <div class="mt1 mb1 tc" style="margin-top:35px">
+            
+            <span style="background: #fff; padding: 12px 15px; box-shadow: 0 0 5px #eee inset; display:inline-block">
+                <img src="../images/账号@2x.png" alt="" class="vm">
+                <input type="text" class="w180" style="border:none; color: #A6CAE5;margin-left: 10px; vertical-align: middle" id="id_username" value="492399154@qq.com" name="username"  maxlength="100" required>
+            </span>
+            
+        </div>
+        <div class="mt1 mb1 tc" style="margin-top: 10px;">
+            
+            <span style="background: #fff; padding: 12px 15px; box-shadow: 0 0 5px #eee inset; display:inline-block">
+                <img src="../images/密码@2x.png" alt="" class="vm">
+                <input type="password" class="w180" style="border:none; color: #A6CAE5; margin-left: 10px; vertical-align: middle" id="id_password" value="sa123" name="username"  maxlength="100" required>
+            </span>
+            
+        </div>
+       
+        <div class="mt20 tc">
+            <span id="login_btn" class="Btn_purple Btn_40 w200" style="font-weight: bold;">登录</span>
+        </div>
+        <div class="mt20 tc mb10 ">
+            <a href="javascript:" class="gf f14  b">忘记密码？</a>
+        </div>
+    </span>
+</div>
+<!--<div class="home_bg tr mainCon" id="center">
     <span class="Dib_vm"></span>
     <span class="login_area">
         <div class="mt1 mb1 tc" style="margin-top:85px">
@@ -24,7 +76,6 @@
             </span>
             
         </div>
-
         <div class="mt1 mb1 tc" style="margin-top: 10px;">
             &emsp;
             <span style="background: #fff; padding: 12px 15px; box-shadow: 0 0 5px #eee inset; display:inline-block">
@@ -42,9 +93,9 @@
             &emsp;&emsp;<a href="javascript:" class="gf f14 C_1 b">忘记密码？</a>
         </div>
     </span>
-</div>
+</div>-->
 <!--footer-->
-<div id="footer"></div>
+<!--<div id="footer"></div>-->
 <!--footer end-->
 
 </body>

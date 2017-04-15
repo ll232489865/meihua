@@ -59,7 +59,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         if(!html)
         {
             if(document.getElementsByTagName("html")[0].className.indexOf('Account')== '-1'){
-                setModule(['footer','header'],{list:data});
+                setModule(['footer'],{list:data});
                 $('#logout').click(function(){
                     var user = userset[JSON.parse(localStorage.getItem("session")).user]
                     $.ajax({

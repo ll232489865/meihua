@@ -582,17 +582,7 @@ input.search{
 	background: @bg1;
 }
 
-/*导航*/
-.Nav {
-    margin: 0 auto;
-    background-color:@color1;
-    line-height: 40px;
-}
-.Nav_item {
-    float: left;
-    line-height: 20px;
 
-}
 @font-face
 	{
 		font-family: huamei;
@@ -605,15 +595,41 @@ input.search{
 		src: url('../../fonts/FZY4JW.TTF'),
 			url('../../fonts/FZY4JW.ttf'); /* IE9 */
 	}
+// .Nav_area{
+// 	margin-bottom:20px;
+// 	background:#fff; border: 2px solid #1488E0;
+// 	height: 20px; padding: 10px;
+// 	border-radius: 20px;
+// 	box-sizing: content-box;
+// }
+/*导航*/
+.Nav {
+    margin: 0 auto;
+    background-color:@color1;
+    line-height: 40px;
+}
+.Nav_item {
+    float: left;
+    line-height: 20px;
+	margin: 0 10px;
+	width: 72px;
+	height: 82px;
+	background: url('../../images/nav_bg.png');
+	text-align: center;
+}
 .Nav_area{
-	margin-top:8px;
-  background:#fff; border: 2px solid #1488E0;
-  height: 20px; padding: 10px;
-  border-radius: 20px;
-  box-sizing: content-box;
+	margin-left: 10%;
+	margin-bottom:10px;
+	// background:#fff; border: 2px solid #1488E0;
+	// height: 20px; padding: 10px;
+	border-radius: 20px;
+	box-sizing: content-box;
 }
 .Nav_a {
-    padding: 0px 20px;
+	margin-top: 30px;
+	
+	
+	display: inline-block;
     font-size: 16px;
 	font-family: 'huamei';
 	color: #fff;
@@ -804,14 +820,14 @@ input.search{
 
 .bn_slide,
 .ce_slide {
-  height: 420px;
+  height: 100%;
   width: 100%;
   float: left;
   position: relative;
   overflow: hidden;
 }
 .ce_slide {
-  height: 300px;
+  height: 100%;
 }
 .bn_position .active,
 .ce_position .active {
@@ -909,12 +925,13 @@ input.search{
 }
 .Foot{
 	line-height: 40px;
-  color: #3A9749;
-  font-family: 'microsoft yahei';
-  font-weight: bold;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+	color: #3A9749;
+	font-family: 'microsoft yahei';
+	font-weight: bold;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100%;
 }
 .Part_area{ line-height: 180%;}
 
@@ -984,6 +1001,19 @@ input.search{
 .Btn_blue:active,.Label_blue:active{
     background:#3190c2;
     border-color:#3190c2;
+}
+
+.Btn_purple{
+    background:#DC078E;
+    border-color:#DC078E;
+}
+.Btn_purple:hover:hover{
+    background:#A00065;
+    border-color:#A00065;
+}
+.Btn_purple:active:active{
+    background:#730049;
+    border-color:#730049;
 }
 
 .Btn_orange,.Btn_orange{

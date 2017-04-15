@@ -1,13 +1,35 @@
 require.config({
     paths : {
         "jquery" : "../js/libs/jquery.min",
-        "moduleHtml":'../js/common'
+        "moduleHtml":'../js/common',
+        "powerSwitch":'../js/libs/powerSwitch'
+    }
+    ,
+    shim:{
+        'powerSwitch': {
+　　　　　　　　deps: ['jquery'],
+　　　　　　　　exports: 'powerSwitch'
+　　　　　　}
     }
 })
-define(['jquery','moduleHtml'],function($,template){
+define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
     $(function(){
-        var h = $('#header').outerHeight();
-        $('.mainCon').height($(window).height() - h);
+        // var h = $('#header').outerHeight();
+        $(function(){
+        $("#bn_position").find("a").powerSwitch({
+                eventType: "hover",
+                classAdd: "active",
+                animation: "fade",
+                autoTime:3000,
+                // container: $("#bn_slide"),
+                // onSwitch: function(image) {
+                //     if (!image.attr("src")) {
+                //         image.attr("src", image.attr("data-src"));
+                //     }
+                // }
+            }).eq(0).trigger("mouseover");
+        })
+        // $('.mainCon').height($(window).height() - h);
         $('#login_btn').click(function(){
              $.ajax({
                 url:'http://120.27.224.143:10010/v1/login?username='+$('#id_username').val(),
