@@ -45,7 +45,10 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
                 }else{
                     var htmlModule = tpl2(value, data);
                 }
-                document.getElementById(value).innerHTML = htmlModule;
+                if(document.getElementById(value)){
+                    document.getElementById(value).innerHTML = htmlModule;
+                }
+                
             })
             setHeight();
         }else{
