@@ -14,22 +14,14 @@ require.config({
 })
 define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
     $(function(){
-        // var h = $('#header').outerHeight();
         $(function(){
         $("#bn_position").find("a").powerSwitch({
                 eventType: "hover",
                 classAdd: "active",
                 animation: "fade",
                 autoTime:3000,
-                // container: $("#bn_slide"),
-                // onSwitch: function(image) {
-                //     if (!image.attr("src")) {
-                //         image.attr("src", image.attr("data-src"));
-                //     }
-                // }
             }).eq(0).trigger("mouseover");
         })
-        // $('.mainCon').height($(window).height() - h);
         $('#login_btn').click(function(){
              $.ajax({
                 url:'http://120.27.224.143:10010/v1/login?username='+$('#id_username').val(),
@@ -39,7 +31,6 @@ define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
                 headers:{"Content-Type": 'application/json'},
                 data: JSON.stringify({"data":$('#id_password').val()}),
                 success:function(data){
-                    console.log(data);
                     var code = data.ret.code;
                     var user = data.data.userDetail.userGroup;
                     template.localStorageObj("session",{apiKey : data.data.apiKey,user:user});
@@ -55,11 +46,15 @@ define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
                             case 'teacher':
                             window.location.href="../admin/admin.html"
                             break;
-                            case 'admin':
+                            case 'zoneAdmin':
                             window.location.href="../admin/admin.html"
                             break;
                         }
                     }
+                    if(code == 401001){
+                        window.location.href="../login/login.html"
+                    }
+
                 }
             })
         })

@@ -2,7 +2,7 @@ require.config({
     paths : {
         "jquery" : "../js/libs/jquery.min",
         "moduleHtml":'../js/common',
-        "powerSwitch":'../js/libs/jquery-powerSwitch',
+        "powerSwitch":'../js/libs/powerSwitch',
         "canvas":'../js/widget/canval',
     }
     ,
@@ -17,7 +17,6 @@ require.config({
             deps: ['jquery'],
             exports: 'powerSwitch'
          }
-
 　　　　}
 })
 define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerSwitch,canvas){

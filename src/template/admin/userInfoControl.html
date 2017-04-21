@@ -1,5 +1,4 @@
 <div class="modal-dialog rel" role="document">
-    
     <div class="alert alert-success dn" id="alert-success"  role="alert" style="position: absolute; width: 100%; top:50%; z-index: 100;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         操作成功
@@ -8,7 +7,6 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         操作失败
     </div>
-   
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -48,63 +46,39 @@
                     <label class="control-label">*</label>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">手机</label>
+                    <label class="col-sm-2 control-label">手机{{list.editInfo}}</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="phone" name="phone"  value="{{list.mobile}}" placeholder="手机">
                     </div>
                     <label class="control-label">*</label>
-                </div>
-                {{if !list.username}}
+                </div>     
+                {{if list.zoneSelect}}    
+                    {{if list.editInfo}}    
                 <div class="form-group">
                     <label  class="col-sm-2 control-label">身份权限</label>
                     <div class="col-sm-9">
                         <select class="selectpicker" id="selectpicker1" data-style="" readonly="readonly">
                             <option data-id="student">学生</option> 
                             <option data-id="teacher">老师</option>
-                            <option data-id="superAdmin">超级管理员</option>
                             <option data-id="zoneAdmin">校区管理员</option>
-                        </select>
-                        <label class="control-label">*</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label  class="col-sm-2 control-label">校区选择</label>
-                    <div class="col-sm-10">
-                        <select class="selectpicker" id="selectpicker2" data-style="" readonly="readonly">
-                            {{each list as value i}}
-                            <option data-id="{{value._id}}">{{value.address}}</option>
-                            {{/each}}
-                        </select>
-                        <label class="control-label">*</label>
-                    </div>
-                </div>
-                {{else}}
-                {{if !list.userGroup}}
-                <div class="form-group">
-                    <label  class="col-sm-2 control-label">身份权限</label>
-                    <div class="col-sm-9">
-                        <select class="selectpicker" id="selectpicker1" data-style="" readonly="readonly">
-                            <option data-id="student">学生</option> 
-                            <option data-id="teacher">老师</option>
-                            <option data-id="superAdmin">超级管理员</option>
-                            <option data-id="zoneAdmin">校区管理员</option>
-                        </select>
-                        <label class="control-label">*</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label  class="col-sm-2 control-label">校区选择</label>
-                    <div class="col-sm-10">
-                        <select class="selectpicker" id="selectpicker2" data-style="" readonly="readonly">
-                            {{each list as value i}}
-                            <option data-id="{{value._id}}">{{value.address}}</option>
-                            {{/each}}
                         </select>
                         <label class="control-label">*</label>
                     </div>
                 </div>
                 {{/if}}
                 
+                <div class="form-group" id="zoneSelect">
+                    <label  class="col-sm-2 control-label">校区选择</label>
+                    <div class="col-sm-10">
+                        <select class="selectpicker" id="selectpicker2" data-style="" readonly="readonly">
+                            {{each list as value i}}
+                            <option data-id="{{value._id}}">{{value.address}}</option>
+                            {{/each}}
+                        </select>
+                        <label class="control-label">*</label>
+                    </div>
+                </div>
+
                 {{/if}}
                 <div class="form-group">
                     <label class="col-sm-2 control-label">性别</label>

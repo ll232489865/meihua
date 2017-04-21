@@ -39,6 +39,12 @@ require.config({
 　　　　}
 })
 define(['jquery','adminTemplate','common','validator','bootstrapValidator','bootstraptable','bootstrapselect'],function($,adminTemplate,common,validator){
+    //根据用户身份确保一些消息是否显示隐藏，默认是admin的身份
+    userOpstions  = {
+        zoneSelect:JSON.parse(localStorage.getItem("session")).user === 'superAdmin' ? true:false, //是否显示校区选择
+        editInfo:false//是否显示用户身份选择，只是注册有，现在不支持身份修改
+    }
+    
     //表格数据加载
     $('#table').bootstrapTable({
         classes:'table table-hover table-condensed',
@@ -49,11 +55,8 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
         pageNumber:1,               
         pageSize: 20,                     
         ajaxOptions:{
-        headers: {
-                'SUPERADMIN-API-KEY'  : JSON.parse(localStorage.getItem("session")).apiKey
-                }
+        headers: common.dynamicKey()
         }
-        
         ,
          columns: [
                 {
@@ -94,44 +97,46 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
     });
     //获取学区信息
     var zoneData;
-    $.ajax({
-        url:'http://120.27.224.143:10010/v1/admin/zone/query',
-        type:"get",
-        dataType:'json',
-        timeout:60000,
-        headers:{
-                'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
-        },
-        success:function(data){
-            zoneData = data.data;
-            console.log(zoneData);
+    function  getZoneInfo(){
+        //如果是超级管理员就返回所有的zone信息，提供界面信息选择
+        var user = JSON.parse(localStorage.getItem("session")).user
+        if(user=='superAdmin'){
+            common.ajaxObj(
+                'admin/zone/query',
+                {
+                    headers:common.dynamicKey()
+                }
+                ,
+                function(data){
+                    zoneData = data.data;
+                    console.log(zoneData);
+                    return zoneData;
+                }
+            )
+        }else{
+            zoneData = {
+                managingZone:'001',
+                managingId:'58f99ab65d937f67b2745d9b'
+            }
         }
-        ,
-        error:function(XMLHttpRequest, textStatus, errorThrown){
-                console.log(XMLHttpRequest);
-                console.log(textStatus);
-                console.log(errorThrown);
-        }
-    })
+    } 
+    getZoneInfo();
+
     //删除记录
     $('#remove').click(function(){
         var selectIndex = $('input[name="btSelectItem"]:checked ').parent().next().text();
         if(selectIndex){
-            $.ajax({
-            url:"http://120.27.224.143:10010/v1/admin/user/"+selectIndex+"/del",
-            type:"get",
-            dataType:'json',
-            timeout:60000,
-            headers:{
-                    'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
-            },
-            success:function(data){
-                $('#table').bootstrapTable('refresh');
-            }
-            ,
-            error:function(XMLHttpRequest, textStatus, errorThrown){
-            }
-        })
+            common.ajaxObj(
+                "admin/user/"+selectIndex+"/del",
+                {
+                    headers:common.dynamicKey()
+                }
+                ,
+                function(data){
+                    console.log(data);
+                    $('#table').bootstrapTable('refresh');
+                }
+            )
         }else{
             alert('请选中一行记录')
         }
@@ -142,35 +147,41 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
     $('#btn_edit').click(function(){
         var selectIndex = $('input[name="btSelectItem"]:checked ').parent().next().text();
         if(selectIndex){
-            $.ajax({
-                url:"http://120.27.224.143:10010/v1/admin/user/"+selectIndex+"/getDetail",
-                type:"get",
-                dataType:'json',
-                timeout:60000,
-                headers:{
-                        'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
-                },
-                success:function(data){
-                    common.htmlModule({list:$.extend({},data.data,zoneData)},$('#userInfoControl')[0],adminTemplate);
-                    console.log($.extend({},data.data,zoneData));
+
+            common.ajaxObj(
+                "admin/user/"+selectIndex+"/getDetail",
+                {
+                    headers:common.dynamicKey()
+                }
+                ,
+                function(data){
+                    
+                    //绑定模板
+                    common.htmlModule({list:$.extend({},data.data,zoneData,userOpstions)},$('#userInfoControl')[0],adminTemplate);   
+
+                    console.log($.extend({},data.data,zoneData,userOpstions))
+                    //显示弹出框
                     $('#userInfoControl').modal('show');
+                    //设置验证
                     validator.ValidatorInit($('#form-horizontal'));
+                    //启动下拉框，身份选择
                     $('#selectpicker1').selectpicker({
                             style: 'btn-default',
                             size: 4,
                             liveSearch:true
                     });
+                    //启动下拉框，校区选择
                     $('#selectpicker2').selectpicker({
                             style: 'btn-default',
                             size: 4,
                             liveSearch:true
                     });
+                    //得到
                     var selectuserGroup = $('#selectpicker1 option').filter(function(index){
                         return $(this).attr('data-id') ==data.data.userGroup
                     });
-                        $('#selectpicker1').selectpicker('val',selectuserGroup.text())
-                        $('#selectpicker2').selectpicker('val',data.data.address)
-                    
+                    $('#selectpicker1').selectpicker('val',selectuserGroup.text())
+                    $('#selectpicker2').selectpicker('val',data.data.address)
                     $("#save_btn").click(function(){ 
                         $('#form-horizontal').bootstrapValidator('validate');
                         sexval = $('input:radio').filter(function(i){
@@ -180,28 +191,24 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                             username:$('#username').val(),
                             englishName:$('#englishName').val(),
                             gender:sexval.val(),
-                            userGroup:$('#selectpicker1 option:selected').attr('data-id'),
                             mobile:$('#phone').val(),
-                            belongingZoneId:$('#selectpicker2 option:selected').attr('data-id'),
-                            belongingZone:$('#selectpicker2').selectpicker('val'),
+                            belongingZoneId: JSON.parse(localStorage.getItem("session")).user==='superAdmin' ?$('#selectpicker2 option:selected').attr('data-id'):zoneData.managingId,
+                            belongingZone:JSON.parse(localStorage.getItem("session")).user==='superAdmin' ? $('#selectpicker2').selectpicker('val'):zoneData.managingZone,
                             email:$('#email').val()
                         }
                         
                         if($('#form-horizontal').data('bootstrapValidator').isValid()){
                                 var selectIndex = $('input[name="btSelectItem"]:checked ').parent().next().text();
                                 if(selectIndex){
-                                    $.ajax({
-
-                                        url:'http://120.27.224.143:10010/v1/admin/user/'+selectIndex+'/modify',
-                                        type:"post",
-                                        dataType:'json',
-                                        timeout:60000,
-                                        headers:{
-                                            "Content-Type": 'application/json',
-                                            'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
-                                        },
-                                        data:JSON.stringify(data),
-                                        success:function(data){
+                                    common.ajaxObj(
+                                        'admin/user/'+selectIndex+'/modify',
+                                        {
+                                            headers:common.dynamicKey(),
+                                            type:'post',
+                                            data:data
+                                        }
+                                        ,
+                                        function(data){
                                             $('#table').bootstrapTable('refresh');
                                             $('#alert-success').show();
                                             setTimeout(function(){
@@ -210,13 +217,13 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                                             },1000)
                                         }
                                         ,
-                                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                                        function(XMLHttpRequest, textStatus, errorThrown){
                                             $('#alert-danger').show()
                                             setTimeout(function(){
                                                 $('#alert-danger').hide()
                                             },1000)
                                         }
-                                    })
+                                    )
                                 }else{
                                     alert('请选中一行记录')
                                 }
@@ -224,14 +231,15 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                     })
                 }
                 ,
-                error:function(XMLHttpRequest, textStatus, errorThrown){
+                function(XMLHttpRequest, textStatus, errorThrown){
+                     console.log('cuowu')
                 }
-            })
+            )
         }else{
             alert('请选中一行记录')
         }
     })
-    //保存以及修改的方法
+    //添加一行
     function modiAdd(){
             sexval = $('input:radio').filter(function(i){
                 return ($(this).attr('name') == 'sex' && $(this)[0].checked)
@@ -243,23 +251,21 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                 gender:sexval.val(),
                 userGroup:$('#selectpicker1 option:selected').attr('data-id'),
                 mobile:$('#phone').val(),
-                belongingZoneId:$('#selectpicker2 option:selected').attr('data-id'),
-                belongingZone:$('#selectpicker2').selectpicker('val'),
+                belongingZoneId:$('#zoneSelect').is(':visible') ? $('#selectpicker2 option:selected').attr('data-id') : '',
+                belongingZone:$('#zoneSelect').is(':visible') ?  $('#selectpicker2').selectpicker('val') : '',
                 email:$('#email').val()
             }
             
             if($('#form-horizontal').data('bootstrapValidator').isValid()){
-                $.ajax({
-                    url:'http://120.27.224.143:10010/v1/admin/user/add',
-                    type:"post",
-                    dataType:'json',
-                    timeout:60000,
-                    headers:{
-                        "Content-Type": 'application/json',
-                        'SUPERADMIN-API-KEY' : JSON.parse(localStorage.getItem("session")).apiKey
-                    },
-                    data:JSON.stringify(data),
-                    success:function(data){
+                common.ajaxObj(
+                    'admin/user/add',
+                    {
+                        headers:common.dynamicKey(),
+                        type:'post',
+                        data:data
+                    }
+                    ,
+                    function(data){
                         $('#table').bootstrapTable('refresh');
                         $('#alert-success').show();
                         setTimeout(function(){
@@ -268,23 +274,34 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                         },1000)
                     }
                     ,
-                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                    function(XMLHttpRequest, textStatus, errorThrown){
                         $('#alert-danger').show()
                         setTimeout(function(){
                             $('#alert-danger').hide()
                         },1000)
                     }
-                })
+                )
             }
     }
     //模态框加载事件，包括了新增以及修改以及查看
     $('#btn_add').click(function(){
-         common.htmlModule({list:zoneData},$('#userInfoControl')[0],adminTemplate);
+        //注册用户的时候，编辑身份是需要显示的
+         common.htmlModule({list:$.extend({},zoneData,$.extend({},userOpstions,{editInfo:true}))},$('#userInfoControl')[0],adminTemplate);
+         //userGroup:JSON.parse(localStorage.getItem("session")).user
+         
             validator.ValidatorInit($('#form-horizontal'));
             $('#selectpicker1').selectpicker({
                     style: 'btn-default',
                     size: 4,
                     liveSearch:true
+            });
+            $('#selectpicker1').on('changed.bs.select',function (e) {
+                
+                if($('#selectpicker1').selectpicker('val') == '校区管理员'){
+                    $('#zoneSelect').hide();
+                }else{
+                    $('#zoneSelect').show();
+                }
             });
             $('#selectpicker2').selectpicker({
                     style: 'btn-default',

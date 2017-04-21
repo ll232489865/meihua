@@ -36,17 +36,13 @@ define(['jquery','common','validator','bootstrap','bootstrapValidator','bootstra
         common.ajaxObj(
                 'admin/user/query',
                 {
-                        headers:{
-                        "SUPERADMIN-API-KEY": JSON.parse(localStorage.getItem("session")).apiKey,
-                        }
+                    headers: common.dynamicKey(),
                 }
                 ,
                 function(data){
                     resultData = data.data;
                     var str = ''
-                    console.log(resultData)
                     $.each(resultData,function(i,n){
-                        // console.log(resultData)
                         if(resultData[i].userGroup==='zoneAdmin'){
                               str+='<option data-phone="'+resultData[i].mobile+'" data-id="'+resultData[i]._id+'">'+resultData[i].username+'</option>'
                         }
@@ -63,9 +59,7 @@ define(['jquery','common','validator','bootstrap','bootstrapValidator','bootstra
                             common.ajaxObj(
                                 'admin/zone/add',
                                 {
-                                        headers:{
-                                                "SUPERADMIN-API-KEY": JSON.parse(localStorage.getItem("session")).apiKey,
-                                        },
+                                        headers: common.dynamicKey(),
                                         data:{
                                                 name : $('#zonename').val() ,
                                                 address: $('#zoneaddress').val() ,

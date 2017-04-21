@@ -28,9 +28,10 @@ require.config({
 })
 
 var userset ={
-      'superAdmin':'SUPERADMIN-API-KEY',
-      'teacher':'TEACHER-API-KEY',
-      'student':'STUDENT-API-KEY'
+      superAdmin:'SUPERADMIN-API-KEY',
+      teacher:'TEACHER-API-KEY',
+      student:'STUDENT-API-KEY',
+      zoneAdmin:'ZONEADMIN-API-KEY'
 }
 define(['tpl','tpl2','jquery'],function(template,tpl2,$){
     
@@ -76,14 +77,22 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
                         dataType:'json',
                         timeout:60000,
                         success:function(data){
-                            localStorage.removeItem('session');
-                            window.location.href = '../login/login.html';
+                            var code = data.ret.code;
+                            if(code==0){
+                                localStorage.removeItem('session');
+                                window.location.href = '../login/login.html';
+                            }
+                            if(code == 401001){
+                                window.location.href="../login/login.html";
+                            }
+                            
                         }
                         ,
                         error:function(XMLHttpRequest, textStatus, errorThrown){
-                                console.log(XMLHttpRequest);
-                                console.log(textStatus);
-                                console.log(errorThrown);
+                            if(errorThrown == 'Unauthorized'){
+                                localStorage.removeItem('session');
+                                window.location.href = '../login/login.html';
+                            }
                         }
                     })
                     
@@ -108,9 +117,10 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
                         }
                         ,
                         error:function(XMLHttpRequest, textStatus, errorThrown){
-                                console.log(XMLHttpRequest);
-                                console.log(textStatus);
-                                console.log(errorThrown);
+                            if(errorThrown == 'Unauthorized'){
+                                localStorage.removeItem('session');
+                                window.location.href = '../login/login.html';
+                            }
                         }
                     })
                 })
@@ -133,7 +143,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         }
     }
     //请求封装
-    function ajaxObj(url,parms,callback){
+    function ajaxObj(url,parms,callback,errorback){
         var defaultCfg = {
             dataType:'json',//服务器返回json格式数据
             type:'get',//HTTP请求类型
@@ -146,11 +156,12 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
                 callback(data);
             },
             error:function(xhr,type,errorThrown){
-                console.log('错误');
+                errorback&&errorback(xhr,type,errorThrown)
             }
         }
         $.extend(defaultCfg.headers,parms.headers);
         var cfg = $.extend({},defaultCfg,{data:JSON.stringify(parms.data)},{type:parms.type});
+
         $.ajax(apiPath(url),cfg);
     }
     //直接调用加载头低部模板
@@ -203,6 +214,34 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
             parmStr:parmStr
         }
     } 
+
+    //根据身份返回不同的 headers 键值对
+    function dynamicKey(){
+       var key =  JSON.parse(localStorage.getItem("session")).user;
+       switch(key)
+        {
+            case 'superAdmin':
+            return {
+                'SUPERADMIN-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'student':
+            return {
+                'STUDENT-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'teacher':
+            return {
+                'TEACHER-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'zoneAdmin':
+            return {
+                'ZONEADMIN-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+        }
+    }
     return {
         htmlModule : htmlModule,
         routPath : routPath,
@@ -211,6 +250,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         catchParameter:catchParameter,
         setHeight:setHeight,
         GetPageurl:GetPageurl,
-        getQueryStringArgs:getQueryStringArgs
+        getQueryStringArgs:getQueryStringArgs,
+        dynamicKey:dynamicKey
     }
 });
