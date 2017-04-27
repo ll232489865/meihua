@@ -8,55 +8,176 @@ require.config({
          'moduleHtml':{
             exports: 'template'
          }
-　　　　}
+　　　}
 })
-define(['jquery','moduleHtml'],function($,template){
-    var score = 0;
-    var mouses = $('#table img');
-    var time1
-    // 跳出一个地鼠，过一会儿隐藏
-    function show(){
-        var a = Math.floor(Math.random() * 9);
-        var mouse = mouses.get(a);
+ define(['jquery','moduleHtml'],function($,template){
+     var score = 0;
+     var mouses = $('#table  .mouse_content');
+     var time1;
+     var constant = {
+         holeNum:10,//洞个数
+         showInterval:4000,//出现时间间隔
+         hideInterval:8300,//出现多长时间后 隐藏
+         totalScore:100,//总分上限
+         timeScore:10,//每次积分
+         timeWordsNum:3,//每次出现的单词的个数
+     };
+     var correctWord = null;
 
-        $(mouse).addClass('mouseUp').removeClass('mouseDown');
 
-        function hide(){
-            $(mouse).addClass('mouseDown').removeClass('mouseUp');
-        }
-        // setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式
-        time = setTimeout(hide, 2500);
-        return time
-    }
-    // 跳出一批地鼠
-    function play(){
-        var time1 = show();
-        var time2 = show();
-        var time3 = show();
-    }
-    // 每隔一段时间跳出一批地鼠
-    time1 = setInterval(play, 2000);
+     // 1.跳出一个地鼠，过一会儿隐藏
+     function show(word){
 
-    // 打中地鼠
-    $('img').click(function(){
-        $(this).addClass('mouseDown').removeClass('mouseUp');
-        score = score + 10;
-        if(score>=100){
-            clearInterval(time1);
-            alert('游戏结束');
-            return
-        }
-        // 设置id=score的标签的文本内容(在这里指的是p标签)
-        $('#score').text('得分：' + score);
-        // 设置id=hit标签的src属性值为hit.wav并播放它
-        $('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
-    });
+        // var a = Math.floor(Math.random() * 9);
+        // var mouse = mouses.get(a);
+        //
+        // $(mouse).addClass('mouseUp').removeClass('mouseDown');
+        // console.log("show"+Date.now());
+        //
+        // function hide(){
+        //     console.log("hide"+Date.now());
+        //     $(mouse).addClass('mouseDown').removeClass('mouseUp');
+        // }
+        // // setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式
+        // time = setTimeout(hide, 2500);
+        // return time
 
-    // 鼠标被按下时，指针图片改为image/cursor-down.png
-    // 鼠标没有被按下时，指针图片改为image/cursor.png
-    $('body').mousedown(function(){
-        $('#setHeight').css('cursor', 'url(../images/mouse_game/cursor-down.png), auto');
-    }).mouseup(function(){
-        $('#setHeight').css('cursor', 'url(../images/mouse_game/cursor.png), auto');
-    });
-})
+        //  var a = Math.floor(Math.random() * constant.holeNum);
+        //  var mouse = mouses.get(a);
+        //  _show($(mouse));
+        // console.log("show"+Date.now());
+        //  function _hide(){
+        //       console.log("_hide"+Date.now());
+        //       $(mouse).addClass('mouseDown').removeClass('mouseUp');
+        //       $(mouse).find("img").addClass('mouseDown').removeClass('mouseUp');
+        //       $(mouse).find("span").hide();
+        //  };
+        //
+        //  time = setTimeout(_hide(), 2500);
+        //  return time;
+
+         var randNum = Math.random() * constant.holeNum;
+         var a = Math.floor(randNum);
+         console.log(a);
+         var mouse = mouses.get(a);
+
+         if(!_show($(mouse),word)){
+             show(word);
+         }
+
+         function _hide(){
+             $(mouse).addClass('mouseDown').removeClass('mouseUp');
+             $(mouse).find("img").addClass('mouseDown').removeClass('mouseUp');
+             $(mouse).find("span").hide();
+         }
+         // setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式
+         // time = setTimeout(_hide, 5500);
+         // return time
+     }
+
+     function _hide($mouse_content) {
+         if($mouse_content.height() == 0) return false;
+         $mouse_content.addClass('mouseDown').removeClass('mouseUp');
+         $mouse_content.find("img").addClass('mouseDown').removeClass('mouseUp');
+         $mouse_content.find("span").hide();
+     }
+
+     function _show($mouse_content,word){
+         if($mouse_content.hasClass("mouseUp")) return false;
+         $mouse_content.addClass('mouseUp').removeClass('mouseDown');
+         $mouse_content.find("img").addClass('mouseUp').removeClass('mouseDown');
+         $mouse_content.find("span").text(word).show();
+         return true;
+     };
+     
+     function _hideAllHole() {
+         if(mouses.length > 0){
+            for(var i =0;i < mouses.length;i ++){
+                _hide($(mouses[i]));
+            }
+         }
+     }
+
+
+
+     //2.获取单词或者句子
+     function _getWord(){
+         //通过ajax  TODO
+         var words = ["get","input","words","acc","add","floor","mouse"];
+         var word = words[template.getRandom(0,words.length)];
+         return word;
+     }
+
+     function _getWrongWord(word){
+        var ns = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
+        var index = template.getRandom(0,word.length);
+        var o = word.charAt(index);
+        var result = word.replace(o,ns[template.getRandom(0,ns.length)]);
+        // console.log(result);
+        return result;
+     }
+
+     // 3.跳出一批地鼠
+     function play(){
+         // for(var i =0 ;i < constant.timeWordsNum;i++){
+         //     show(_getWord());
+         // }
+         correctWord = _getWord();
+         var t1 = show(correctWord);
+         var t2 = show(_getWrongWord(correctWord));
+         var t3 = show(_getWrongWord(correctWord));
+     }
+
+     //4.判断正确与否  然后算分 还是减分
+     function isCorrect(word){
+        return word == correctWord ? true:false;
+     }
+
+     // 5.每隔一段时间跳出一批地鼠
+     // time1 = setInterval(play, constant.showInterval);
+    play();
+     
+     // 打中地鼠
+     $('img').click(function(){
+         var $span = $(this).siblings("span");
+         $(this).addClass('mouseDown').removeClass('mouseUp');
+         $span.hide();
+         _hideAllHole();
+         if($span.text()){
+             if(isCorrect($span.text())){
+                 score += constant.timeScore;
+                 setTimeout(function () {
+                     play();
+                 },300);
+             }else{
+                alert("选错了！");
+                score -= constant.timeScore;
+                setTimeout(function () {
+                    var t1 = show(correctWord);
+                    var t2 = show(_getWrongWord(correctWord));
+                    var t3 = show(_getWrongWord(correctWord));
+                },300);
+             }
+         }
+
+         //TODO
+         // 设置id=score的标签的文本内容(在这里指的是p标签)
+         $('#score').text('得分：' + score);
+         $("body").css('cursor', 'url(../images/mouse_game/cursor-down.ico), auto');
+         setTimeout(function () {
+             $("body").trigger("mouseup");
+         },250);
+         if(score>=constant.totalScore){
+             clearInterval(time1);
+             alert('游戏结束');
+             return
+         }
+         // 设置id=hit标签的src属性值为hit.wav并播放它
+         $('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
+     });
+
+     // 鼠标没有被按下时，指针图片改为image/cursor.ico
+     $('body').mouseup(function(){
+         $(this).css('cursor', 'url(../images/mouse_game/cursor.ico), auto');
+     });
+ })

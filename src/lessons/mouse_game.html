@@ -13,35 +13,43 @@
                 /*background-image: url(../images/mouse_game/bg.jpg);*/
                 /*cursor属性可以自定义鼠标指针的样式：第一个参数是自定义鼠标图标路径，
                 第2个参数auto是css标准的cursor样式，可换成其它属性(如pointer/default等)*/
-                cursor: url(../images/mouse_game/cursor.png), auto;
+                cursor: url(../images/mouse_game/cursor.ico), default;
                 /*-moz-user-select: none; */
             }
-            table{
-                width: 600px;
+            .mouse_content{
+                width: 99%;
                 height: 600px;
-                left:50%;
-                margin-left:-300px;
                 position: absolute;
             }
-            td{
+            td.hole{
                 height: 150px;
                 background-image: url(../images/mouse_game/hole.png);
-                background-size: 120px 50px;
+                background-size: 260px 92px;
                 background-repeat: no-repeat;
                 background-position: center bottom;
                 text-align: center;
                 vertical-align: bottom;
             }
-            #table img{
-                width: 80px;
-                height: 0;
+            #table .mouse_content,#table .mouse_content img{
+                width: 96px;
+                height: 0px;
                 position: relative;
-                bottom: 8px;
+                margin: 0 auto;
+                bottom: 60px;
                 /*animation-timing-function 规定动画的速度曲线
                 linear指的是动画从头到尾的速度是相同的*/
                 animation-timing-function: linear;
                 /*animation-fill-mode属性规定动画在播放之前或之后，其动画效果是否可见*/
                 animation-fill-mode: both;
+            }
+            #table .mouse_content img{
+                bottom: 5px;
+            }
+            #table .mouse_content span{
+                /*display: none;*/
+                font-size: 19px;
+                font-weight: bold;
+                color: #ffffff;
             }
             .mouseUp{
                 animation-name: up;
@@ -49,16 +57,16 @@
             }
             .mouseDown{
                 animation-name: down;
-                animation-duration: 0.1s;
+                animation-duration: 0.2s;
             }
             /*地鼠消失的动画*/
             @keyframes down{
-                0%{height: 70px;}
+                0%{height: 90px;}
                 100%{height: 0;}
             }
             @keyframes up{
                 0%{height: 0;}
-                100%{height: 70px;}
+                100%{height: 90px;}
             }
             #score{
                 font-size: 30px;
@@ -80,21 +88,20 @@
         <audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
         <audio id="hit"></audio>
         <p id="score">得分：0</p>
-        <table id="table">
+        <table id="table" class="mouse_content">
             <tr>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
             </tr>
             <tr>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-            </tr>
-            <tr>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
-                <td><img src="../images/mouse_game/mouse.png"></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
+                <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
             </tr>
         </table>
     </div>

@@ -214,6 +214,11 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         }
     } 
 
+
+	//获取一个最小min 最大max的随机数 整数
+    function getRandom(min,max){ 
+		return Math.floor(Math.random()*max + min);
+    }
     //根据身份返回不同的 headers 键值对
     function dynamicKey(){
        var key =  JSON.parse(localStorage.getItem("session")).user;
@@ -250,6 +255,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         setHeight:setHeight,
         GetPageurl:GetPageurl,
         getQueryStringArgs:getQueryStringArgs,
+        getRandom:getRandom,
         dynamicKey:dynamicKey
     }
 });
