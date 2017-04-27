@@ -1,92 +1,91 @@
 require.config({
     paths : {
         "jquery" : "../js/libs/jquery.min",
-        "moduleHtml":'../js/common'
+        "common":'../js/common'
     }
     ,
     shim: {
-         'moduleHtml':{
-            exports: 'template'
+         'common':{
+            exports: 'common'
          }
 　　　　}
 })
-define(['jquery','moduleHtml'],function($,template){
-    var ofenshu = document.getElementById("fenshu");
-		var odaojishi = document.getElementById("daojishi");
-		var yinyue = document.getElementById("yinyue");
-		var Btn = document.getElementById("btn");
-
-		var fenshu = 0;
-		var daojishi = 60;
-
-		//当页面上出现功能类似、属性类型，什么都类似的东西
-		//应该封装成一个类
-		function Ballon(){
-			this.top = 600;
-			this.left = 200 + Math.random() * 800;
-			this.score = parseInt(Math.random() * 3) + 1;
-			this.init();
-			this.fly();
-		}
-		//初始化
-		Ballon.prototype.init = function(){
-			//创建DOM，并且给这个对象的dom属性
-			this.dom = document.createElement("div");
-			this.dom.innerHTML = "Hello";
-			//更改类名
-			this.dom.className = "ballon";
-			//追加这个DOM元素
-			document.body.appendChild(this.dom);
-			//设置样式
-			this.dom.style.left = this.left + "px";
-			this.dom.style.top = this.top + "px";
-			//设置背景定位，背景定位要根据自己的分数来设置。
-			//精灵图有bug，分数和自己的真实用图差了1。
-			var x = -(this.score - 1) % 3 * 146;
-			var y = 0;
-			this.dom.style.backgroundPosition = x + "px " + y + "px";
-
-			var self = this;
-			//绑定监听
-			this.dom.onclick = function(){
-				self.bomb();
-
-				//音效
-				yinyue.load();
-				yinyue.play();
-			}
-		}
-		Ballon.prototype.fly = function(){
-			//备份this
-			var self = this;
-			//自己有自己的定时器
-			this.timer = setInterval(function(){
-				//更改top值
-				self.top -= 2 * 1;
-				//小于-100
-				if(self.top < -100){
-					self.bomb();
-				}
-				self.dom.style.top = self.top + "px";
-			},30);
-		}
-		//爆炸方法
-		Ballon.prototype.bomb = function(){
-			clearInterval(this.timer);
-			//移除DOM
-			document.body.removeChild(this.dom);
-		}
-
-		var frameCount = 0;
-		//让定时器每500毫秒一个球
-		Btn.onclick = function () {
-			var times = 5;
-		    Btn.style.display = 'none';
-			var timer = setInterval(function(){
-				if (times > 0)
-				new Ballon();
-				times--;
-		},1000);
+define(['jquery','common'],function($,common){
+	$(function(){
+	var ofenshu = document.getElementById("fenshu");
+	var odaojishi = document.getElementById("daojishi");
+	var yinyue = document.getElementById("yinyue");
+	var Btn = document.getElementById("btn");
+	var audio = document.getElementById("audio");
+	var part = document.getElementById("part");
+	var integral = document.getElementById("integral");
+	var fenshu = 0;
+	var next = document.getElementById("next");
+	var daojishi = 60;
+	var appleMain = document.getElementById("appleMain");
+	var currentpart = document.getElementById('currentpart');
+	var options = {
+		part : 0,
+		integraljifen:0,
+		currentpart:1,
+		total:2
 	}
+	var dataArray  = [
+		{
+			wordList:['zhangsan','lisi','wangwu','zhaoliu','heihei'],
+			audio:'../images/ballon_game/0.mp3',
+			targetWord:'zhangsan'
+		}
+		,
+		{
+			wordList:['heihei','haha','gaga','hehe','gg'],
+			audio:'../images/ballon_game/0.mp3',
+			targetWord:'haha'
+		}
+	]
+	dataArray[options.part].wordList.forEach(function(value, index, array){
+		$(appleMain).find('span').eq(index).html(value);
+	});
+	Btn.onclick = function () {
+		$(next).hide();
+		Btn.style.display = 'none';
+		audio.style.display = 'inline-block';
+		part.style.display = 'inline-block';
+		integral.style.display = 'block';
+		appleMain.style.display = 'block';
+	}
+	$(".appleItem").click(function(){
+		var thisHtml = $(this).text();
+		console.log(thisHtml);
+		if(thisHtml == dataArray[options.part].targetWord){
+			options.integraljifen += 10;
+			$(integral).html(options.integraljifen);
+			$(next).show();
+			alert('回答正确，加10分');
+		}else{
+			alert('回答错误，扣10分')
+			options.integraljifen -= 10;
+			if(options.integraljifen<=0){
+				options.integraljifen =0
+			}
+			$(integral).html(options.integraljifen);
+		}
+		
+	})
+	$(next).click(function(){
+		if(options.currentpart == options.total){
+			alert('游戏已经结束');
+			return;
+		}
+		options.part +=1;
+		options.currentpart+=1;
+		$(currentpart).html(options.currentpart);
+		dataArray[options.part].wordList.forEach(function(value, index, array){
+			$(appleMain).find('span').eq(index).html(value);
+		});
+		
+	})
+	})
+    
 })
     

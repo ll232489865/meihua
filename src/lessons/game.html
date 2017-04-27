@@ -7,15 +7,69 @@
 <link rel="stylesheet" href="../css/include/base.css">
 <link rel="stylesheet" href="../css/include/public.css">
 <link rel="stylesheet" href="../css/include/style.css">
-<body>
-<div id="header"></div>
+<body style="background:url('../images/searcbWorld/背景@2x.png') no-repeat; background-size:cover">
+<style>
+    .ballon{
+			width: 164px;
+			height: 437px;
+			background: url(../images/ballon_game/ballon.png) no-repeat;
+			position: absolute;
+			cursor: Pointer;
+			text-align:center;
+			line-height:200px;
+			font-size: 25px;
+		    margin: 20px 0;
+		    color: #fff;
+		    font-weight:bold;
+		    text-shadow: 1px 1px 1px #000;
+		}
+    .next{
+        position: absolute; bottom: 30%; right: 0; line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center
+    }
+    .audio{ position: absolute; bottom: 20px; right: 20px; display: none}
+    .integral,.part{ line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center}
+    .integral{position: absolute; left: 0; top: 0; width: 100px;}    
+    button {
+			padding:10px 20px;
+			font-size: 50px;
+			cursor: pointer;
+			position: absolute; top: 40%; left: 45%;
+			border-radius:10px;
+			background: #fff;
+			border:1px solid #F5AB24;
+		}
+    .appleItem{
+        display:inline-block;
+        width: 150px; height: 169px;
+        background: url('../images/searcbWorld/apple@2x.png');
+        background-size:cover;
+    }
+	.appleItem{ cursor: pointer; color: #fff; font-size: 20px; font-weight: bold; line-height: 200px; text-align: center;}
+</style>
 
-<div id="setHeight" class="game_bg">
-   
+<div style="text-align: center">
+	<span id="part" class="part"> 
+		<span id="currentpart">1</span>/2
+	</span>
+</div>
+<div id="integral" class="integral">
+	0
+</div>
+<div id="next" class="next" >
+	答对了，进入下一题
+</div>
+<button id="btn">开始</button>
+<div class="audio" id="audio">
+    <img src="../images/播放@2x.png" alt="">
 </div>
 
-
-
+<div style="display: none;" id="appleMain">
+    <span class="appleItem" style="position: absolute; top:10px; left: 500px;"> 1</span>
+    <span class="appleItem" style="position: absolute; top:30px; left: 750px;"> 2</span>
+    <span class="appleItem" style="position: absolute; top:230px; left: 350px;"> 3</span>
+    <span class="appleItem" style="position: absolute; top:200px; left: 600px;"> 4</span>
+    <span class="appleItem" style="position: absolute; top:230px; left: 850px;"> 5</span>
+</div>
 
 <!--footer-->
 <div id="footer"></div>

@@ -13,12 +13,12 @@
 		}
 		body{
 			height: 100%;
-			background: url(../images/ballon_game/bg.jpg);
+			background: url(../images/ballon_game/bg.png);
 			background-size: cover;
 			overflow: hidden;
 		}
 		.ballon{
-			width: 146px;
+			width: 164px;
 			height: 437px;
 			background: url(../images/ballon_game/ballon.png) no-repeat;
 			position: absolute;
@@ -38,45 +38,168 @@
 		.btn {
 			margin:100px 100px;
 		}
+		.next{
+			position: absolute; bottom: 30%; right: 0; line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center
+		}
 		button {
 			padding:10px 20px;
 			font-size: 50px;
 			cursor: pointer;
+			position: absolute; top: 40%; left: 45%;
+			border-radius:10px;
+			background: #fff;
+			border:1px solid #F5AB24;
+		}
+		.audio{ position: absolute; bottom: 20px; right: 20px; display: none}
+		.integral,.part{ line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center}
+		.integral{position: absolute; left: 0; top: 0; width: 100px;}
+		.sucss{
+			-webkit-transition:all 1s;
+			-moz-transition:all 1s;
+				-ms-transition:all 1s;
+				-o-transition:all 1s;	
+				transition:all 1s; 
+		}
+		@keyframes ballon
+		{
+			50% {
+				margin: -10px 0 0 -10px;
+				
+			}
+			100% {
+				margin-left: 0 -10px -10px 0 ;
+				
+			}
+		}
+		@keyframes scale
+		{
+			0% {
+				-webkit-transform:scale(1,1)
+				
+			}
+			100% {
+				-webkit-transform:scale(1.2,1.2) ;
+				
+			}
+		}
+		@keyframes opacity1
+		{
+			0% {
+				opacity:1;
+				
+			}
+			100% {
+				opacity:0;
+				
+			}
+		}
+		.animate{
+			animation: ballon 1.5s;
+			-webkit-animation-duration: 4s;/*动画持续时间*/ 
+			-webkit-animation-timing-function: linear; /*动画频率，和transition-timing-function是一样的*/ 
+			-webkit-animation-delay: 0;/*动画延迟时间*/ 
+			-webkit-animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/ 
+			-webkit-animation-direction: alternate;/*定义动画方式*/
+			animation-fill-mode:forwards;
+		}
+		.animate2{
+			animation: ballon 1.5s;
+			-webkit-animation-duration: 1.5s;/*动画持续时间*/ 
+			-webkit-animation-timing-function: linear; /*动画频率，和transition-timing-function是一样的*/ 
+			-webkit-animation-delay: 0;/*动画延迟时间*/ 
+			-webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/ 
+			-webkit-animation-direction: alternate;/*定义动画方式*/
+			animation-fill-mode:forwards;
+		}
+
+		.animate3{
+			animation: scale 1.5s;
+			-webkit-animation-duration: 1s;/*动画持续时间*/ 
+			-webkit-animation-timing-function: linear; /*动画频率，和transition-timing-function是一样的*/ 
+			-webkit-animation-delay: 1.5;/*动画延迟时间*/ 
+			-webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/ 
+			-webkit-animation-direction: alternate;/*定义动画方式*/
+			animation-fill-mode:forwards;
 		}
 	</style>
 </head>
 <body>
-
-<div class="btn">
-	<button id="btn">测试开始</button>
+<audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
+<div style="text-align: center">
+	<span id="part" class="part"> 
+		1/10
+	</span>
 </div>
-
+<div id="integral" class="integral">
+	0
+</div>
+<div id="next" class="next" >
+	答对了，进入下一题
+</div>
+<div class="btn">
+	
+</div>
+<button id="btn">开始</button>
+	<div class="audio" id="audio">
+		<img src="../images/播放@2x.png" alt="">
+	</div>	
 	<audio src="../music/ballon_game/c.wav" id="yinyue"></audio>
-	<audio src="../music/ballon_game/bgm.mp3" autoplay></audio>
-
+	<audio src="../music/ballon_game/bgm.mp3"></audio>
+	<script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js"></script>
 	<script type="text/javascript">
+
+	  var dataArray  = [
+		  {
+			  wordList:['zhangsan','lisi','wangwu','zhaoliu','heihei'],
+			  audio:'../images/ballon_game/0.mp3',
+			  targetWord:'zhangsan'
+		  }
+		  ,
+		  {
+			  wordList:['heihei','haha','gaga','hehe','gg'],
+			  audio:'../images/ballon_game/0.mp3',
+			  targetWord:'haha'
+		  }
+	  ]
 		var ofenshu = document.getElementById("fenshu");
 		var odaojishi = document.getElementById("daojishi");
 		var yinyue = document.getElementById("yinyue");
 		var Btn = document.getElementById("btn");
-
+		var audio = document.getElementById("audio");
+	    var part = document.getElementById("part");
+		var integral = document.getElementById("integral");
 		var fenshu = 0;
+		var next = document.getElementById("next");
 		var daojishi = 60;
+		var integraljifen = 0
 
 		//当页面上出现功能类似、属性类型，什么都类似的东西
 		//应该封装成一个类
-		function Ballon(){
-			this.top = 600;
-			this.left = 200 + Math.random() * 800;
-			this.score = parseInt(Math.random() * 3) + 1;
+		function Ballon(wordList,audioUrl,targetWord,index){
+			this.top = 600 - Math.random() * 150;
+			this.minTop = Math.random() * 100;
+			this.left = 200 + this.Objlist.length % 5 * 164 + (10+Math.random()*(50-10+1));
+			this.score = parseInt(Math.random() * 5) + 1;
+			this.targetWord = targetWord;
+			this.wordList = wordList;
+			this.audioUrl = audioUrl;
+			this.index = index;
+			this.flyspeed = (20+Math.random()*(40-20+1));
 			this.init();
 			this.fly();
 		}
+		Ballon.prototype = {
+			Objlist:[],
+			createTime:null,
+			ballNum:5,
+			
+		};
 		//初始化
 		Ballon.prototype.init = function(){
 			//创建DOM，并且给这个对象的dom属性
 			this.dom = document.createElement("div");
-			this.dom.innerHTML = "Hello";
+			this.dom.innerHTML = this.wordList;
+
 			//更改类名
 			this.dom.className = "ballon";
 			//追加这个DOM元素
@@ -84,21 +207,65 @@
 			//设置样式
 			this.dom.style.left = this.left + "px";
 			this.dom.style.top = this.top + "px";
+			this.dom.setAttribute('world',this.wordList);
+			this.dom.setAttribute('data-index',this.index);
+			
 			//设置背景定位，背景定位要根据自己的分数来设置。
 			//精灵图有bug，分数和自己的真实用图差了1。
-			var x = -(this.score - 1) % 3 * 146;
+			var x = -(this.score - 1) % 5 * 164;
 			var y = 0;
 			this.dom.style.backgroundPosition = x + "px " + y + "px";
 
 			var self = this;
 			//绑定监听
 			this.dom.onclick = function(){
-				self.bomb();
+				var that = this;
+				//如果是错的气球，则因藏匿其他的气球
+				if(this.getAttribute('world')!=self.targetWord)
+				{
+					self.bomb();
+					if(integraljifen>=10){
+						integraljifen -= 10; 
+						integral.innerHTML = integraljifen;
+					}
+					//音效
 
-				//音效
-				yinyue.load();
-				yinyue.play();
+					yinyue.load();
+					yinyue.play();
+				}else{
+					clearInterval(self.timer);
+					//积分+10
+					integraljifen += 10; 
+					//设置是否继续创建标识
+					Ballon.createTime = true ;
+					//积分设置
+					integral.innerHTML = integraljifen;
+					//便利气球数组
+					console.log(self.Objlist);
+					self.Objlist.forEach(function(value, index, array){
+						 
+						//如果是对的气球，则因藏匿其他的气球并且移除DOM
+						if(value.dom.innerHTML != self.targetWord){  
+							value.dom.style.display = 'none';
+							setTimeout(function() {
+								if(self.Objlist.length > 1){
+									document.body.removeChild(value.dom);
+									self.Objlist.splice(that.getAttribute('data-index')-1,1)
+								}
+							});
+							
+						}
+					});
+					self.dom.className = 'ballon'
+					self.dom.onclick = null;
+					self.Objlist.splice(this.getAttribute('data-index')-1,1)
+					$(self.dom).addClass('sucss animate3');
+					$(self.dom).css({ "left": "50%", "top": "50%" , "marginLeft": "-80px" , "marginTop": "-200px" });
+					$(next).show();
+				}
+				
 			}
+			this.Objlist.push(this);
 		}
 		Ballon.prototype.fly = function(){
 			//备份this
@@ -108,28 +275,64 @@
 				//更改top值
 				self.top -= 2 * 1;
 				//小于-100
-				if(self.top < -100){
-					self.bomb();
+				if(self.top < self.minTop){
+					// self.bomb();
+					self.dom.className ="ballon animate"
+					clearInterval(self.timer);		
 				}
 				self.dom.style.top = self.top + "px";
-			},30);
+			},self.flyspeed);
 		}
 		//爆炸方法
 		Ballon.prototype.bomb = function(){
 			clearInterval(this.timer);
+			this.Objlist.splice(this.dom.getAttribute('data-index')-1,1)
+
 			//移除DOM
+
 			document.body.removeChild(this.dom);
+			
 		}
 
 		var frameCount = 0;
 		//让定时器每500毫秒一个球
+
+		//开始方法，点击按钮与下一条按钮相同
 		Btn.onclick = function () {
 			var times = 5;
 		    Btn.style.display = 'none';
+			audio.style.display = 'inline-block';
+			part.style.display = 'inline-block';
+			integral.style.display = 'block';
 			var timer = setInterval(function(){
-				if (times > 0)
-				new Ballon();
-				times--;
+				if (times > 0 && !(Ballon.createTime))
+				{
+					new Ballon(dataArray[0].wordList[5-times],dataArray[0].audio,'lisi',[5-times]);
+					times--;
+				}else{
+					clearInterval(timer);
+				}
+				
+		},1000);
+	}
+	next.onclick = function(){
+		$('.ballon').remove();
+		Ballon.Objlist = [];
+		Ballon.createTime = null;
+		var times = 5;
+		    Btn.style.display = 'none';
+			audio.style.display = 'inline-block';
+			part.style.display = 'inline-block';
+			integral.style.display = 'block';
+			var timer = setInterval(function(){
+				if (times > 0 && !(Ballon.createTime))
+				{
+					new Ballon(dataArray[1].wordList[5-times],dataArray[1].audio,'gaga',[5-times]);
+					times--;
+				}else{
+					clearInterval(timer);
+				}
+				
 		},1000);
 	}
 

@@ -23,7 +23,6 @@ require.config({
         "tpl":path+'../output/main/template',
         "tpl2":path+'../output/admin/template',
         'jquery':path+'../js/libs/jquery.min'
-        
     }
 })
 
