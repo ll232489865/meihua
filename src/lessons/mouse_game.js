@@ -21,44 +21,16 @@ require.config({
          totalScore:100,//总分上限
          timeScore:10,//每次积分
          timeWordsNum:3,//每次出现的单词的个数
+         isStart:false,
      };
      var correctWord = null;
 
 
      // 1.跳出一个地鼠，过一会儿隐藏
-     function show(word){
-
-        // var a = Math.floor(Math.random() * 9);
-        // var mouse = mouses.get(a);
-        //
-        // $(mouse).addClass('mouseUp').removeClass('mouseDown');
-        // console.log("show"+Date.now());
-        //
-        // function hide(){
-        //     console.log("hide"+Date.now());
-        //     $(mouse).addClass('mouseDown').removeClass('mouseUp');
-        // }
-        // // setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式
-        // time = setTimeout(hide, 2500);
-        // return time
-
-        //  var a = Math.floor(Math.random() * constant.holeNum);
-        //  var mouse = mouses.get(a);
-        //  _show($(mouse));
-        // console.log("show"+Date.now());
-        //  function _hide(){
-        //       console.log("_hide"+Date.now());
-        //       $(mouse).addClass('mouseDown').removeClass('mouseUp');
-        //       $(mouse).find("img").addClass('mouseDown').removeClass('mouseUp');
-        //       $(mouse).find("span").hide();
-        //  };
-        //
-        //  time = setTimeout(_hide(), 2500);
-        //  return time;
+     function show(word){     
 
          var randNum = Math.random() * constant.holeNum;
          var a = Math.floor(randNum);
-         console.log(a);
          var mouse = mouses.get(a);
 
          if(!_show($(mouse),word)){
@@ -135,23 +107,37 @@ require.config({
 
      // 5.每隔一段时间跳出一批地鼠
      // time1 = setInterval(play, constant.showInterval);
-    play();
+    
+
+    $("#btn").on("click",function(){ 
+    	$(this).hide();
+		play();
+		 $("body").css('cursor', 'url(../images/mouse_game/cursor.ico), default');
+		 constant.isStart =true;	 
+		 return false;
+    });
      
      // 打中地鼠
-     $('img').click(function(){
-         var $span = $(this).siblings("span");
-         $(this).addClass('mouseDown').removeClass('mouseUp');
+     $('.mouse_content').click(function(){     	
+     	if(!$(this).hasClass("mouseUp")) return false;
+         var $span = $(this).find("span");
+         $(this).find("img").addClass('mouseDown').removeClass('mouseUp');
          $span.hide();
-         _hideAllHole();
+         _hideAllHole();         
          if($span.text()){
              if(isCorrect($span.text())){
                  score += constant.timeScore;
+                 // 设置id=hit标签的src属性值为hit.wav并播放它
+         		$('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
                  setTimeout(function () {
                      play();
                  },300);
              }else{
                 alert("选错了！");
-                score -= constant.timeScore;
+                if(score>0){ 
+					score -= constant.timeScore;
+                }
+                
                 setTimeout(function () {
                     var t1 = show(correctWord);
                     var t2 = show(_getWrongWord(correctWord));
@@ -163,7 +149,7 @@ require.config({
          //TODO
          // 设置id=score的标签的文本内容(在这里指的是p标签)
          $('#score').text('得分：' + score);
-         $("body").css('cursor', 'url(../images/mouse_game/cursor-down.ico), auto');
+         $("body").css('cursor', 'url(../images/mouse_game/cursor-down.ico), default');
          setTimeout(function () {
              $("body").trigger("mouseup");
          },250);
@@ -172,12 +158,14 @@ require.config({
              alert('游戏结束');
              return
          }
-         // 设置id=hit标签的src属性值为hit.wav并播放它
-         $('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
+         
+         return false;
      });
 
      // 鼠标没有被按下时，指针图片改为image/cursor.ico
-     $('body').mouseup(function(){
-         $(this).css('cursor', 'url(../images/mouse_game/cursor.ico), auto');
+     $('body').mouseup(function(){    
+     	if(constant.isStart) { 
+     		$(this).css('cursor', 'url(../images/mouse_game/cursor.ico), default');
+     	}         
      });
  })
