@@ -109,13 +109,19 @@ require.config({
      // time1 = setInterval(play, constant.showInterval);
     
 
-    $("#btn").on("click",function(){ 
+     //开始游戏
+    $("#startBtn").on("click",function(){
     	$(this).hide();
 		play();
 		 $("body").css('cursor', 'url(../images/mouse_game/cursor.ico), default');
 		 constant.isStart =true;	 
 		 return false;
     });
+
+     //下个游戏
+     $("#nextGameBtn").on("click",function(){
+          location.href = "ballon_game.html";
+     });
      
      // 打中地鼠
      $('.mouse_content').click(function(){     	
@@ -130,7 +136,9 @@ require.config({
                  // 设置id=hit标签的src属性值为hit.wav并播放它
          		$('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
                  setTimeout(function () {
-                     play();
+					 if(score < 100){
+							play();
+					 }                     
                  },300);
              }else{
                 alert("选错了！");
@@ -154,6 +162,9 @@ require.config({
              $("body").trigger("mouseup");
          },250);
          if(score>=constant.totalScore){
+			 $("#nextGameBtn").show();
+			 $("#startBtn").hide();
+			 _hideAllHole(); 
              clearInterval(time1);
              alert('游戏结束');
              return

@@ -94,6 +94,10 @@
 				position: relative;
 				z-index: 55;
 			}
+            #nextGameBtn{
+                display: none;
+            }
+
         </style>
     </head>
 
@@ -103,7 +107,8 @@
         <audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
         <audio id="hit"></audio>
         <p id="score">得分：0</p>
-        <button id="btn">开始</button>
+        <button id="startBtn">开始</button>
+        <button id="nextGameBtn">下一个游戏</button>
         <table id="table" class="mouse_content">
             <tr>
                 <td class="hole"><div class="mouse_content"><span></span><img src="../images/mouse_game/mouse.png"></div></td>
