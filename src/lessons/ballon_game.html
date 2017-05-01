@@ -121,6 +121,9 @@
 			-webkit-animation-direction: alternate;/*定义动画方式*/
 			animation-fill-mode:forwards;
 		}
+		#nextGame{ 
+			display: none;
+		}
 	</style>
 </head>
 <body>
@@ -140,12 +143,13 @@
 	
 </div>
 <button id="btn">开始</button>
+<button id="nextGame">下一个游戏</button>
 	<div class="audio" id="audio">
 		<img src="../images/播放@2x.png" alt="">
 	</div>	
 	<audio src="../music/ballon_game/c.wav" id="yinyue"></audio>
 	<audio src="../music/ballon_game/bgm.mp3"></audio>
-	<script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js"></script>
+	<script src="../js/libs/jquery.min.js"></script>
 	<script type="text/javascript">
 
 	  var dataArray  = [
@@ -161,6 +165,11 @@
 			  targetWord:'haha'
 		  }
 	  ]
+	  var constant = { 
+	  	   maxScore : 20,	  
+	  	   maxPart : 5,	 
+	  	   nowPart : 1	  	   
+	  };
 		var ofenshu = document.getElementById("fenshu");
 		var odaojishi = document.getElementById("daojishi");
 		var yinyue = document.getElementById("yinyue");
@@ -168,6 +177,7 @@
 		var audio = document.getElementById("audio");
 	    var part = document.getElementById("part");
 		var integral = document.getElementById("integral");
+		var $nextGame = $("#nextGame");//下一个游戏
 		var fenshu = 0;
 		var next = document.getElementById("next");
 		var daojishi = 60;
@@ -235,13 +245,29 @@
 				}else{
 					clearInterval(self.timer);
 					//积分+10
-					integraljifen += 10; 
-					//设置是否继续创建标识
-					Ballon.createTime = true ;
+					integraljifen += 10;
 					//积分设置
-					integral.innerHTML = integraljifen;
+					integral.innerHTML = integraljifen; 
+					if(integraljifen == constant.maxScore){ //100分
+						if(constant.nowPart == constant.maxPart){ 
+							$nextGame.show();
+							$(".ballon").hide();
+							$(next).hide();
+							//return;
+						}else{ 
+							constant.nowPart++;
+							$(part).html(constant.nowPart+"/"+constant.maxPart);
+							integraljifen = 0;
+							integral.innerHTML = integraljifen;
+							$(next).show();
+						}
+					}else{ 
+						$(next).show();
+					} 					
+					//设置是否继续创建标识
+					Ballon.createTime = true ;					
 					//便利气球数组
-					console.log(self.Objlist);
+					//console.log(self.Objlist);
 					self.Objlist.forEach(function(value, index, array){
 						 
 						//如果是对的气球，则因藏匿其他的气球并且移除DOM
@@ -261,7 +287,7 @@
 					self.Objlist.splice(this.getAttribute('data-index')-1,1)
 					$(self.dom).addClass('sucss animate3');
 					$(self.dom).css({ "left": "50%", "top": "50%" , "marginLeft": "-80px" , "marginTop": "-200px" });
-					$(next).show();
+					//$(next).show();
 				}
 				
 			}
@@ -335,6 +361,10 @@
 				
 		},1000);
 	}
+
+	$nextGame.on("click",function(){ 
+		location.href = "game.html";
+	});
 
 	</script>
 </body>
