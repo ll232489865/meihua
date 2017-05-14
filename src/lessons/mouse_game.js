@@ -11,13 +11,19 @@ require.config({
 　　　}
 })
  define(['jquery','moduleHtml'],function($,template){
+ 	//模拟参数
+ 	var getUrl = "http://120.27.224.143:10010";
+ 	var unit = "1";
+ 	var page = '1';
+
+
      var score = 0;
      var mouses = $('#table  .mouse_content');
      var $audio = $("#yinyue");
      var $audioImg = $("#audio");
      var yinyueDom = document.getElementById("yinyue");	
      var time1;
-     var getUrl = "http://120.27.224.143:10010";
+     
      var constant = {
          holeNum:10,//洞个数
          showInterval:4000,//出现时间间隔
@@ -98,13 +104,12 @@ require.config({
      function play(){
      	var  words = null;
      	var  showwords = [];
-     	var  unit = "1";
      	  $.ajax({
-                url:getUrl+'/v1/unit/'+unit+'/game/page/1/get',
+                url:getUrl+'/v1/unit/'+unit+'/game/page/'+page+'/get',
                 type:"get",
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'f4cf4a16-df5b-428b-84f9-7d635890a8d9'},               
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'ad4a83aa-bac1-4b94-8981-ba8dbe0b42dd'},               
                 success:function(data){   
                 	var refpositon = null;                   	      
                 	 words = data.data.componentGroups[0].components[0].resources;
