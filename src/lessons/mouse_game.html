@@ -98,6 +98,12 @@
                 display: none;
             }
 
+            div.audio{ 
+				position: absolute;	
+			    bottom: 0;
+			    right: 0;
+            }
+
         </style>
     </head>
 
@@ -126,8 +132,12 @@
             </tr>
         </table>
     </div>
-<div id="footer"></div>
+    <div class="audio" id="audio">
+		<img src="../images/播放@2x.png" alt="">
+	</div>	
 
+<div id="footer"></div>
+<audio src="../music/ballon_game/c.wav" id="yinyue"></audio>
 
 <script data-main="mouse_game" src="../js/libs/require.js"></script>
 </body>

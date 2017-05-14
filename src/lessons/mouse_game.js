@@ -13,7 +13,11 @@ require.config({
  define(['jquery','moduleHtml'],function($,template){
      var score = 0;
      var mouses = $('#table  .mouse_content');
+     var $audio = $("#yinyue");
+     var $audioImg = $("#audio");
+     var yinyueDom = document.getElementById("yinyue");	
      var time1;
+     var getUrl = "http://120.27.224.143:10010";
      var constant = {
          holeNum:10,//洞个数
          showInterval:4000,//出现时间间隔
@@ -75,6 +79,7 @@ require.config({
      //2.获取单词或者句子
      function _getWord(){
          //通过ajax  TODO
+         var param = {};         
          var words = ["get","input","words","acc","add","floor","mouse"];
          var word = words[template.getRandom(0,words.length)];
          return word;
@@ -88,16 +93,44 @@ require.config({
         // console.log(result);
         return result;
      }
-
+ 
      // 3.跳出一批地鼠
      function play(){
-         // for(var i =0 ;i < constant.timeWordsNum;i++){
-         //     show(_getWord());
-         // }
-         correctWord = _getWord();
-         var t1 = show(correctWord);
-         var t2 = show(_getWrongWord(correctWord));
-         var t3 = show(_getWrongWord(correctWord));
+     	var  words = null;
+     	var  showwords = [];
+     	var  unit = "1";
+     	  $.ajax({
+                url:getUrl+'/v1/unit/'+unit+'/game/page/1/get',
+                type:"get",
+                dataType:'json',
+                timeout:60000,
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'f4cf4a16-df5b-428b-84f9-7d635890a8d9'},               
+                success:function(data){   
+                	var refpositon = null;                   	      
+                	 words = data.data.componentGroups[0].components[0].resources;
+				    	if(words){ 
+							for(var i=0;i < words.length;i++ ){ //根据position获取到正确等
+								if (words[i].type == "sound") { 
+									refpositon = words[i].refPosition;									
+									yinyueDom.src = getUrl+words[i].content;																
+								}else{ 
+									if(refpositon == words[i].position){ 
+ 										correctWord = words[i].content;
+									} 
+									showwords.push(words[i].content);
+								}
+							} 							
+					         var t1 = show(showwords[0]);
+					         var t2 = show(showwords[1]);
+					         var t3 = show(showwords[2]);
+					         yinyueDom.load();
+					         yinyueDom.play();
+				     	}
+                },
+                error:function(){ 
+                	alert("获取数据异常");
+                }
+            });     	
      }
 
      //4.判断正确与否  然后算分 还是减分
@@ -172,6 +205,11 @@ require.config({
          
          return false;
      });
+
+    //播放
+	$audioImg.on("click",function(){ 
+		yinyueDom.play();
+	}); 
 
      // 鼠标没有被按下时，指针图片改为image/cursor.ico
      $('body').mouseup(function(){    
