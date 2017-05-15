@@ -15,6 +15,7 @@ define(['jquery','common'],function($,common){
 	var ofenshu = document.getElementById("fenshu");
 	var odaojishi = document.getElementById("daojishi");
 	var yinyue = document.getElementById("yinyue");
+	var wordaudio = document.getElementById("wordaudio");//单词播放
 	var Btn = document.getElementById("btn");
 	var audio = document.getElementById("audio");
 	var part = document.getElementById("part");
@@ -24,6 +25,7 @@ define(['jquery','common'],function($,common){
 	var daojishi = 60;
 	var appleMain = document.getElementById("appleMain");
 	var currentpart = document.getElementById('currentpart');
+	var getUrl = "http://120.27.224.143:10010";
 	var options = {
 		part : 0,
 		integraljifen:0,
@@ -43,9 +45,8 @@ define(['jquery','common'],function($,common){
 			targetWord:'haha'
 		}
 	]
-	dataArray[options.part].wordList.forEach(function(value, index, array){
-		$(appleMain).find('span').eq(index).html(value);
-	});
+
+
 	Btn.onclick = function () {
 		$(next).hide();
 		Btn.style.display = 'none';
@@ -53,10 +54,11 @@ define(['jquery','common'],function($,common){
 		part.style.display = 'inline-block';
 		integral.style.display = 'block';
 		appleMain.style.display = 'block';
+		showWords();
 	}
 	$(".appleItem").click(function(){
 		var thisHtml = $(this).text();
-		console.log(thisHtml);
+		//console.log(thisHtml);
 		if(thisHtml == dataArray[options.part].targetWord){
 			options.integraljifen += 10;
 			$(integral).html(options.integraljifen);
@@ -80,11 +82,56 @@ define(['jquery','common'],function($,common){
 		options.part +=1;
 		options.currentpart+=1;
 		$(currentpart).html(options.currentpart);
-		dataArray[options.part].wordList.forEach(function(value, index, array){
-			$(appleMain).find('span').eq(index).html(value);
-		});
-		
+		showWords();		
 	})
+   
+    function showWords (){ 
+		 var  unit = "2";		
+		 var　page = "1";
+		 var refpositon = null;
+     	  $.ajax({
+                url:getUrl+'/v1/unit/'+unit+'/game/page/'+page+'/get',
+                type:"get",
+                dataType:'json',
+                timeout:60000,
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'f4cf4a16-df5b-428b-84f9-7d635890a8d9'},                
+                success:function(data){                   
+                	 words = data.data.componentGroups[0].components[0].resources;
+				    	if(words){ 
+				    		dataArray[options.part].wordList = [];
+							for(var i=0;i < words.length;i++ ){ //根据position获取到正确等
+								if (words[i].type == "sound") { 
+									refpositon = words[i].refPosition;									
+									wordaudio.src = getUrl+words[i].content;									
+								}else{ 
+									if(refpositon == words[i].position){ 
+ 										dataArray[options.part].targetWord = words[i].content; 										
+				     					dataArray[0].targetWord = words[1].content;
+									}
+									//correctWord = words[i];
+									dataArray[options.part].wordList.push(words[i].content);
+								}
+							} 
+							 
+				     	} 
+
+				     	dataArray[options.part].wordList.forEach(function(value, index, array){
+							$(appleMain).find('span').eq(index).html(value);
+						});
+				       wordaudio.load();
+					    wordaudio.play();				  
+                },
+                error:function(){ 
+                	alert("获取数据异常");
+                }
+            });  
+    }
+
+    audio.onclick = function(){ 
+    	wordaudio.load();
+    	 wordaudio.play();		
+    } 
+
 	})
     
 })

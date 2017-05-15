@@ -26,7 +26,7 @@
     .next{
         position: absolute; bottom: 30%; right: 0; line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center
     }
-    .audio{ position: absolute; bottom: 20px; right: 20px; display: none}
+    .audio{ position: absolute; bottom: 20px; right: 20px; display: none;z-index: 20;}
     .integral,.part{ line-height:40px; background:#fff; width: 200px; color: #000; display: none; text-align: center}
     .integral{position: absolute; left: 0; top: 0; width: 100px;}    
     button {
@@ -59,6 +59,7 @@
 	答对了，进入下一题
 </div>
 <button id="btn">开始</button>
+<audio src="../music/ballon_game/bgm.mp3" id="wordaudio"></audio>
 <div class="audio" id="audio">
     <img src="../images/播放@2x.png" alt="">
 </div>
