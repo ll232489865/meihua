@@ -52,24 +52,34 @@
                     </div>
                     <label class="control-label">*</label>
                 </div>     
-                {{if list.zoneSelect}}    
+                
                     {{if list.editInfo}}    
                 <div class="form-group">
-                    <label  class="col-sm-2 control-label">身份权限</label>
+                    <label  class="col-sm-2 control-label">身份</label>
+					{{if list.user!='teacher'}}
                     <div class="col-sm-9">
                         <select class="selectpicker" id="selectpicker1" data-style="" readonly="readonly">
                             <option data-id="student">学生</option> 
                             <option data-id="teacher">老师</option>
+							{{if list.user=='superAdmin'}}
                             <option data-id="zoneAdmin">校区管理员</option>
+							{{/if}}
                         </select>
                         <label class="control-label">*</label>
                     </div>
+					{{else}}
+					
+					<div class="col-sm-9">
+                        <input type="text" class="form-control"  value="学生" readonly="readonly">
+                    </div>
+					{{/if}}
                 </div>
-                {{/if}}
+              
                 
                 <div class="form-group" id="zoneSelect">
                     <label  class="col-sm-2 control-label">校区选择</label>
-                    <div class="col-sm-10">
+					{{if list.user=='superAdmin'}}
+                    <div class="col-sm-10" id="zoneaEnbleSelect">
                         <select class="selectpicker" id="selectpicker2" data-style="" readonly="readonly">
                             {{each list as value i}}
                             <option data-id="{{value._id}}">{{value.address}}</option>
@@ -77,6 +87,11 @@
                         </select>
                         <label class="control-label">*</label>
                     </div>
+					{{else}}
+					<div class="col-sm-9" id="zoneaUnbleSelect">
+                        <input type="text" data-id="{{list.belongingId}}" class="form-control" value="{{list.belongingZone}}" readonly="readonly">
+                    </div>
+					{{/if}}
                 </div>
 
                 {{/if}}

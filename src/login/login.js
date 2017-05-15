@@ -33,23 +33,13 @@ define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
                 success:function(data){
                     var code = data.ret.code;
                     var user = data.data.userDetail.userGroup;
-                    template.localStorageObj("session",{apiKey : data.data.apiKey,user:user});
+					var belongingZone = data.data.userDetail.belongingZone
+					var belongingId = data.data.userDetail._id
+					
+                    template.localStorageObj("session",{apiKey : data.data.apiKey,user:user,belongingZone:belongingZone,belongingId:belongingId});
+					debugger;
                     if(code==0){
-                        switch(user)
-                        {
-                            case 'student':
-                            window.location.href="../lessons/lessons.html"
-                            break;
-                            case 'superAdmin':
-                            window.location.href="../admin/admin.html"
-                            break;
-                            case 'teacher':
-                            window.location.href="../admin/admin.html"
-                            break;
-                            case 'zoneAdmin':
-                            window.location.href="../admin/admin.html"
-                            break;
-                        }
+						window.location.href="../lessons/lessons.html"
                     }
                     if(code == 401001){
                         window.location.href="../login/login.html"

@@ -108,7 +108,7 @@ gulp.task('webserver', function(){
     gulp.src('src/')
         .pipe(webserver({
             port: 8881,//端口
-            host: '0',//域名
+            host: '127.0.0.1',//域名
             liveload: true,//实时刷新代码。不用f5刷新
             directoryListing: {
                 path: 'dist/',  

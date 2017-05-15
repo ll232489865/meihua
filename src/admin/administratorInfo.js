@@ -54,7 +54,7 @@ define(['jquery','common','validator','bootstrap','bootstrapValidator','bootstra
                         liveSearch:true
                     });
                     $('#zoneAdmin').click(function(){
-                        var selectedOption = $('#selectpicker1 option').eq($("#selectpicker1").get(0).selectedIndex);
+                   
                         if($('#form-horizontal3').data('bootstrapValidator').isValid()){
                             common.ajaxObj(
                                 'admin/zone/add',
@@ -63,9 +63,7 @@ define(['jquery','common','validator','bootstrap','bootstrapValidator','bootstra
                                         data:{
                                                 name : $('#zonename').val() ,
                                                 address: $('#zoneaddress').val() ,
-                                                managerId : selectedOption.data('id') ,
-                                                managerName : $('#selectpicker1').selectpicker('val') ,
-                                                contact: selectedOption.data('phone').toString()
+                                                contact: $('#zoneaContact').val()
                                         }
                                         ,
                                         type:'post'
