@@ -33,6 +33,8 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 				$(this).jPlayer("setMedia", {
 					mp3:url //mp3的播放地址
 				});
+				$(this).jPlayer('play');
+				$(this).jPlayer('push');
 			},
 			timeupdate: function(event) {
 				if(event.jPlayer.status.currentTime==0){
@@ -63,7 +65,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
                 url:getUrl+'/v1/unit/'+unit+'/song/'+song+'/get',                
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'ad4a83aa-bac1-4b94-8981-ba8dbe0b42dd'},                
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': '16047fca-c466-4797-8ae0-7ec169bf2cc0'},                
                 success:function(data){                   
                 	initSong(data.data.componentGroups[0].components[0].resources[0].content,data.data.componentGroups[0].components[0].resources[1].content);	  
                 },
