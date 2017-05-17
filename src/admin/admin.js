@@ -178,7 +178,6 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
     //编辑记录
     $('#btn_edit').click(function(){
         var selectIndex = $('input[name="btSelectItem"]:checked ').parent().next().text();
-		debugger;
         if(selectIndex){
 
             common.ajaxObj(
@@ -280,14 +279,35 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
             var data = {
                 username:$('#username').val(),
                 password:$('#password').val(),
+                email:$('#email').val(),
                 englishName:$('#englishName').val(),
+                mobile:$('#phone').val(),
                 gender:sexval.val(),
                 userGroup:$('#selectpicker1 option:selected').attr('data-id'),
-                mobile:$('#phone').val(),
+                //校区ID
                 belongingZoneId:$('#selectpicker2').is(':visible') ? $('#selectpicker2 option:selected').attr('data-id') : $('#zoneaUnbleSelect').attr('data-id'),
+                //校区编号
                 belongingZone:$('#selectpicker2').is(':visible') ?  $('#selectpicker2').selectpicker('val') : $('#zoneaUnbleSelect').val(),
-                email:$('#email').val()
             }
+            // switch($('#selectpicker1 option:selected').attr('data-id'))
+            // {
+            //     case 'zoneAdmin':
+            //         var data = baseData;
+            //     break;
+            //     case 'teacher':
+
+            //     break;
+            //     case 'student':
+            //         var data = $.extend({},baseData,{
+            //             //所属老师ID
+            //             belongingTeacherId:3,
+            //             //所属老师
+            //             belongingTeacher:1,
+            //             //购买单元数目
+            //             unitsBought:1
+            //             })
+            //     break;
+            // }
              if($('#form-horizontal').data('bootstrapValidator').isValid()){
                 common.ajaxObj(
                     'admin/user/add',
@@ -319,6 +339,8 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
     $('#btn_add').click(function(){
         //注册用户的时候，编辑身份是需要显示的
 		console.log(userOpstions);
+
+
 		 switch(user)
 		{
 			
@@ -335,7 +357,31 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 	
 		
          //userGroup:JSON.parse(localStorage.getItem("session")).user
-         
+          function stuSpecialInfo(){
+                var zoneId = $('#selectpicker2 option:selected').attr('data-id');
+                common.ajaxObj(
+                    'admin/user/query?userGroup=teacher&belongingZoneId='+zoneId,
+                    {
+                        headers:common.dynamicKey()
+                    }
+                    ,
+                    function(data){
+                        console.log(data.data);
+                        var result = data.data;
+                        var str = '';
+						result.forEach(function(value,i,array){
+							str += '<option>'+ value.username +'</option>' 
+						}) 
+						$('#selectpicker3').html(str).selectpicker('refresh');
+                    }
+                    ,
+                    function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log('cuowu')
+                    }
+
+                )
+            }
+            stuSpecialInfo();
             validator.ValidatorInit($('#form-horizontal'));
 			//身份选择
 			rendererSelect($('#selectpicker1'))
@@ -348,7 +394,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                 if($('#selectpicker1').selectpicker('val') == '校区管理员'){
                     var str = '';
 					zoneUnused.forEach(function(value,i,array){
-						str += '<option data-id="student">'+ value.name +'</option>' 
+						str += '<option data-id='+value._id+'>'+ value.name +'</option>' 
 					}) 
 					$('#selectpicker2').html(str).selectpicker('refresh');
 					
@@ -356,21 +402,27 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 					if(userOpstions.user=='superAdmin'){
 						var str = '';
 						zoneData.forEach(function(value,i,array){
-							str += '<option data-id="student">'+ value.name +'</option>' 
+							str += '<option data-id='+value._id+'>'+ value.name +'</option>' 
 						}) 
 						$('#selectpicker2').html(str).selectpicker('refresh');
 					}
-					
-					
 				}
 
-				if($('#selectpicker1').selectpicker('val') == '学生'){
-					alert(111);
-				}
 				
             });
 			//校区选择
-            rendererSelect($('#selectpicker2'))
+            rendererSelect($('#selectpicker2'));
+            //当添加的是学生，那么在不同的校区就对应不同的老师，所以校区选择上，需要做出对应响应
+             $('#selectpicker2').on('changed.bs.select',function (e) {
+				if($('#selectpicker1').selectpicker('val') == '学生'){
+					stuSpecialInfo();
+				}
+             });
+            //老师选择
+            rendererSelect($('#selectpicker3'))
+
+            //购买章节
+            rendererSelect($('#selectpicker4'))
             //点击保存按钮的回调
             $("#save_btn").click(function(){ 
                 $('#form-horizontal').bootstrapValidator('validate');
