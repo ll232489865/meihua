@@ -23,6 +23,10 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	var getUrl = "http://120.27.224.143:10010";
 	var unit = "1";
 	var song = "1";
+	var session = {};
+	if(localStorage.session){ 
+		session = JSON.parse(localStorage.session);
+	}
 
 
 	function initSong(url,lrc){ 
@@ -65,7 +69,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
                 url:getUrl+'/v1/unit/'+unit+'/song/'+song+'/get',                
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': '16047fca-c466-4797-8ae0-7ec169bf2cc0'},                
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
                 success:function(data){                   
                 	initSong(data.data.componentGroups[0].components[0].resources[0].content,data.data.componentGroups[0].components[0].resources[1].content);	  
                 },
@@ -76,5 +80,9 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	}
 
 	loadSong();
+
+	$(".close").on("click",function(){ 
+          //界面跳转
+	});
 })
     

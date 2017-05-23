@@ -35,7 +35,7 @@
                 height: 0px;
                 position: relative;
                 margin: 0 auto;
-                bottom: 99px;
+                bottom: 87px;
                 /*animation-timing-function 规定动画的速度曲线
                 linear指的是动画从头到尾的速度是相同的*/
                 animation-timing-function: linear;
@@ -47,7 +47,7 @@
             }
             #table .mouse_content span{
                 /*display: none;*/
-                font-size: 40px;
+                font-size: 23px;
                 font-weight: bold;
                 color: #ffffff;
                 text-stroke: 3px red;
@@ -104,15 +104,29 @@
 			    right: 0;
             }
 
+            .close{ 
+			   		position: absolute;
+					float: right;
+					right: 50px;	
+					top: 50px;
+					cursor: pointer;
+					z-index: 10;
+			   }
+			   .close img{ 
+					width: 100px;
+					height: 100px;
+			   }
+
         </style>
     </head>
 
 <body class="game_bg">
-<div id="header"></div>    
+<div id="header"></div>   
+<div class="close"><img src="../images/close.png"></div> 
     <div id="setHeight">
         <audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
         <audio id="hit"></audio>
-        <p id="score">得分：0</p>
+        <p id="score" style="display:none;">得分：0</p>
         <button id="startBtn">开始</button>
         <button id="nextGameBtn">下一个游戏</button>
         <table id="table" class="mouse_content">

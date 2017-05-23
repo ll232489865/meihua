@@ -15,8 +15,8 @@
     .music_box{margin:0 auto;width:643px; padding-top:100px;top: 27%;left: 22%;position: absolute;}
     .content {width: 501px;height:324px;overflow:hidden;padding:10px; margin: 0 auto;background-color: #fdfbdd;}
     #lrc_list{margin:10px auto;}
-    #lrc_list li{font:normal 18px/2.1 'microsoft yahei';text-align:center;}
-    #lrc_list li.hover {color:red;font-weight:bold;} 
+    #lrc_list li{font:normal 29px/2.1 'microsoft yahei';text-align:center;}
+    #lrc_list li.hover {color:#006699;font-weight:bold;} 
     body{ background-color: #fdfbdd;}
     #setHeight{ 
 		width: 1363px;
@@ -32,10 +32,21 @@
 	.content{ 
 		border: 0px;
 	}
-
+   .close{ 
+   		position: absolute;
+		float: right;
+		right: 100px;	
+		top: 100px;
+		cursor: pointer;
+   }
+   .close img{ 
+		width: 100px;
+		height: 100px;
+   }
 
 </style>
 <div id="header"></div>
+<div class="close"><img src="../images/close.png"></div>
 <div id="setHeight" >
    <textarea id="lrc_content" name="textfield" cols="70" rows="10" style="display:none;"> 
 

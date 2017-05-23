@@ -45,14 +45,27 @@
         background-size:cover;
     }
 	.appleItem{ cursor: pointer; color: #fff; font-size: 20px; font-weight: bold; line-height: 200px; text-align: center;}
+	.close{ 
+   		position: absolute;
+		float: right;
+		right: 50px;	
+		top: 50px;
+		cursor: pointer;
+		z-index: 10;
+   }
+   .close img{ 
+		width: 100px;
+		height: 100px;
+   }
 </style>
 
+<div class="close"><img src="../images/close.png"></div>
 <div style="text-align: center">
 	<span id="part" class="part"> 
 		<span id="currentpart">1</span>/2
 	</span>
 </div>
-<div id="integral" class="integral">
+<div id="integral" class="integral" style="display:none;">
 	0
 </div>
 <div id="next" class="next" >

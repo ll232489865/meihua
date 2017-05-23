@@ -26,12 +26,18 @@ define(['jquery','common'],function($,common){
 	var appleMain = document.getElementById("appleMain");
 	var currentpart = document.getElementById('currentpart');
 	var getUrl = "http://120.27.224.143:10010";
+	var  unit = "2";		
+		 var　page = "1";
 	var options = {
 		part : 0,
 		integraljifen:0,
 		currentpart:1,
-		total:2
+		total:2000000
 	}
+	var session = {};
+	if(localStorage.session){ 
+		session = JSON.parse(localStorage.session);
+	}	
 	var dataArray  = [
 		{
 			wordList:['zhangsan','lisi','wangwu','zhaoliu','heihei'],
@@ -51,8 +57,8 @@ define(['jquery','common'],function($,common){
 		$(next).hide();
 		Btn.style.display = 'none';
 		audio.style.display = 'inline-block';
-		part.style.display = 'inline-block';
-		integral.style.display = 'block';
+		part.style.display = 'none';
+		integral.style.display = 'none';
 		appleMain.style.display = 'block';
 		showWords();
 	}
@@ -63,9 +69,9 @@ define(['jquery','common'],function($,common){
 			options.integraljifen += 10;
 			$(integral).html(options.integraljifen);
 			$(next).show();
-			alert('回答正确，加10分');
+			//alert('回答正确，加10分');
 		}else{
-			alert('回答错误，扣10分')
+			alert('回答错误')
 			options.integraljifen -= 10;
 			if(options.integraljifen<=0){
 				options.integraljifen =0
@@ -79,22 +85,20 @@ define(['jquery','common'],function($,common){
 			alert('游戏已经结束');
 			return;
 		}
-		options.part +=1;
+		//options.part +=1;
 		options.currentpart+=1;
 		$(currentpart).html(options.currentpart);
 		showWords();		
 	})
    
-    function showWords (){ 
-		 var  unit = "2";		
-		 var　page = "1";
+    function showWords (){ 		 
 		 var refpositon = null;
      	  $.ajax({
                 url:getUrl+'/v1/unit/'+unit+'/game/page/'+page+'/get',
                 type:"get",
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'f4cf4a16-df5b-428b-84f9-7d635890a8d9'},                
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
                 success:function(data){                   
                 	 words = data.data.componentGroups[0].components[0].resources;
 				    	if(words){ 
@@ -131,6 +135,10 @@ define(['jquery','common'],function($,common){
     	wordaudio.load();
     	 wordaudio.play();		
     } 
+
+    $(".close").on("click",function(){ 
+           location.href = getUrl + "/lessons/unit.html#"+unit;
+	});
 
 	})
     

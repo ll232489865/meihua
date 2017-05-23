@@ -124,15 +124,28 @@
 		#nextGame{ 
 			display: none;
 		}
+		.close{ 
+			   		position: absolute;
+					float: right;
+					right: 50px;	
+					top: 50px;
+					cursor: pointer;
+					z-index: 10;
+			   }
+			   .close img{ 
+					width: 100px;
+					height: 100px;
+			   }
 	</style>
 </head>
 <body>
-<div style="text-align: center">
+<div class="close"><img src="../images/close.png"></div>
+<div style="text-align: center;display:none;">
 	<span id="part" class="part"> 
 		1/10
 	</span>
 </div>
-<div id="integral" class="integral">
+<div id="integral" class="integral" style="display:none;">
 	0
 </div>
 <div id="next" class="next" >
@@ -168,9 +181,13 @@
 	  var getUrl = "http://120.27.224.143:10010";
 	  var unit = "2";
 	  var page = '1';
+	  var session = {};
+     if(localStorage.session){ 
+		session = JSON.parse(localStorage.session);
+	}
 
 	  var constant = { 
-	  	   maxScore : 20,	  
+	  	   maxScore : 2000000,	  
 	  	   maxPart : 5,	 
 	  	   nowPart : 1	  	   
 	  };
@@ -335,7 +352,7 @@
 		    Btn.style.display = 'none';
 			audio.style.display = 'inline-block';
 			part.style.display = 'inline-block';
-			integral.style.display = 'block';
+			integral.style.display = 'none';
 			showWords();
 	}
 
@@ -353,7 +370,7 @@
                 type:"get",
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': 'ad4a83aa-bac1-4b94-8981-ba8dbe0b42dd'},                
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
                 success:function(data){                   
                 	 words = data.data.componentGroups[0].components[0].resources;
 				    	if(words){ 
@@ -380,7 +397,7 @@
 						    Btn.style.display = 'none';
 							audio.style.display = 'inline-block';
 							part.style.display = 'inline-block';
-							integral.style.display = 'block';
+							integral.style.display = 'none';
 							var timer = setInterval(function(){
 								if (times > 0 && !(Ballon.createTime))
 								{
@@ -410,6 +427,10 @@
 		wordaudio.load();
 		wordaudio.play();
 	}
+
+	$(".close").on("click",function(){ 
+           location.href = getUrl + "/lessons/unit.html#"+unit;
+	});
 
 	</script>
 </body>

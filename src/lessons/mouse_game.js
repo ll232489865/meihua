@@ -23,12 +23,16 @@ require.config({
      var $audioImg = $("#audio");
      var yinyueDom = document.getElementById("yinyue");	
      var time1;
+     var session = {};
+     if(localStorage.session){ 
+		session = JSON.parse(localStorage.session);
+	}
      
      var constant = {
          holeNum:10,//洞个数
          showInterval:4000,//出现时间间隔
          hideInterval:8300,//出现多长时间后 隐藏
-         totalScore:100,//总分上限
+         totalScore:10000000,//总分上限
          timeScore:10,//每次积分
          timeWordsNum:3,//每次出现的单词的个数
          isStart:false,
@@ -109,7 +113,7 @@ require.config({
                 type:"get",
                 dataType:'json',
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': '16047fca-c466-4797-8ae0-7ec169bf2cc0'},               
+                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},               
                 success:function(data){   
                 	var refpositon = null;                   	      
                 	 words = data.data.componentGroups[0].components[0].resources;
@@ -222,4 +226,8 @@ require.config({
      		$(this).css('cursor', 'url(../images/mouse_game/cursor.ico), default');
      	}         
      });
+
+     $(".close").on("click",function(){ 
+          location.href = getUrl + "/lessons/unit.html#"+unit;
+	});
  })
