@@ -179,7 +179,7 @@
 		  }
 	  ]
 	  var getUrl = "http://120.27.224.143:10010";
-	  var unit = "2";
+	  var unit = "1";
 	  var page = '1';
 	  var session = {};
      if(localStorage.session){ 
@@ -204,6 +204,8 @@
 		var next = document.getElementById("next");
 		var daojishi = 60;
 		var integraljifen = 0
+		var nowIndex = 0; //当前是开始选择的那个单词
+		var wordList = []; //记录第一次获取到的所有单词
 		
 
 		//当页面上出现功能类似、属性类型，什么都类似的东西
@@ -358,9 +360,12 @@
 
 
 	next.onclick = function(){
-		$('.ballon').remove();
-		showWords();
-		
+		$('.ballon').remove();		
+		if(nowIndex == wordList.length-1){ 
+			alert("游戏结束");
+			return false;
+		}
+		showWords1(wordList[nowIndex+1],nowIndex+1);
 	}
 
 	showWords = function(){ 
@@ -371,25 +376,38 @@
                 dataType:'json',
                 timeout:60000,
                 headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
-                success:function(data){                   
-                	 words = data.data.componentGroups[0].components[0].resources;
-				    	if(words){ 
-				    		dataArray[0].wordList = [];
-							for(var i=0;i < words.length;i++ ){ //根据position获取到正确等
-								if (words[i].type == "sound") { 
-									refpositon = words[i].refPosition;									
-									wordaudio.src = getUrl+words[i].content;									
-								}else{ 
-									if(refpositon == words[i].position){ 
- 										correctWord = words[i].content; 										
-				     					dataArray[0].targetWord = words[1].content;
-									}
-									//correctWord = words[i];
-									dataArray[0].wordList.push(words[i].content);
-								}
-							} 
+                success:function(data){    
+                	wordList = data.data.componentGroups[0].components;    
+                	if (wordList.length > 0) {
+						showWords1(wordList[0], 0);
+					}               	 
+                },
+                error:function(){ 
+                	alert("获取数据异常");
+                }
+            });  
+	}
+
+	showWords1 = function(wordObj,index){ 
+		nowIndex = index;
+		words = wordObj.resources;
+		if(words){ 
+			dataArray[0].wordList = [];
+			for(var i=0;i < words.length;i++ ){ //根据position获取到正确等
+				if (words[i].type == "sound") { 
+					refpositon = words[i].refPosition;									
+					wordaudio.src = getUrl+words[i].content;									
+				}else{ 
+					if(refpositon == words[i].position){ 
+ 						correctWord = words[i].content; 										
+				     	dataArray[0].targetWord = words[1].content;
+					}
+						//correctWord = words[i];
+						dataArray[0].wordList.push(words[i].content);
+				}
+			} 
 							 
-				     	} 
+		} 
 				    
 				     	Ballon.Objlist = [];
 						Ballon.createTime = null;
@@ -412,11 +430,6 @@
 					   				 wordaudio.play();
 								}
 						},1000);
-                },
-                error:function(){ 
-                	alert("获取数据异常");
-                }
-            });  
 	}
 
 	$nextGame.on("click",function(){ 
