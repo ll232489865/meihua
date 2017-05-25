@@ -4,8 +4,8 @@
         <title>打地鼠</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/include/base.css">
-<link rel="stylesheet" href="../css/include/public.css">
-<link rel="stylesheet" href="../css/include/style.css">
+        <link rel="stylesheet" href="../css/include/public.css">
+        <link rel="stylesheet" href="../css/include/style.css">
 	<script src="../js/libs/jquery.min.js"></script>
         <style>
             body{
@@ -98,31 +98,17 @@
                 display: none;
             }
 
-            div.audio{ 
-				position: absolute;	
+            div.audio{
+				position: absolute;
 			    bottom: 0;
 			    right: 0;
             }
-
-            .close{ 
-			   		position: absolute;
-					float: right;
-					right: 50px;	
-					top: 50px;
-					cursor: pointer;
-					z-index: 10;
-			   }
-			   .close img{ 
-					width: 100px;
-					height: 100px;
-			   }
-
         </style>
     </head>
 
 <body class="game_bg">
-<div id="header"></div>   
-<div class="close"><img src="../images/close.png"></div> 
+<div id="header"></div>
+<div class="close"><img src="../images/close.png"></div>
     <div id="setHeight">
         <audio src="../music/mouse_game/back_ground.mp3" autoplay loop></audio>
         <audio id="hit"></audio>
@@ -148,9 +134,9 @@
     </div>
     <div class="audio" id="audio">
 		<img src="../images/播放@2x.png" alt="">
-	</div>	
+	</div>
 
-<div id="footer"></div>
+<!-- <div id="footer"></div> -->
 <audio src="../music/ballon_game/c.wav" id="yinyue"></audio>
 
 <script data-main="mouse_game" src="../js/libs/require.js"></script>

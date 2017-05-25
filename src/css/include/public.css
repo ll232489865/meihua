@@ -577,12 +577,12 @@ input.search {
   background: #0168B7;
 }
 @font-face {
-  font-family: huamei;
+  font-family: meihua;
   src: url('../../fonts/comicbd.ttf'), url('../../fonts/comicbd.ttf');
   /* IE9 */
 }
 @font-face {
-  font-family: huamei2;
+  font-family: meihua2;
   src: url('../../fonts/FZY4JW.TTF'), url('../../fonts/FZY4JW.ttf');
   /* IE9 */
 }
@@ -611,7 +611,7 @@ input.search {
   margin-top: 30px;
   display: inline-block;
   font-size: 16px;
-  font-family: 'huamei';
+  font-family: 'meihua';
   color: #fff;
   text-shadow: #444 2px 0 2px, #444 0 2px 2px, #444 -2px 0 2px, #444 0 -2px 2px;
 }
