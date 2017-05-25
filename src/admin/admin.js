@@ -46,13 +46,13 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
     var zoneData; //校区所有信息
 	var zoneUse =[];	//已经被使用校区
 	var zoneUnused =[]; //没有被使用的校区
-	
+
 	var fixedzone = [];  //如果登录是校区管理员或者老师登录，则有单独的相应校区，因为是固定的
-	
-	
+
+
 	//另外，如果根据身份登录的不同，身份权限能选得选项也不同。
-	
-	
+
+
 	//渲染bootstrapSelect,如果第2个参数为空，则使用默认的插件渲染，如第三个参数不为空，重新便利DOM
 	function rendererSelect(selectDom,data){
 		selectDom.selectpicker({
@@ -61,7 +61,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 			liveSearch:true
 		});
 	}
-	
+
 	//根据用户身份确保一些消息是否显示隐藏，默认是admin的身份
     userOpstions  = {
         //zoneSelect:JSON.parse(localStorage.getItem("session")).user === 'superAdmin' ? true:false, //是否显示校区选择
@@ -74,13 +74,13 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 		var parms = {} ||  parm
 		$('#table').bootstrapTable({
 			classes:'table table-hover table-condensed',
-			pagination: true, 
+			pagination: true,
 			queryParams:parms,
 			url: 'http://120.27.224.143:10010/v1/admin/user/query',
-			method: 'get',   
+			method: 'get',
 			clicktoselect:'btSelectItem',
-			pageNumber:1,               
-			pageSize: 20,                     
+			pageNumber:1,
+			pageSize: 20,
 			ajaxOptions:{
 			headers: common.dynamicKey()
 			}
@@ -90,7 +90,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 						checkbox: true
 					},
 					{
-							field: '_id',
+							field: 'identifier',
 							title:'用户ID'
 					}, {
 							field: 'username',
@@ -120,11 +120,11 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 							field: 'creationTime',
 							title: '创建帐号时间'
 					}
-			] 
+			]
 		});
-    
+
 	}
-   
+
 	//不同身份登录，所做的事情也不一样，所以有一个身份初始化的函数
 	//比如不同的身份登录，表格的用户是不同的
 	//比如超级管理身份登录，那么添加成员功能里面的校区就有选择，但是如果是校区管理员身份登录，添加成员功能里面的选择选择就是死的
@@ -172,7 +172,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
         }else{
             alert('请选中一行记录')
         }
-        
+
     })
 
     //编辑记录
@@ -189,7 +189,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                 function(data){
                     console.log(data);
                     //绑定模板
-                    common.htmlModule({list:$.extend({},data.data,zoneData,userOpstions)},$('#userInfoControl')[0],adminTemplate);   
+                    common.htmlModule({list:$.extend({},data.data,zoneData,userOpstions)},$('#userInfoControl')[0],adminTemplate);
 
                     console.log($.extend({},data.data,zoneData,userOpstions))
                     //显示弹出框
@@ -214,7 +214,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                     });
                     $('#selectpicker1').selectpicker('val',selectuserGroup.text())
                     $('#selectpicker2').selectpicker('val',data.data.address)
-                    $("#save_btn").click(function(){ 
+                    $("#save_btn").click(function(){
                         $('#form-horizontal').bootstrapValidator('validate');
                         sexval = $('input:radio').filter(function(i){
                             return ($(this).attr('name') == 'sex' && $(this)[0].checked)
@@ -228,7 +228,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                             belongingZone:JSON.parse(localStorage.getItem("session")).user==='superAdmin' ? $('#selectpicker2').selectpicker('val'):zoneData.managingZone,
                             email:$('#email').val()
                         }
-                        
+
                         if($('#form-horizontal').data('bootstrapValidator').isValid()){
                                 var selectIndex = $('input[name="btSelectItem"]:checked ').parent().next().text();
                                 if(selectIndex){
@@ -333,7 +333,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                         },1000)
                     }
                 )
-            } 
+            }
     }
     //模态框加载事件，包括了新增以及修改以及查看
     $('#btn_add').click(function(){
@@ -343,7 +343,7 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 
 		 switch(user)
 		{
-			
+
 			case 'superAdmin':
 			common.htmlModule({list:$.extend({},zoneData,$.extend({},userOpstions,{editInfo:true}))},$('#userInfoControl')[0],adminTemplate);
 			break;
@@ -353,9 +353,9 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 			case 'zoneAdmin':
 			common.htmlModule({list:$.extend({},fixedzone,$.extend({},userOpstions,{editInfo:true}))},$('#userInfoControl')[0],adminTemplate);
 			break;
-		}		 
-	
-		
+		}
+
+
          //userGroup:JSON.parse(localStorage.getItem("session")).user
           function stuSpecialInfo(){
                 var zoneId = $('#selectpicker2 option:selected').attr('data-id');
@@ -370,8 +370,8 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                         var result = data.data;
                         var str = '';
 						result.forEach(function(value,i,array){
-							str += '<option>'+ value.username +'</option>' 
-						}) 
+							str += '<option>'+ value.username +'</option>'
+						})
 						$('#selectpicker3').html(str).selectpicker('refresh');
                     }
                     ,
@@ -394,21 +394,21 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
                 if($('#selectpicker1').selectpicker('val') == '校区管理员'){
                     var str = '';
 					zoneUnused.forEach(function(value,i,array){
-						str += '<option data-id='+value._id+'>'+ value.name +'</option>' 
-					}) 
+						str += '<option data-id='+value._id+'>'+ value.name +'</option>'
+					})
 					$('#selectpicker2').html(str).selectpicker('refresh');
-					
+
                 }else{
 					if(userOpstions.user=='superAdmin'){
 						var str = '';
 						zoneData.forEach(function(value,i,array){
-							str += '<option data-id='+value._id+'>'+ value.name +'</option>' 
-						}) 
+							str += '<option data-id='+value._id+'>'+ value.name +'</option>'
+						})
 						$('#selectpicker2').html(str).selectpicker('refresh');
 					}
 				}
 
-				
+
             });
 			//校区选择
             rendererSelect($('#selectpicker2'));
@@ -424,11 +424,11 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
             //购买章节
             rendererSelect($('#selectpicker4'))
             //点击保存按钮的回调
-            $("#save_btn").click(function(){ 
+            $("#save_btn").click(function(){
                 $('#form-horizontal').bootstrapValidator('validate');
                 modiAdd();
             })
             $('#userInfoControl').modal('show');
     })
-  
+
 });
