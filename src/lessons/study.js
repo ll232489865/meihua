@@ -21,6 +21,8 @@ require.config({
 })
 define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerSwitch,canvas){
     // console.log(powerSwitch);
+    var getUrl = "http://120.27.224.143:10010";
+
     $("#ce_position").find("a").powerSwitch({
         eventType: "hover",
         classAdd: "active",
@@ -32,8 +34,8 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
         }
     }).eq(0).trigger("mouseover");
     $("#studyContain").css('height',$("#studyContain").parent().height()-100)
-    $('#canvas').attr('height',$('#ce_slide').height()).attr('width',$('#ce_slide').width())
-    
+    $('#canvas').attr('height',$('#ce_slide').height()-30).attr('width',$('#ce_slide').width())
+
     $('#pens').click(function(){
         $('#canvas').css('visibility','visible');
         canvas.paint.init(true);
@@ -55,5 +57,8 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
         audio.src = src;
         return audio
     }
+
+    $(".close").on("click", function() {
+		location.href = getUrl + "/lessons/lessons.html";
+    });
 })
-    

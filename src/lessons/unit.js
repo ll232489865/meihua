@@ -11,7 +11,7 @@ require.config({
 　　　　}
 })
 define(['jquery','moduleHtml'],function($,template){
-    var getUrl = "http://192.168.188.128:8881";
+    var getUrl = "http://120.27.224.143:10010";
 
     $('#unit').text('Unit'+template.catchParameter(window.location.href,'#'));
 
