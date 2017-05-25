@@ -26,6 +26,8 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	if (localStorage.session) {
 		session = JSON.parse(localStorage.session);
 	}
+	//var keyType = ;//----------
+	session.apiKey = 'caf30342-d2b2-4236-b4da-96fee63a7f82';
 	var wordList = []; //记录第一次获取到的所有单词
 	var nowIndex = 0; //当前是开始选择的那个单词
 	var constant = {
@@ -190,8 +192,9 @@ define(['jquery', 'moduleHtml'], function($, template) {
 				$('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
 				setTimeout(function() {
 					if (nowIndex == (wordList.length-1)) {
+						//updateGrade();
 						alert('游戏结束');
-						//TODO 更新游戏进度
+						//TODO 更新游戏进度						
 						return false;
 					}
 					play1(wordList[nowIndex + 1], nowIndex + 1);
@@ -244,4 +247,25 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	$(".close").on("click", function() {
 		location.href = getUrl + "/lessons/unit.html#" + unit;
 	});
+
+	function updateGrade() {
+		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+			$.ajax({
+				url: getUrl + '/v1/progress/update',
+				type: "post",
+				dataType: 'json',
+				timeout: 60000,
+				data: JSON.stringify(param),
+				headers: {
+					"Content-Type": 'application/json',
+					'SUPERADMIN-API-KEY': session.apiKey
+				},
+				success: function(data) {
+					//TODO 更新本地的进度
+				},
+				error: function() {
+					alert("更新数据异常");
+				}
+			});
+		}
 })

@@ -27,6 +27,7 @@ define(['jquery', 'common'], function($, common) {
 		var getUrl = "http://120.27.224.143:10010";
 		var unit = "1";
 		var　 page = "1";
+		var keyType = 'SUPERADMIN-API-KEY';
 		var options = {
 			part: 0,
 			integraljifen: 0,
@@ -85,11 +86,12 @@ define(['jquery', 'common'], function($, common) {
 			//options.part +=1;
 			options.currentpart += 1;
 			$(currentpart).html(options.currentpart);
-			if(wordList.length-1 == nowIndex){ 
+			if (wordList.length - 1 == nowIndex) {
+				//updateGrade();
 				alert("游戏结束");
 				return false;
 			}
-			showWords1(wordList[nowIndex+1],nowIndex+1);
+			showWords1(wordList[nowIndex + 1], nowIndex + 1);
 		})
 
 		function showWords() {
@@ -101,7 +103,7 @@ define(['jquery', 'common'], function($, common) {
 				timeout: 60000,
 				headers: {
 					"Content-Type": 'application/json',
-					'SUPERADMIN-API-KEY': session.apiKey
+					keyType: session.apiKey
 				},
 				success: function(data) {
 					wordList = data.data.componentGroups[0].components;
@@ -143,6 +145,31 @@ define(['jquery', 'common'], function($, common) {
 			});
 			wordaudio.load();
 			wordaudio.play();
+		}
+
+		function updateGrade() {
+			$.ajax({
+				url: getUrl + '/v1/progress/update',
+				type: "post",
+				dataType: 'json',
+				timeout: 60000,
+				data: {
+					"unit": unit,
+					"part": "game",
+					"page": page,
+					"grade": 0
+				},
+				headers: {
+					"Content-Type": 'application/json',
+					'SUPERADMIN-API-KEY': session.apiKey
+				},
+				success: function(data) {
+					//TODO 更新本地的进度
+				},
+				error: function() {
+					alert("更新数据异常");
+				}
+			});
 		}
 
 		audio.onclick = function() {

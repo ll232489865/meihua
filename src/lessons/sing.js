@@ -23,11 +23,12 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	var getUrl = "http://120.27.224.143:10010";
 	var unit = "1";
 	var song = "1";
+
 	var session = {};
 	if(localStorage.session){ 
 		session = JSON.parse(localStorage.session);
 	}
-
+	session.apiKey = 'cc161615-4278-40da-9cf8-aee9e30d9f79';
 
 	function initSong(url,lrc){ 
 		url = getUrl + url;
@@ -55,6 +56,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 			},
 			ended:function(event){
 				$("#lrc_list").removeAttr("style").html("<li>歌曲播放完毕！</li>");
+				updateGrade();
 			},
 			swfPath: "/js",  		//存放jplayer.swf的决定路径
 			solution:"html, flash", //支持的页面
@@ -68,6 +70,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 		 $.ajax({
                 url:getUrl+'/v1/unit/'+unit+'/song/'+song+'/get',                
                 dataType:'json',
+                type: "get",
                 timeout:60000,
                 headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
                 success:function(data){                   
@@ -82,7 +85,28 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	loadSong();
 
 	$(".close").on("click",function(){ 
-          //界面跳转
+          location.href = getUrl + "/lessons/unit.html#"+unit;
 	});
+
+		function updateGrade() {
+		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+			$.ajax({
+				url: getUrl + '/v1/progress/update',
+				type: "post",
+				dataType: 'json',
+				timeout: 60000,
+				data: JSON.stringify(param),
+				headers: {
+					"Content-Type": 'application/json',
+					'SUPERADMIN-API-KEY': session.apiKey
+				},
+				success: function(data) {
+					//TODO 更新本地的进度
+				},
+				error: function() {
+					alert("更新数据异常");
+				}
+			});
+		}
 })
     

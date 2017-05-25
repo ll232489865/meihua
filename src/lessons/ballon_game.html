@@ -354,6 +354,7 @@
 	next.onclick = function(){
 		$('.ballon').remove();
 		if(nowIndex == wordList.length-1){
+			//updateGrade();
 			alert("游戏结束");
 			return false;
 		}
@@ -436,6 +437,27 @@
 	$(".close").on("click",function(){
            location.href = getUrl + "/lessons/unit.html#"+unit;
 	});
+
+	function updateGrade() {
+		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+			$.ajax({
+				url: getUrl + '/v1/progress/update',
+				type: "post",
+				dataType: 'json',
+				timeout: 60000,
+				data: JSON.stringify(param),
+				headers: {
+					"Content-Type": 'application/json',
+					'SUPERADMIN-API-KEY': session.apiKey
+				},
+				success: function(data) {
+					//TODO 更新本地的进度
+				},
+				error: function() {
+					alert("更新数据异常");
+				}
+			});
+		}
 
 	</script>
 </body>
