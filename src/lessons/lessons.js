@@ -13,12 +13,6 @@ define(['jquery', 'moduleHtml'], function($, template) {
 
 	var apiKey = "";
 	var getUrl = "http://120.27.224.143:10010";
-	var keyType = 'SUPERADMIN-API-KEY';
-	var session = {};
-	if (localStorage.session) {
-		session = JSON.parse(localStorage.session);
-	}
-	session.apiKey = 'a064bcaa-1003-420d-aa1d-e40298cdb091';
 	var header = template.getApiKey();
 	//getAllData();  
 

@@ -23,12 +23,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	var yinyueDom = document.getElementById("yinyue");
 	var time1;
 	var header  = template.getApiKey();
-	var session = {};
-	if (localStorage.session) {
-		session = JSON.parse(localStorage.session);
-	}
-	//var keyType = ;//----------
-	session.apiKey = 'caf30342-d2b2-4236-b4da-96fee63a7f82';
+
 	var wordList = []; //记录第一次获取到的所有单词
 	var nowIndex = 0; //当前是开始选择的那个单词
 	var constant = {
