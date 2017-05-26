@@ -246,6 +246,39 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
             break;
         }
     }
+
+    //动态构造header
+    function getApiKey(){   	
+    	
+           var key =  JSON.parse(localStorage.getItem("session")).user;
+       switch(key)
+        {
+            case 'superAdmin':
+            return {
+            	"Content-Type": 'application/json',
+                'SUPERADMIN-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'student':
+            return {
+            	"Content-Type": 'application/json',
+                'STUDENT-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'teacher':
+            return {
+            	"Content-Type": 'application/json',
+                'TEACHER-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+            case 'zoneAdmin':
+            return {
+            	"Content-Type": 'application/json',
+                'ZONEADMIN-API-KEY':JSON.parse(localStorage.getItem("session")).apiKey
+            }
+            break;
+        }
+    }
     return {
         htmlModule : htmlModule,
         routPath : routPath,
@@ -256,6 +289,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         GetPageurl:GetPageurl,
         getQueryStringArgs:getQueryStringArgs,
         getRandom:getRandom,
-        dynamicKey:dynamicKey
+        dynamicKey:dynamicKey,
+        getApiKey:getApiKey
     }
 });
