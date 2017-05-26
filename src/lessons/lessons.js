@@ -19,7 +19,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 		session = JSON.parse(localStorage.session);
 	}
 	session.apiKey = 'a064bcaa-1003-420d-aa1d-e40298cdb091';
-
+	var header = template.getApiKey();
 	//getAllData();  
 
 	function getAllData() {
@@ -27,13 +27,10 @@ define(['jquery', 'moduleHtml'], function($, template) {
 			url: getUrl + '/v1/units/list',
 			dataType: 'json',
 			timeout: 60000,
-			headers: {
-				"Content-Type": 'application/json',
-				'SUPERADMIN-API-KEY': session.apiKey
-			},
+			headers: header,
 			success: function(data) {
 				var units = data.data.units;
-				template.localStorageObj('units',units);	
+				template.localStorageObj('units', units);
 			},
 			error: function() {
 				alert("获取数据异常");

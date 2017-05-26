@@ -23,6 +23,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	var getUrl = "http://120.27.224.143:10010";
 	var unit = "1";
 	var song = "1";
+	var header  = template.getApiKey();
 
 	var session = {};
 	if(localStorage.session){ 
@@ -72,7 +73,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
                 dataType:'json',
                 type: "get",
                 timeout:60000,
-                headers:{"Content-Type": 'application/json','SUPERADMIN-API-KEY': session.apiKey},                
+                headers:header,                
                 success:function(data){                   
                 	initSong(data.data.componentGroups[0].components[0].resources[0].content,data.data.componentGroups[0].components[0].resources[1].content);	  
                 },
@@ -96,10 +97,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 				dataType: 'json',
 				timeout: 60000,
 				data: JSON.stringify(param),
-				headers: {
-					"Content-Type": 'application/json',
-					'SUPERADMIN-API-KEY': session.apiKey
-				},
+				headers: header,
 				success: function(data) {
 					//TODO 更新本地的进度
 				},

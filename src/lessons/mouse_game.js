@@ -22,6 +22,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	var $audioImg = $("#audio");
 	var yinyueDom = document.getElementById("yinyue");
 	var time1;
+	var header  = template.getApiKey();
 	var session = {};
 	if (localStorage.session) {
 		session = JSON.parse(localStorage.session);
@@ -107,16 +108,13 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	}
 
 	// 3.跳出一批地鼠
-	function play() {
+	function play() {		
 		$.ajax({
 			url: getUrl + '/v1/unit/' + unit + '/game/page/' + page + '/get',
 			type: "get",
 			dataType: 'json',
 			timeout: 60000,
-			headers: {
-				"Content-Type": 'application/json',
-				'SUPERADMIN-API-KEY': session.apiKey
-			},
+			headers: header,
 			success: function(data) {				
 				wordList = data.data.componentGroups[0].components;
 				if (wordList.length > 0) {
@@ -256,10 +254,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 				dataType: 'json',
 				timeout: 60000,
 				data: JSON.stringify(param),
-				headers: {
-					"Content-Type": 'application/json',
-					'SUPERADMIN-API-KEY': session.apiKey
-				},
+				headers: header,
 				success: function(data) {
 					//TODO 更新本地的进度
 				},

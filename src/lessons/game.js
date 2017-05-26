@@ -28,6 +28,7 @@ define(['jquery', 'common'], function($, common) {
 		var unit = "1";
 		var　 page = "1";
 		var keyType = 'SUPERADMIN-API-KEY';
+		var header  = template.getApiKey();
 		var options = {
 			part: 0,
 			integraljifen: 0,
@@ -101,10 +102,7 @@ define(['jquery', 'common'], function($, common) {
 				type: "get",
 				dataType: 'json',
 				timeout: 60000,
-				headers: {
-					"Content-Type": 'application/json',
-					keyType: session.apiKey
-				},
+				headers: header,
 				success: function(data) {
 					wordList = data.data.componentGroups[0].components;
 					if (wordList.length > 0) {
@@ -159,10 +157,7 @@ define(['jquery', 'common'], function($, common) {
 					"page": page,
 					"grade": 0
 				},
-				headers: {
-					"Content-Type": 'application/json',
-					'SUPERADMIN-API-KEY': session.apiKey
-				},
+				headers: header,
 				success: function(data) {
 					//TODO 更新本地的进度
 				},
