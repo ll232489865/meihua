@@ -28,7 +28,7 @@ define(['jquery', 'common'], function($, common) {
 		var unit = "1";
 		var　 page = "1";
 		var keyType = 'SUPERADMIN-API-KEY';
-		var header  = template.getApiKey();
+		var header  = common.getApiKey();
 		var options = {
 			part: 0,
 			integraljifen: 0,

@@ -14,7 +14,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	var apiKey = "";
 	var getUrl = "http://120.27.224.143:10010";
 	var header = template.getApiKey();
-	//getAllData();  
+	getAllData();  
 
 	function getAllData() {
 		$.ajax({
