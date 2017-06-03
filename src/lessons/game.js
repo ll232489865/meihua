@@ -25,7 +25,7 @@ define(['jquery', 'common'], function($, common) {
 		var appleMain = document.getElementById("appleMain");
 		var currentpart = document.getElementById('currentpart');
 		var getUrl = "http://120.27.224.143:10010";
-		var unit = "1";
+		var unit = common.catchParameter(window.location.href, '#');
 		var　 page = "1";
 		var keyType = 'SUPERADMIN-API-KEY';
 		var header  = common.getApiKey();

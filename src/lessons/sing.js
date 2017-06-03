@@ -21,7 +21,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 
     //模拟数据
 	var getUrl = "http://120.27.224.143:10010";
-	var unit = "1";
+	var unit = template.catchParameter(window.location.href, '#');
 	var song = "1";
 	var header  = template.getApiKey();
 

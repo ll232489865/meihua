@@ -26,7 +26,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 		  }
 	  ]
 	  var getUrl = "http://120.27.224.143:10010";
-	  var unit = "1";
+	  var unit = template.catchParameter(window.location.href, '#');
 	  var page = '1';
 	  var header  = template.getApiKey();
 

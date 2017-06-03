@@ -23,10 +23,12 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	var game = unit.game;
 	var song = unit.song;
 
-	console.log(href);
 	var href = game.pageTemplates[0].template;//只修改游戏的地址
-	$("#game").attr("href",href);
-	
+	$("#game").attr("href",href+"#"+unitNum);
+	$("#study").attr("href","study.html#"+unitNum);
+	$("#sing").attr("href","sing.html#"+unitNum);
+
+
 	$('#unit').text('Unit' + unitNum);
 
 	$(".close").on("click", function() {

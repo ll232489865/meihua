@@ -12,7 +12,7 @@ require.config({
 define(['jquery', 'moduleHtml'], function($, template) {
 	//模拟参数
 	var getUrl = "http://120.27.224.143:10010";
-	var unit = "1";
+	var unit = template.catchParameter(window.location.href, '#');
 	var page = '1';
 
 
