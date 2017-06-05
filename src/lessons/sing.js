@@ -90,7 +90,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	});
 
 		function updateGrade() {
-		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+		var param = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
 			$.ajax({
 				url: getUrl + '/v1/progress/update',
 				type: "post",

@@ -206,7 +206,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	next.onclick = function(){
 		$('.ballon').remove();
 		if(nowIndex == wordList.length-1){
-			//updateGrade();
+			updateGrade();
 			alert("游戏结束");
 			return false;
 		}
@@ -291,7 +291,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	});
 
 	function updateGrade() {
-		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+		var param = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
 			$.ajax({
 				url: getUrl + '/v1/progress/update',
 				type: "post",

@@ -88,7 +88,7 @@ define(['jquery', 'common'], function($, common) {
 			options.currentpart += 1;
 			$(currentpart).html(options.currentpart);
 			if (wordList.length - 1 == nowIndex) {
-				//updateGrade();
+				updateGrade();
 				alert("游戏结束");
 				return false;
 			}
@@ -152,9 +152,9 @@ define(['jquery', 'common'], function($, common) {
 				dataType: 'json',
 				timeout: 60000,
 				data: {
-					"unit": unit,
+					"unit": parseInt(unit),
 					"part": "game",
-					"page": page,
+					"page": parseInt(page),
 					"grade": 0
 				},
 				headers: header,

@@ -185,9 +185,8 @@ define(['jquery', 'moduleHtml'], function($, template) {
 				$('#hit').attr('src', '../music/mouse_game/hit.wav').get(0).play();
 				setTimeout(function() {
 					if (nowIndex == (wordList.length-1)) {
-						//updateGrade();
-						alert('游戏结束');
-						//TODO 更新游戏进度						
+						updateGrade();
+						alert('游戏结束');											
 						return false;
 					}
 					play1(wordList[nowIndex + 1], nowIndex + 1);
@@ -242,7 +241,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	});
 
 	function updateGrade() {
-		var param = {"unit": unit,"part": "game","page": page,"grade": 0};
+		var param = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
 			$.ajax({
 				url: getUrl + '/v1/progress/update',
 				type: "post",
@@ -252,6 +251,7 @@ define(['jquery', 'moduleHtml'], function($, template) {
 				headers: header,
 				success: function(data) {
 					//TODO 更新本地的进度
+					var result = data;
 				},
 				error: function() {
 					alert("更新数据异常");
