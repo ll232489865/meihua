@@ -27,148 +27,31 @@
     .ce_slide_control .i8{background:#8000FF;}
     .ce_slide_control .i9{background:#CCCC00;}
     .ce_slide .selected .ce_abs{display: block}
+
+    #content{ 
+		height: 900px;
+		margin-top: 20px;
+		border: 2px solid white;
+		width: 1500px;
+		margin-left: 200px;
+    }
 </style>
 <div class="close"><img src="../images/close.png"></div>
 <div id="setHeight" >
-    <div style="background: url(../images/sdudy.jpg) no-repeat; height:100%; background-size: cover cover; width:90%; margin: 0 auto;">
-       <div style="padding: 50px;" class="fix rel" id="studyContain">
-        <div id="ce_slide" class="ce_slide" style="height: 100%;">
-            <canvas id="canvas" width="740" height="420" style="position: absolute; visibility: hidden; z-index: 100; left: 0; top: 0;">您的浏览器不支持 canvas 标签</canvas>
-            <div class="bn_img"  id="ce_adImage0">
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_03.png">
-                    <audio src="../images/unit1/1.mp3" id="audio0">
-                    </audio>
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_05.png">
-                    <audio src="../images/unit1/1704.mp3" id="audio1">
-                    </audio>
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_07.png">
-                    <audio src="../images/unit1/3.mp3" id="audio2">
-                    </audio>
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_13.png">
-                    <audio src="../images/unit1/5.mp3" id="audio3">
-                    </audio>
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_15.png">
-                    <audio src="../images/unit1/6.mp3" id="audio4">
-                    </audio>
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-            </div>
-            <div class="bn_img" id="ce_adImage1">
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_03.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_05.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_07.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_13.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_15.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-            </div>
-            <div class="bn_img" id="ce_adImage2">
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_03.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_05.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_07.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_13.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-                <div class="ce_item" style="float: left; margin: 30px; position: relative">
-                    <img src="../images/unit1/study_unit1_15.png">
-                    <div class="ce_abs">
-                        糖
-                    </div>
-                </div>
-            </div>
-            <div id="ce_position" class="ce_position">
-                <a href="javascript:" class="bn_control" data-rel="ce_adImage0"></a>
-                <a href="javascript:" class="bn_control active" data-rel="ce_adImage1"></a>
-                <a href="javascript:" class="bn_control" data-rel="ce_adImage2"></a>
-            </div>
-        </div>
-        <div class="ce_slide_control">
-            <!--<span class="Dib_vm"></span>-->
-            <span class="dib vm">
-                <img src="../css/img/canvasControl_cursor.png" alt="" id="default">
-                <img src="../css/img/canvasControl_erase.png" id="eraser" alt="">
-                <img src="../css/img/canvasControl_delete.png" id="clear" alt="">
-                <span style="display: inline-block; height: 59px; width: 54px; position: relative">
-                    <img src="../css/img/canvasControl_pen.png" id="pens" alt="">
-                </span>
-            </span>
-            <span id="color" class="dn">
-                <input class="i1" type="button" value="" />
-                <input class="i2" type="button" value="" />
-                <input class="i3" type="button" value="" />
-                <input class="i4" type="button" value="" />
-                <input class="i5" type="button" value="" />
-                <input class="i6" type="button" value="" />
-                <input class="i7" type="button" value="" />
-                <input class="i8" type="button" value="" />
-                <input class="i9" type="button" value="" />
-            </span>
-        </div>
-       </div>
+    <div id="content">
+    	<div class="word1">    	
+    		<div class='pic'></div>
+			<span class="text"></span>    		
+    	</div>
+    	<div class="word1">
+			<div class='pic'></div>
+			<span class="text"></span>  
+    	</div>
+
+		<div class="word1">
+			<div class='pic'></div>
+			<span class="text"></span>  
+		</div>
     </div>
 </div>
 

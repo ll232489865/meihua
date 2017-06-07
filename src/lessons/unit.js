@@ -25,7 +25,12 @@ define(['jquery', 'moduleHtml'], function($, template) {
 
 	var href = game.pageTemplates[0].template;//只修改游戏的地址
 	$("#game").attr("href",href+"#"+unitNum);
-	$("#study").attr("href","study.html#"+unitNum);
+	if(unitNum == "1" ||unitNum == "2"){ 
+		$("#study").attr("href","study"+"_u"+unitNum+".html#"+unitNum);
+	}else{ 
+		$("#study").attr("href","study.html#"+unitNum);
+	}
+
 	$("#sing").attr("href","sing.html#"+unitNum);
 
 

@@ -24,6 +24,7 @@ define(['jquery','moduleHtml','jpalayer','lrc'],function($,template,jpalayer){
 	var unit = template.catchParameter(window.location.href, '#');
 	var song = "1";
 	var header  = template.getApiKey();
+	var page = "1";
 
 	var session = {};
 	if(localStorage.session){ 
