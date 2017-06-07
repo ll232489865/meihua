@@ -250,6 +250,16 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
     //动态构造header
     function getApiKey(){   	
     	
+
+     	/*return {
+            	"Content-Type": 'application/json',
+                'SUPERADMIN-API-KEY':'5c4558e7-6787-45e4-bb41-dcd19e34526c'
+            }
+		return {
+            	"Content-Type": 'application/json',
+                'STUDENT-API-KEY':'9da887b5-dda4-4701-8f60-0a4a9363a46d'
+            }*/
+
            var key =  JSON.parse(localStorage.getItem("session")).user;
        switch(key)
         {
@@ -279,6 +289,18 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
             break;
         }
     }
+
+
+     function showPaint(){   
+     	return;
+    	var roll = JSON.parse(localStorage.getItem("session")).user;
+    	if(roll == 'teacher'){ 
+    		$(".ce_slide_control").show();
+    	}else{ 
+			$(".ce_slide_control").hide();
+    	}
+    	
+    }
     return {
         htmlModule : htmlModule,
         routPath : routPath,
@@ -290,6 +312,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         getQueryStringArgs:getQueryStringArgs,
         getRandom:getRandom,
         dynamicKey:dynamicKey,
-        getApiKey:getApiKey
+        getApiKey:getApiKey,
+        showPaint:showPaint
     }
 });

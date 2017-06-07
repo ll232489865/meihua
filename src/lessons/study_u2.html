@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en"  class="Header1">
+<head>
+    <meta charset="UTF-8">
+    <title>Studying</title>
+</head>
+<link rel="stylesheet" href="../css/include/base.css">
+<link rel="stylesheet" href="../css/include/public.css">
+<link rel="stylesheet" href="../css/include/style.css">
+<body style="background: #EA6074">
+<div id="header"></div>
+<style>
+     .ce_abs{position: absolute; width: 100%; height: 100%; top: 0; display: none; font-size: 50px;}
+     .ce_item:hover img{ opacity: .8}
+     .ce_slide_control{
+         position: absolute; height: 59px; width: 100%;font-size: 0; bottom: 20px;
+     }
+     .ce_slide_control img{ cursor: pointer}
+     .ce_slide_control input{width:40px;height:40px;border:1px solid #fff;border-radius:4px;background:#ddd;}
+    .ce_slide_control .i1{background:#000000;}
+    .ce_slide_control .i2{background:#FF0000;}
+    .ce_slide_control .i3{background:#80FF00;}
+    .ce_slide_control .i4{background:#00FFFF;}
+    .ce_slide_control .i5{background:#808080;}
+    .ce_slide_control .i6{background:#FF8000;}
+    .ce_slide_control .i7{background:#408080;}
+    .ce_slide_control .i8{background:#8000FF;}
+    .ce_slide_control .i9{background:#CCCC00;}
+    .ce_slide .selected .ce_abs{display: block}
+
+
+    .pic{ 
+		position: relative;		
+		float: left;
+    }
+    .pic1_t{ 
+	 	left: 27px;
+	    top: 196px;
+    } 
+    .pic2_t{ 
+	    left: 654px;
+	    top: 206px;
+    }
+    .pic3_t{ 
+		left: 660px;
+	    top: 299px;
+    }
+    .pic4_t{ 
+	    left: -302px;
+    	top: 509px;
+    }
+    .pic1{ 
+	    width: 76px;
+	    height: 760px;
+    }  
+    .pic1 .pic_content{ 
+	    top: 195px;
+    	left: 186px;
+    }
+    .pic2 .pic_content{ 
+	     top: 138px;
+    	left: -160px;
+    }
+    .pic3 .pic_content{ 
+		top: 100px;
+    	left: 201px;
+    }
+
+    .pic4 .pic_content{ 
+		top: 5px;
+    	left: 994px;
+    }
+    .pic4 .pic_1{ 
+		top: -208px;
+   		left: 190px;
+    }
+    .pic4 .pic_2{ 
+		top: -51px;
+    	left: 501px;
+    }
+    .pic4 .pic_3{ 
+		top: -4px;
+    	left: 0px;
+    }
+    .pic_content{ 
+		opacity: 0.3;
+		position: relative;
+    }
+    .pic_content:hover{ 
+		opacity: 1;
+    }
+	.dialog_1{ 
+		top: 262px;
+    	left: -575px;
+	}
+	.dialog_2{ 
+		top: 220px;
+    	left: -50px;
+	}
+	.dialog_3{ 
+        top: 278px;
+    	left: 500px;
+	}
+	.dialog_4{ 
+		top: 411px;
+    	left: 609px;
+	}
+
+    #ce_adImage0{ 
+		position: relative;
+    }
+
+	.pic .dialog_text,
+   .pic .text{ 
+		position: absolute;
+		color: #195cb5;
+    	font-size: 23px;
+    	font-weight: bold;
+    	-webkit-text-stroke-width: 1px;
+
+   }
+   .pic1_t .text1{ 
+		left: 302px;
+	    top: 216px;
+	    display: inline-block;
+	    display: none;
+	    width: 87px;
+   }
+
+   .pic4_t .text1{ 
+	    left: 273px;
+	    top: -50px;
+	    display: inline-block;
+	    display: none;
+	    width: 114px;
+   }
+
+   .pic4_t .text2{ 
+		left: 560px;
+    	top: 117px;
+	    display: inline-block;
+	    display: none;
+	    width: 108px;
+   }
+
+   .pic .dialog_text_l
+   {
+   		top: 48px;
+   		 left: 22px;
+    	font-size: 20px;
+   }
+
+   .pic .dialog_text_r
+   {
+   		top: 48px;
+   		left: 53px;
+    	font-size: 20px;
+   }
+   .dialog{ 
+		display: none;
+   }
+
+</style>
+<div class="close"><img src="../images/close.png"></div>
+<div id="setHeight1" >
+    <div style="background: url(images/u2/study.png) no-repeat; height:900px; background-size: cover cover; width:1600px; margin: 0 auto;">
+       <div style="padding: 50px;height:892px;" class="fix rel" id="studyContain1">
+        <div id="ce_slide" class="ce_slide" style="height: 100%;">
+            <canvas id="canvas" width="740" height="420" style="position: absolute; visibility: hidden; z-index: 100; left: 0; top: 0;">您的浏览器不支持 canvas 标签</canvas>
+            <div class="bn_img"  id="ce_adImage0">                
+
+				<div class="pic pic1_t">
+					<div class="pic1">
+						<img class="pic_content" src="images/u2/left_1.png" alt="">
+					</div>					
+					<audio src="../music/ballon_game/c.wav"></audio>
+				</div>
+				
+				<div class="pic pic2_t">
+					<div class="pic2">
+						<img class="pic_content pic_left" src="images/u2/left_2.png" alt="">						
+					</div>			
+					<audio class="a2" src=""></audio>
+				</div>
+
+				<div class="pic pic3_t">
+					<div class="pic3">
+						<img class="pic_content" src="images/u2/right_1.png" alt="">						
+					</div>
+					<audio class="a2" src=""></audio>
+				</div>				
+
+				<div class="pic pic4_t">
+					<div class="pic4">
+						<img class="pic_content" src="images/u2/right_2.png" alt="">						
+						<audio class="a2" src=""></audio>
+					</div>					
+				</div>	
+
+				<div class="pic dialog dialog_1">
+					<div>
+						<img src="images/u1/left.png" alt="">						
+					</div>
+					<span class="dialog_text dialog_text_l">
+						I am fine,thank you.
+					</span>					
+				</div>
+
+				<div class="pic dialog dialog_2">
+					<div>
+						<img src="images/u1/right.png" alt="">						
+					</div>
+					<span class="dialog_text dialog_text_r">
+						Hi,how are you?
+					</span>								
+				</div>
+				<div class="pic dialog dialog_3">
+					<div>
+						<img src="images/u1/right.png" alt="">						
+					</div>
+					<span class="dialog_text dialog_text_r">
+						Thank you.
+					</span>								
+				</div>
+				<div class="pic dialog dialog_4">
+					<div>
+						<img src="images/u1/right.png" alt="">						
+					</div>
+					<span class="dialog_text dialog_text_r">
+						Here you are.
+					</span>								
+				</div>
+
+
+
+            </div>
+            <div class="bn_img" id="ce_adImage1">
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_03.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_05.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_07.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_13.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_15.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+            </div>
+            <div class="bn_img" id="ce_adImage2">
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_03.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_05.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_07.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_13.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+                <div class="ce_item" style="float: left; margin: 30px; position: relative">
+                    <img src="../images/unit1/study_unit1_15.png">
+                    <div class="ce_abs">
+                        糖
+                    </div>
+                </div>
+            </div>
+            <div id="ce_position" class="ce_position" style="display:none;">
+                <a href="javascript:" class="bn_control" data-rel="ce_adImage0"></a>
+                <a href="javascript:" class="bn_control active" data-rel="ce_adImage1"></a>
+                <a href="javascript:" class="bn_control" data-rel="ce_adImage2"></a>
+            </div>
+        </div>
+        <div class="ce_slide_control">
+            <!--<span class="Dib_vm"></span>-->
+            <span class="dib vm">
+                <img src="../css/img/canvasControl_cursor.png" alt="" id="default">
+                <img src="../css/img/canvasControl_erase.png" id="eraser" alt="">
+                <img src="../css/img/canvasControl_delete.png" id="clear" alt="">
+                <span style="display: inline-block; height: 59px; width: 54px; position: relative">
+                    <img src="../css/img/canvasControl_pen.png" id="pens" alt="">
+                </span>
+            </span>
+            <span id="color" class="dn">
+                <input class="i1" type="button" value="" />
+                <input class="i2" type="button" value="" />
+                <input class="i3" type="button" value="" />
+                <input class="i4" type="button" value="" />
+                <input class="i5" type="button" value="" />
+                <input class="i6" type="button" value="" />
+                <input class="i7" type="button" value="" />
+                <input class="i8" type="button" value="" />
+                <input class="i9" type="button" value="" />
+            </span>
+        </div>
+       </div>
+    </div>
+</div>
+
+<!--footer-->
+<!-- <div id="footer"></div> -->
+<!--footer end-->
+
+</body>
+<script data-main="study_u2" src="../js/libs/require.js"></script>
+</html>
