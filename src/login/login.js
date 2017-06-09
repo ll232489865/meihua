@@ -35,7 +35,7 @@ define(['jquery','moduleHtml','powerSwitch'],function($,template,powerSwitch){
                     var user = data.data.userDetail.userGroup;
 					var belongingZone = data.data.userDetail.belongingZone
 					var belongingId = data.data.userDetail._id
-					
+
                     template.localStorageObj("session",{apiKey : data.data.apiKey,user:user,belongingZone:belongingZone,belongingId:belongingId});
 					debugger;
                     if(code==0){

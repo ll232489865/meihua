@@ -12,63 +12,60 @@
 <style type="text/css">
     * {margin: 0;padding: 0;outline:none;}
     ul, ol, dl {list-style: none;}
-    .music_box{margin:0 auto;width:643px; padding-top:100px;top: 27%;left: 22%;position: absolute;}
-    .content {width: 501px;height:324px;overflow:hidden;padding:10px; margin: 0 auto;background-color: #fdfbdd;}
+    .lyric {
+        overflow:hidden;
+        padding:10px;
+        margin: 0 auto;
+    }
     #lrc_list{margin:10px auto;}
-    #lrc_list li{font:normal 29px/2.1 'microsoft yahei';text-align:center;}
+    #lrc_list li{font:normal 20px/2.1 'microsoft yahei';text-align:center;}
     #lrc_list li.hover {color:#006699;font-weight:bold;}
     body{ background-color: #fdfbdd;}
     #setHeight{
 		width: 1363px;
 		margin:0 auto;
-		background: url('../images/singbg.png');
+		background: url('../images/1-music_bg.png');
 		position: relative;
     }
     div.jp-interface {
 	    position: relative;
-	    background-color: #fdfbdd;
+	    /*background-color: #fdfbdd;*/
 	    width: 100%;
 	}
-	.content{
+	/*.content{
 		border: 0px;
-	}
+	}*/
 
 </style>
 <div id="header"></div>
 <div class="close"><img src="../images/close.png"></div>
-<div id="setHeight" >
-   <textarea id="lrc_content" name="textfield" cols="70" rows="10" style="display:none;">
 
-</textarea>
-<div class="music_box">
-	<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-		<div class="content"><ul id="lrc_list"><li>点击开始播放……</li></ul></div>
+<div id="setHeight" >
+    <textarea id="lrc_content" name="textfield" cols="70" rows="10" style="display:none;"></textarea>
+    <div class="music_box">
+	    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		<div class="lyric"><ul id="lrc_list"><li>点击开始播放……</li></ul></div>
         <div id="jp_container_1" class="jp-audio">
             <div class="jp-type-single">
                 <div class="jp-gui jp-interface">
                     <ul class="jp-controls">
                         <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
                         <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-                        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-                        <li class="hide"><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" >mute</a></li>
-                        <li class="hide"><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-                        <li class="hide"><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
                     </ul>
-                    <div class="jp-progress hide">
+                    <!-- <div class="jp-progress hide">
                         <div class="jp-seek-bar">
                             <div class="jp-play-bar"></div>
                         </div>
-                    </div>
-                    <div class="jp-volume-bar hide">
+                    </div> -->
+                    <!-- <div class="jp-volume-bar hide">
                         <div class="jp-volume-bar-value"></div>
-                    </div>
+                    </div> -->
                     <div class="jp-time-holder hide">
-                        <div class="jp-current-time"></div>
-                        <div class="jp-duration"></div>
-                        <ul class="jp-toggles">
+                        <!-- <div class="jp-duration"></div> -->
+                        <!-- <ul class="jp-toggles">
                             <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
                             <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="jp-no-solution"> <span>Update Required</span> To play the media you will need to either update your browser to a recent version or update your Flash plugin. </div>
@@ -76,13 +73,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!--footer-->
-<!-- <div id="footer"></div> -->
-<!--footer end-->
 
 </body>
 <script data-main="sing" src="../js/libs/require.js"></script>

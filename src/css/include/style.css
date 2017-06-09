@@ -59,9 +59,9 @@
     background-size:cover, cover;
 }
 .login_area{
-    width: 350px;
-    height: 350px;
-    border-radius: 250px;
+    width: 832px;
+    height: 50px;
+    /*border-radius: 250px;*/
     /*background: url('../../images/login_area_03.png') no-repeat left top;*/
     background:rgba(33,33,33,.4);
     background-size: 100% 100%;
@@ -100,4 +100,14 @@
 .close img{
     width: 60px;
     height: 60px;
+}
+
+.music_box{
+    margin:0 auto;
+    width:1000px;
+    padding-top:10px;
+    top: 5%;
+    left: 10%;
+    position: absolute;
+    background-size:cover, cover;
 }

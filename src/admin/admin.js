@@ -88,13 +88,12 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 			 columns: [
 					{
 						checkbox: true
-					},
-					{
+					}, {
 							field: 'identifier',
-							title:'用户ID'
+							title:'用户名'
 					}, {
 							field: 'username',
-							title: '名称'
+							title: '姓名'
 					}, {
 							field: 'englishName',
 							title: '英文名'
@@ -107,16 +106,19 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator','boot
 					}, {
 							field: 'userGroup',
 							title: '身份'
-					}
-					, {
+                    }, {
+                            field: 'belongingZone',
+                            title: '校区'
+                    }, {
+                            field: 'belongingZoneManager',
+                            title: '校区管理员'
+                    }, {
 							field: 'email',
 							title: '邮箱'
-					}
-					, {
+					}, {
 							field: 'lastLoginTime',
 							title: '最后登录时间'
-					}
-					, {
+					}, {
 							field: 'creationTime',
 							title: '创建帐号时间'
 					}
