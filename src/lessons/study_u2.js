@@ -81,7 +81,7 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
 			success: function(data) {				
 				unitData = data.data.componentGroups[0].components;
 				if (unitData.length > 0) {
-					showVideo(unitData);
+					//showVideo(unitData);
 				}
 			},
 			error: function() {
@@ -90,33 +90,64 @@ define(['jquery','moduleHtml','powerSwitch','canvas'],function($,template,powerS
 		});
     };
 
-    function showVideo(unitData){ 
 
-    }
+    function _show($dom, flag) {
+		if (flag) {
+			$dom.css({
+				'opacity': 1
+			});
+		} else {
+			if ($dom.hasClass('readed')) {
+				return
+			}
+			$dom.css({
+				'opacity': 0.3
+			});
+		}
+	}
+
+	//点击事件
+	$(".pic_content").on("click",function(){ 
+		_show($(this),true);
+		if($(this).hasClass('pic1_img')){
+            _show($(".dialog_1"),true);
+            $(".dialog_1").addClass("readed");
+		} else if($(this).hasClass('pic2_img')){
+            _show($(".dialog_2"),true);
+            $(".dialog_2").addClass("readed");
+        }else if($(this).hasClass('pic3_img')){
+            _show($(".dialog_3"),true);
+            $(".dialog_3").addClass("readed");
+        }else if($(this).hasClass('pic4_img')){
+            _show($(".dialog_4"),true);
+            $(".dialog_4").addClass("readed");
+        }
+	});
 
 
-    $(".pic1_t").find(".pic_content").on("mouseover",function(){ 
-       	$(".dialog_1").show();	
-    }).on("mouseout",function(){ 
-    	$(".dialog_1").hide();	
+
+    $(".pic1_t").find(".pic_content").on("mouseover",function(){       
+       	_show($(".dialog_1"),true);
+    }).on("mouseout",function(){
+        _show($(".dialog_1"),false);
     });
 
     $(".pic2_t").find(".pic_content").on("mouseover",function(){ 
-       	$(".dialog_2").show();	
-    }).on("mouseout",function(){ 
-    	$(".dialog_2").hide();	
+        _show($(".dialog_2"),true);
+    }).on("mouseout",function(){
+        _show($(".dialog_2"),false);
     });
 
-    $(".pic3_t").find(".pic_content").on("mouseover",function(){ 
-       	$(".dialog_3").show();	
-    }).on("mouseout",function(){ 
-    	$(".dialog_3").hide();	
+    $(".pic3_t").find(".pic_content").on("mouseover",function(){
+        _show($(".dialog_3"),true);
+    }).on("mouseout",function(){
+        _show($(".dialog_3"),false);
     });
 
     $(".pic4_t").find(".pic_content").on("mouseover",function(){ 
-       	$(".dialog_4").show();	
-    }).on("mouseout",function(){ 
-    	$(".dialog_4").hide();	
+        _show($(".dialog_4"),true);
+    }).on("mouseout",function(){
+        _show($(".dialog_4"),false);
     });
 
 
