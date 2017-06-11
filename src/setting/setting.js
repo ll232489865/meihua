@@ -27,13 +27,12 @@ require.config({
 })
 define(['jquery','adminTemplate','common','validator','bootstrapValidator'],function($,adminTemplate,common,validator){
     var resultData;
+    var header = common.getApiKey();
     //查询用户信息
     common.ajaxObj(
         'settings/get',
         {
-            headers:{
-                "STUDENT-API-KEY": JSON.parse(localStorage.getItem("session")).apiKey,
-            }
+            headers:header
         }
         ,
         function(data){
@@ -41,11 +40,11 @@ define(['jquery','adminTemplate','common','validator','bootstrapValidator'],func
             resultData = data.data;
             var newresultdata;
             
-            resultData.gender == 'male' ? newresultdata = $.extend({},resultData,{gender:'男'}):newresultdata = $.extend({},resultData,{gender:'女'});
-            for (attr in newresultdata)
+            resultData.userDetail.gender == 'male' ? newresultdata = $.extend({},resultData,{gender:'男'}):newresultdata = $.extend({},resultData,{gender:'女'});
+            for (attr in resultData.userDetail)
             {
                 if($('#'+attr)!=0){
-                    $('#'+attr).text(resultData[attr]);
+                    $('#'+attr).text(resultData.userDetail[attr]);
                 }
                 
             }
