@@ -251,13 +251,13 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
     function getApiKey(){   	
     	
 
-     	/*return {
-            	"Content-Type": 'application/json',
-                'SUPERADMIN-API-KEY':'5c4558e7-6787-45e4-bb41-dcd19e34526c'
-            }
+     	/* return {
+          //   	"Content-Type": 'application/json',
+          //       'SUPERADMIN-API-KEY':'198ef2c8-84d4-485c-ac47-55dca2266d00'
+          //   }
 		return {
             	"Content-Type": 'application/json',
-                'STUDENT-API-KEY':'9da887b5-dda4-4701-8f60-0a4a9363a46d'
+                'STUDENT-API-KEY':'c89b5057-2a52-4abf-b942-5023b590cfb3'
             }*/
 
            var key =  JSON.parse(localStorage.getItem("session")).user;
@@ -301,6 +301,26 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
     	}
     	
     }
+
+    function updateGrade(param) {
+        var key =  JSON.parse(localStorage.getItem("session")).user;
+        if(key != "student") return;
+        $.ajax({
+            url: param.getUrl + '/v1/progress/update',
+            type: "post",
+            dataType: 'json',
+            timeout: 60000,
+            data: JSON.stringify(param.data),
+            headers: param.header,
+            success: function(data) {
+                var result = data;
+            },
+            error: function() {
+                alert("更新数据异常");
+            }
+        });
+    }
+
     return {
         htmlModule : htmlModule,
         routPath : routPath,
@@ -313,6 +333,7 @@ define(['tpl','tpl2','jquery'],function(template,tpl2,$){
         getRandom:getRandom,
         dynamicKey:dynamicKey,
         getApiKey:getApiKey,
-        showPaint:showPaint
+        showPaint:showPaint,
+        updateGrade:updateGrade
     }
 });
