@@ -241,21 +241,10 @@ define(['jquery', 'moduleHtml'], function($, template) {
 	});
 
 	function updateGrade() {
-		var param = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
-			$.ajax({
-				url: getUrl + '/v1/progress/update',
-				type: "post",
-				dataType: 'json',
-				timeout: 60000,
-				data: JSON.stringify(param),
-				headers: header,
-				success: function(data) {
-					//TODO 更新本地的进度
-					var result = data;
-				},
-				error: function() {
-					alert("更新数据异常");
-				}
-			});
-		}
+        var param = {};
+        param.data = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
+        param.header = header;
+        param.getUrl = getUrl;
+        template.updateGrade(param);
+	}
 })

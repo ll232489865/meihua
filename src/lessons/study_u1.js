@@ -25,6 +25,8 @@ define(['jquery', 'moduleHtml', 'powerSwitch', 'canvas'], function($, template, 
 	var unit = template.catchParameter(window.location.href, '#');
 	var page = '1';
 	var unitData = {};
+	var allAudio = [];//获取到的所有音频数据
+	var yingyueDom = document.getElementById("audio1");
 
 	template.showPaint();
 
@@ -70,22 +72,25 @@ define(['jquery', 'moduleHtml', 'powerSwitch', 'canvas'], function($, template, 
 		if ($(this).hasClass('s1')) {
 			_show($(this).parent().siblings('.text'), true);
 			$(this).parent().siblings('.text').addClass('readed');
+            playSong("line up");
 		} else if ($(this).hasClass('s2')) {
 			_show($(".dialog_l"), true);
 			$(".dialog_l").addClass("readed");
+            playSong("What's your name?");
 		} else if ($(this).hasClass('s3')) {
 			_show($(".dialog_r"), true);
 			$(".dialog_r").addClass("readed");
+            playSong("I'm Cindy.");
 		} else if ($(this).hasClass('s4')) {
 			_show($(this).parent().siblings('.text1'), true);
 			$(this).parent().siblings('.text1').addClass('readed');
+            playSong("stand up");
 		} else if ($(this).hasClass('s5')) {
 			_show($(this).parent().siblings('.text2'), true);
-			$(this).parent().siblings('.text2').addClass('readed');	
+			$(this).parent().siblings('.text2').addClass('readed');
+            playSong("sit down");
 		}
-
-		//是否需要更新进度
-		//更新学习进度
+        updateProgress();
 	});
 
 
@@ -102,7 +107,7 @@ define(['jquery', 'moduleHtml', 'powerSwitch', 'canvas'], function($, template, 
 			success: function(data) {
 				unitData = data.data.componentGroups[0].components;
 				if (unitData.length > 0) {
-					//showVideo(unitData);
+					updateCash(unitData);
 				}
 			},
 			error: function() {
@@ -111,6 +116,32 @@ define(['jquery', 'moduleHtml', 'powerSwitch', 'canvas'], function($, template, 
 		});
 	};
 
+	function updateCash(data) {//更新课程数据
+		var item = {};
+        unitData = [];
+		for(var i =0;i <data.length;i ++){
+            item = data[i].resources;
+            item.readed = false;
+            unitData.push(item);
+		}
+    }
+    
+    function  playSong(text) {//根据单词  然后更新缓存中read状态
+		var item = {};
+		for(var key in unitData){
+            item = unitData[key];
+            if(item[0].content == text){
+                item.readed = true;
+                yingyueDom.src =  getUrl + item[1].content;
+                yingyueDom.load();
+                yingyueDom.play();
+                return;
+			}
+		}
+    }
+
+
+	
 	function _show($dom, flag) {
 		if (flag) {
 			$dom.css({
@@ -125,6 +156,25 @@ define(['jquery', 'moduleHtml', 'powerSwitch', 'canvas'], function($, template, 
 			});
 		}
 	}
+	
+	
+	function  updateProgress() {//更新课程进度
+		//判断是否需要更新
+		for(var i =0;i<unitData.length;i++){
+			if(!unitData[i].readed) return;
+		}
+		//ajax更新
+        updateGrade();
+    }
+
+
+    function updateGrade() {
+        var param= {};
+        param.data = {"unit": parseInt(unit),"part": "study","page": parseInt(page),"grade": 0};
+        param.getUrl = getUrl;
+        param.header = header;
+        template.updateGrade(param);
+    }
 
 
 

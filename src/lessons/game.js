@@ -146,25 +146,11 @@ define(['jquery', 'common'], function($, common) {
 		}
 
 		function updateGrade() {
-			$.ajax({
-				url: getUrl + '/v1/progress/update',
-				type: "post",
-				dataType: 'json',
-				timeout: 60000,
-				data: {
-					"unit": parseInt(unit),
-					"part": "game",
-					"page": parseInt(page),
-					"grade": 0
-				},
-				headers: header,
-				success: function(data) {
-					//TODO 更新本地的进度
-				},
-				error: function() {
-					alert("更新数据异常");
-				}
-			});
+            var param = {};
+            param.data = {"unit": parseInt(unit),"part": "game","page": parseInt(page),"grade": 0};
+            param.header = header;
+            param.getUrl = getUrl;
+            common.updateGrade(param);
 		}
 
 		audio.onclick = function() {
